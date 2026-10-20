@@ -1,41 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 300" width="860" height="300" font-family="Segoe UI, Helvetica, Arial, sans-serif">
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#55605e"/></marker>
-<marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b8862e"/></marker></defs>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5f5456"/></marker>
+<marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b3202a"/></marker></defs>
 <rect width="860" height="300" fill="#ffffff"/>
-<text x="20" y="32" font-size="16" font-weight="700" fill="#0f2a4a">07 Donation thank-you and receipts</text>
-<text x="20" y="52" font-size="12" fill="#55605e">Make.com scenario, left to right. Gold marks the human check.</text>
-<rect x="16" y="80" width="122" height="70" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="77.0" y="111.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Donation form</text>
-<text x="77.0" y="127.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">new row in Sheets</text>
-<rect x="156" y="80" width="122" height="70" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="217.0" y="111.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Receipt number</text>
-<text x="217.0" y="127.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">CHF-2026-000123</text>
-<rect x="296" y="80" width="122" height="70" rx="10" fill="#0f2a4a" stroke="#0f2a4a" stroke-width="1.2"/>
+<text x="20" y="32" font-size="16" font-weight="700" fill="#4a1424">07 Donation thank-you and receipts</text>
+<text x="20" y="52" font-size="12" fill="#5f5456">Make.com scenario, left to right. Gold marks the human check.</text>
+<rect x="16" y="80" width="122" height="70" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="77.0" y="111.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Donation form</text>
+<text x="77.0" y="127.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">new row in Sheets</text>
+<rect x="156" y="80" width="122" height="70" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="217.0" y="111.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Receipt number</text>
+<text x="217.0" y="127.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">CHF-2026-000123</text>
+<rect x="296" y="80" width="122" height="70" rx="10" fill="#4a1424" stroke="#4a1424" stroke-width="1.2"/>
 <text x="357.0" y="111.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Router</text>
 <text x="357.0" y="127.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#ffffff">by fund type</text>
-<rect x="436" y="80" width="122" height="70" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="497.0" y="103.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Thank-you email</text>
-<text x="497.0" y="119.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">fund-specific</text>
-<text x="497.0" y="135.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">wording</text>
-<rect x="576" y="80" width="122" height="70" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="637.0" y="103.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Sheets ledger</text>
-<text x="637.0" y="119.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">fund kept in</text>
-<text x="637.0" y="135.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">its own column</text>
-<rect x="716" y="80" width="122" height="70" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="777.0" y="103.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Weekly summary</text>
-<text x="777.0" y="119.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">treasurer and</text>
-<text x="777.0" y="135.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">second trustee</text>
-<line x1="138" y1="115.0" x2="154" y2="115.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="278" y1="115.0" x2="294" y2="115.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="418" y1="115.0" x2="434" y2="115.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="558" y1="115.0" x2="574" y2="115.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="698" y1="115.0" x2="714" y2="115.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<rect x="276" y="200" width="162" height="72" rx="10" fill="#fbf3e2" stroke="#b8862e" stroke-width="2"/>
-<text x="357.0" y="224.0" text-anchor="middle" font-size="13" font-weight="700" fill="#8a5d12">Trustee review</text>
-<text x="357.0" y="240.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">1,000 or more, unknown</text>
-<text x="357.0" y="256.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">fund or no email</text>
-<line x1="357" y1="150" x2="357" y2="198" stroke="#b8862e" stroke-width="1.5" marker-end="url(#ag)"/>
-<text x="460" y="232" font-size="11.5" fill="#55605e">Zakat: eligible recipients only, separate account.</text>
-<text x="460" y="250" font-size="11.5" fill="#55605e">Waqf: principal preserved, only returns spent.</text>
-<text x="460" y="268" font-size="11.5" fill="#55605e">No AI in this flow: rules only.</text>
+<rect x="436" y="80" width="122" height="70" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="497.0" y="103.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Thank-you email</text>
+<text x="497.0" y="119.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">fund-specific</text>
+<text x="497.0" y="135.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">wording</text>
+<rect x="576" y="80" width="122" height="70" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="637.0" y="103.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Sheets ledger</text>
+<text x="637.0" y="119.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">fund kept in</text>
+<text x="637.0" y="135.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">its own column</text>
+<rect x="716" y="80" width="122" height="70" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="777.0" y="103.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Weekly summary</text>
+<text x="777.0" y="119.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">treasurer and</text>
+<text x="777.0" y="135.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">second trustee</text>
+<line x1="138" y1="115.0" x2="154" y2="115.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="278" y1="115.0" x2="294" y2="115.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="418" y1="115.0" x2="434" y2="115.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="558" y1="115.0" x2="574" y2="115.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="698" y1="115.0" x2="714" y2="115.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<rect x="276" y="200" width="162" height="72" rx="10" fill="#ffffff" stroke="#b3202a" stroke-width="2"/>
+<text x="357.0" y="224.0" text-anchor="middle" font-size="13" font-weight="700" fill="#b3202a">Trustee review</text>
+<text x="357.0" y="240.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">1,000 or more, unknown</text>
+<text x="357.0" y="256.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">fund or no email</text>
+<line x1="357" y1="150" x2="357" y2="198" stroke="#b3202a" stroke-width="1.5" marker-end="url(#ag)"/>
+<text x="460" y="232" font-size="11.5" fill="#5f5456">Zakat: eligible recipients only, separate account.</text>
+<text x="460" y="250" font-size="11.5" fill="#5f5456">Waqf: principal preserved, only returns spent.</text>
+<text x="460" y="268" font-size="11.5" fill="#5f5456">No AI in this flow: rules only.</text>
 </svg>

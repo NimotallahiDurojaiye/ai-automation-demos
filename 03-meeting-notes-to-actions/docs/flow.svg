@@ -1,45 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 300" width="860" height="300" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Meeting notes to action list">
 <title>Meeting notes to action list</title>
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#55605e"/></marker></defs>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5f5456"/></marker></defs>
 <rect width="860" height="300" fill="#ffffff"/>
-<text x="20" y="30" font-size="15" font-weight="700" fill="#0f2a4a">Meeting notes to action list</text>
-<rect x="16" y="70" width="118" height="74" rx="9" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="75.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2a4a">Notes in</text>
-<text x="75.0" y="111.0" text-anchor="middle" font-size="11" fill="#16201f">Form or Google Doc</text>
-<text x="75.0" y="127.0" text-anchor="middle" font-size="11" fill="#16201f">after the call</text>
-<rect x="156" y="70" width="118" height="74" rx="9" fill="#0f2a4a" stroke="#0f2a4a" stroke-width="1.2"/>
+<text x="20" y="30" font-size="15" font-weight="700" fill="#4a1424">Meeting notes to action list</text>
+<rect x="16" y="70" width="118" height="74" rx="9" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="75.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4a1424">Notes in</text>
+<text x="75.0" y="111.0" text-anchor="middle" font-size="11" fill="#1d1416">Form or Google Doc</text>
+<text x="75.0" y="127.0" text-anchor="middle" font-size="11" fill="#1d1416">after the call</text>
+<rect x="156" y="70" width="118" height="74" rx="9" fill="#4a1424" stroke="#4a1424" stroke-width="1.2"/>
 <text x="215.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Claude reads</text>
-<text x="215.0" y="111.0" text-anchor="middle" font-size="11" fill="#dfe6ee">finds summary,</text>
-<text x="215.0" y="127.0" text-anchor="middle" font-size="11" fill="#dfe6ee">decisions, actions</text>
-<rect x="296" y="70" width="118" height="74" rx="9" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="355.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2a4a">Tracker rows</text>
-<text x="355.0" y="111.0" text-anchor="middle" font-size="11" fill="#16201f">each action added</text>
-<text x="355.0" y="127.0" text-anchor="middle" font-size="11" fill="#16201f">as a draft</text>
-<rect x="436" y="70" width="118" height="74" rx="9" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="495.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2a4a">Draft to lead</text>
-<text x="495.0" y="111.0" text-anchor="middle" font-size="11" fill="#16201f">email with the</text>
-<text x="495.0" y="127.0" text-anchor="middle" font-size="11" fill="#16201f">draft summary</text>
-<rect x="576" y="70" width="118" height="74" rx="9" fill="#fbf4e6" stroke="#b8862e" stroke-width="2"/>
-<text x="635.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a5513">Lead checks</text>
-<text x="635.0" y="111.0" text-anchor="middle" font-size="11" fill="#16201f">edits cells, ticks</text>
-<text x="635.0" y="127.0" text-anchor="middle" font-size="11" fill="#16201f">Approved</text>
-<rect x="716" y="70" width="118" height="74" rx="9" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="775.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2a4a">Team email</text>
-<text x="775.0" y="111.0" text-anchor="middle" font-size="11" fill="#16201f">sent only after</text>
-<text x="775.0" y="127.0" text-anchor="middle" font-size="11" fill="#16201f">the tick</text>
-<line x1="134" y1="107.0" x2="153" y2="107.0" stroke="#55605e" stroke-width="1.6" marker-end="url(#a)"/>
-<line x1="274" y1="107.0" x2="293" y2="107.0" stroke="#55605e" stroke-width="1.6" marker-end="url(#a)"/>
-<line x1="414" y1="107.0" x2="433" y2="107.0" stroke="#55605e" stroke-width="1.6" marker-end="url(#a)"/>
-<line x1="554" y1="107.0" x2="573" y2="107.0" stroke="#55605e" stroke-width="1.6" marker-end="url(#a)"/>
-<line x1="694" y1="107.0" x2="713" y2="107.0" stroke="#55605e" stroke-width="1.6" marker-end="url(#a)"/>
-<rect x="156" y="185" width="118" height="66" rx="9" fill="#fbf4e6" stroke="#b8862e" stroke-width="2"/>
-<text x="215.0" y="206.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a5513">Not finished</text>
-<text x="215.0" y="222.0" text-anchor="middle" font-size="11" fill="#16201f">refusal or cut off:</text>
-<text x="215.0" y="238.0" text-anchor="middle" font-size="11" fill="#16201f">lead writes it up</text>
-<path d="M215.0,144 L215.0,182" fill="none" stroke="#55605e" stroke-width="1.6" marker-end="url(#a)" stroke-dasharray="4 3"/>
-<text x="223.0" y="168" text-anchor="start" font-size="10.5" fill="#55605e">stop_reason not end_turn</text>
-<text x="635.0" y="172" text-anchor="middle" font-size="11" fill="#b8862e">No tick, no email.</text>
-<text x="635.0" y="188" text-anchor="middle" font-size="10.5" fill="#55605e">Checked every 30 minutes</text>
-<rect x="20" y="272" width="12" height="12" rx="3" fill="#fbf4e6" stroke="#b8862e" stroke-width="2"/>
-<text x="38" y="282" text-anchor="start" font-size="10.5" fill="#55605e">A person decides here</text>
+<text x="215.0" y="111.0" text-anchor="middle" font-size="11" fill="#d9d4d5">finds summary,</text>
+<text x="215.0" y="127.0" text-anchor="middle" font-size="11" fill="#d9d4d5">decisions, actions</text>
+<rect x="296" y="70" width="118" height="74" rx="9" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="355.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4a1424">Tracker rows</text>
+<text x="355.0" y="111.0" text-anchor="middle" font-size="11" fill="#1d1416">each action added</text>
+<text x="355.0" y="127.0" text-anchor="middle" font-size="11" fill="#1d1416">as a draft</text>
+<rect x="436" y="70" width="118" height="74" rx="9" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="495.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4a1424">Draft to lead</text>
+<text x="495.0" y="111.0" text-anchor="middle" font-size="11" fill="#1d1416">email with the</text>
+<text x="495.0" y="127.0" text-anchor="middle" font-size="11" fill="#1d1416">draft summary</text>
+<rect x="576" y="70" width="118" height="74" rx="9" fill="#ffffff" stroke="#b3202a" stroke-width="2"/>
+<text x="635.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b3202a">Lead checks</text>
+<text x="635.0" y="111.0" text-anchor="middle" font-size="11" fill="#1d1416">edits cells, ticks</text>
+<text x="635.0" y="127.0" text-anchor="middle" font-size="11" fill="#1d1416">Approved</text>
+<rect x="716" y="70" width="118" height="74" rx="9" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="775.0" y="95.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4a1424">Team email</text>
+<text x="775.0" y="111.0" text-anchor="middle" font-size="11" fill="#1d1416">sent only after</text>
+<text x="775.0" y="127.0" text-anchor="middle" font-size="11" fill="#1d1416">the tick</text>
+<line x1="134" y1="107.0" x2="153" y2="107.0" stroke="#5f5456" stroke-width="1.6" marker-end="url(#a)"/>
+<line x1="274" y1="107.0" x2="293" y2="107.0" stroke="#5f5456" stroke-width="1.6" marker-end="url(#a)"/>
+<line x1="414" y1="107.0" x2="433" y2="107.0" stroke="#5f5456" stroke-width="1.6" marker-end="url(#a)"/>
+<line x1="554" y1="107.0" x2="573" y2="107.0" stroke="#5f5456" stroke-width="1.6" marker-end="url(#a)"/>
+<line x1="694" y1="107.0" x2="713" y2="107.0" stroke="#5f5456" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="156" y="185" width="118" height="66" rx="9" fill="#ffffff" stroke="#b3202a" stroke-width="2"/>
+<text x="215.0" y="206.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b3202a">Not finished</text>
+<text x="215.0" y="222.0" text-anchor="middle" font-size="11" fill="#1d1416">refusal or cut off:</text>
+<text x="215.0" y="238.0" text-anchor="middle" font-size="11" fill="#1d1416">lead writes it up</text>
+<path d="M215.0,144 L215.0,182" fill="none" stroke="#5f5456" stroke-width="1.6" marker-end="url(#a)" stroke-dasharray="4 3"/>
+<text x="223.0" y="168" text-anchor="start" font-size="10.5" fill="#5f5456">stop_reason not end_turn</text>
+<text x="635.0" y="172" text-anchor="middle" font-size="11" fill="#b3202a">No tick, no email.</text>
+<text x="635.0" y="188" text-anchor="middle" font-size="10.5" fill="#5f5456">Checked every 30 minutes</text>
+<rect x="20" y="272" width="12" height="12" rx="3" fill="#ffffff" stroke="#b3202a" stroke-width="2"/>
+<text x="38" y="282" text-anchor="start" font-size="10.5" fill="#5f5456">A person decides here</text>
 </svg>

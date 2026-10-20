@@ -188,7 +188,7 @@
         "journal": "{{ifempty(get(4.`container-title`; 1); \"(no journal listed, often a preprint)\")}}",
         "has_abstract": "{{if(length(trim(stripHTML(4.abstract))) > 40; \"yes\"; \"no\")}}",
         "prompt_line": "DOI: {{lower(4.DOI)}}{{newline}}Title: {{get(4.title; 1)}}{{newline}}Abstract: {{substring(trim(stripHTML(4.abstract)); 0; 4000)}}",
-        "html_line": "<li style=\"margin-bottom:8px\">{{get(4.title; 1)}}<br><span style=\"color:#55605e\">{{get(4.`container-title`; 1)}} &middot; <a href=\"https://doi.org/{{4.DOI}}\">doi.org/{{4.DOI}}</a> &middot; <i>no abstract available, not summarised</i></span></li>",
+        "html_line": "<li style=\"margin-bottom:8px\">{{get(4.title; 1)}}<br><span style=\"color:#5f5456\">{{get(4.`container-title`; 1)}} &middot; <a href=\"https://doi.org/{{4.DOI}}\">doi.org/{{4.DOI}}</a> &middot; <i>no abstract available, not summarised</i></span></li>",
         "title_line": "<li>{{get(4.title; 1)}} (<a href=\"https://doi.org/{{4.DOI}}\">doi.org/{{4.DOI}}</a>)</li>"
       },
       "metadata": {
@@ -433,7 +433,7 @@
                         "rowSeparator": ""
                       },
                       "mapper": {
-                        "value": "<div style=\"border:1px solid #d8d2c4;border-radius:6px;padding:10px 14px;margin:0 0 10px\"><div style=\"font-weight:600\">{{get(map(5.array; \"title\"; \"doi\"; lower(11.doi)); 1)}}</div><div style=\"color:#55605e;font-size:12px\">{{get(map(5.array; \"journal\"; \"doi\"; lower(11.doi)); 1)}} &middot; <a href=\"https://doi.org/{{11.doi}}\">doi.org/{{11.doi}}</a> &middot; <span style=\"color:#b8862e\">{{11.relevance}}</span></div><div style=\"margin-top:6px\">{{11.summary}}</div></div>"
+                        "value": "<div style=\"border:1px solid #d9d4d5;border-radius:6px;padding:10px 14px;margin:0 0 10px\"><div style=\"font-weight:600\">{{get(map(5.array; \"title\"; \"doi\"; lower(11.doi)); 1)}}</div><div style=\"color:#5f5456;font-size:12px\">{{get(map(5.array; \"journal\"; \"doi\"; lower(11.doi)); 1)}} &middot; <a href=\"https://doi.org/{{11.doi}}\">doi.org/{{11.doi}}</a> &middot; <span style=\"color:#b3202a\">{{11.relevance}}</span></div><div style=\"margin-top:6px\">{{11.summary}}</div></div>"
                       },
                       "metadata": {
                         "designer": {
@@ -464,7 +464,7 @@
                           "team@example.org"
                         ],
                         "subject": "Weekly research digest: {{formatDate(now; \"D MMMM YYYY\")}}",
-                        "content": "<div style=\"font-family:Helvetica,Arial,sans-serif;color:#16201f;max-width:640px;line-height:1.55;font-size:14px\"><h2 style=\"color:#0f2a4a;font-size:18px;margin:0 0 4px\">Weekly research digest</h2><p style=\"color:#55605e;margin:0 0 14px\">Crossref records with a publication date in the last 7 days, search: islamic finance, sukuk, green sukuk.</p><h3 style=\"color:#0f2a4a;margin:18px 0 6px;font-size:15px\">Summarised from the abstract</h3>{{12.text}}<h3 style=\"color:#0f2a4a;margin:18px 0 6px;font-size:15px\">Listed without a summary</h3><ul style=\"padding-left:18px\">{{join(map(5.array; \"html_line\"; \"has_abstract\"; \"no\"); \"\")}}</ul><p style=\"color:#55605e;font-size:12px;border-top:1px solid #d8d2c4;padding-top:10px\">This digest lists what Crossref returned for the search terms. It is not a quality filter. Check the journal and read the paper before relying on it. Summaries are written by AI from the abstract only. New items this week: {{length(5.array)}}. Summaries received: {{length(10.items)}}.</p></div>",
+                        "content": "<div style=\"font-family:Helvetica,Arial,sans-serif;color:#1d1416;max-width:640px;line-height:1.55;font-size:14px\"><h2 style=\"color:#4a1424;font-size:18px;margin:0 0 4px\">Weekly research digest</h2><p style=\"color:#5f5456;margin:0 0 14px\">Crossref records with a publication date in the last 7 days, search: islamic finance, sukuk, green sukuk.</p><h3 style=\"color:#4a1424;margin:18px 0 6px;font-size:15px\">Summarised from the abstract</h3>{{12.text}}<h3 style=\"color:#4a1424;margin:18px 0 6px;font-size:15px\">Listed without a summary</h3><ul style=\"padding-left:18px\">{{join(map(5.array; \"html_line\"; \"has_abstract\"; \"no\"); \"\")}}</ul><p style=\"color:#5f5456;font-size:12px;border-top:1px solid #d9d4d5;padding-top:10px\">This digest lists what Crossref returned for the search terms. It is not a quality filter. Check the journal and read the paper before relying on it. Summaries are written by AI from the abstract only. New items this week: {{length(5.array)}}. Summaries received: {{length(10.items)}}.</p></div>",
                         "bodyType": "rawHtml"
                       },
                       "metadata": {
@@ -595,7 +595,7 @@
                           "research.lead@example.org"
                         ],
                         "subject": "Research digest held: AI step did not finish",
-                        "content": "<div style=\"font-family:Helvetica,Arial,sans-serif;color:#16201f;max-width:640px;line-height:1.55;font-size:14px\"><p>The AI step stopped with reason <b>{{8.data.stop_reason}}</b>, so this week's digest was not sent and no DOIs were logged.</p><p>Please review these new items by hand:</p><ul>{{join(map(5.array; \"title_line\"); \"\")}}</ul></div>",
+                        "content": "<div style=\"font-family:Helvetica,Arial,sans-serif;color:#1d1416;max-width:640px;line-height:1.55;font-size:14px\"><p>The AI step stopped with reason <b>{{8.data.stop_reason}}</b>, so this week's digest was not sent and no DOIs were logged.</p><p>Please review these new items by hand:</p><ul>{{join(map(5.array; \"title_line\"); \"\")}}</ul></div>",
                         "bodyType": "rawHtml"
                       },
                       "metadata": {
@@ -635,7 +635,7 @@
                   "team@example.org"
                 ],
                 "subject": "Weekly research digest: {{formatDate(now; \"D MMMM YYYY\")}} (titles only)",
-                "content": "<div style=\"font-family:Helvetica,Arial,sans-serif;color:#16201f;max-width:640px;line-height:1.55;font-size:14px\"><h2 style=\"color:#0f2a4a;font-size:18px;margin:0 0 4px\">Weekly research digest</h2><p>None of this week's new items came with an abstract, so nothing was summarised.</p><h3 style=\"color:#0f2a4a;margin:18px 0 6px;font-size:15px\">Listed without a summary</h3><ul style=\"padding-left:18px\">{{join(map(5.array; \"html_line\"; \"has_abstract\"; \"no\"); \"\")}}</ul><p style=\"color:#55605e;font-size:12px;border-top:1px solid #d8d2c4;padding-top:10px\">This digest lists what Crossref returned for the search terms. It is not a quality filter. Check the journal and read the paper before relying on it. Summaries are written by AI from the abstract only. New items this week: {{length(5.array)}}. Summaries received: 0.</p></div>",
+                "content": "<div style=\"font-family:Helvetica,Arial,sans-serif;color:#1d1416;max-width:640px;line-height:1.55;font-size:14px\"><h2 style=\"color:#4a1424;font-size:18px;margin:0 0 4px\">Weekly research digest</h2><p>None of this week's new items came with an abstract, so nothing was summarised.</p><h3 style=\"color:#4a1424;margin:18px 0 6px;font-size:15px\">Listed without a summary</h3><ul style=\"padding-left:18px\">{{join(map(5.array; \"html_line\"; \"has_abstract\"; \"no\"); \"\")}}</ul><p style=\"color:#5f5456;font-size:12px;border-top:1px solid #d9d4d5;padding-top:10px\">This digest lists what Crossref returned for the search terms. It is not a quality filter. Check the journal and read the paper before relying on it. Summaries are written by AI from the abstract only. New items this week: {{length(5.array)}}. Summaries received: 0.</p></div>",
                 "bodyType": "rawHtml"
               },
               "metadata": {

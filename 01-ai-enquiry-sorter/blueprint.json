@@ -292,7 +292,7 @@
                           "head@example.org"
                         ],
                         "subject": "HIGH: {{if(5.child_safety_concern = true; \"child safety\"; 5.category)}} message from {{1.`Name`}}",
-                        "content": "<p><b>Human action needed.</b> This message was marked high priority and has not been answered. No draft reply was created.</p><p><b>Reason:</b> {{if(5.child_safety_concern = true; \"Possible child safety concern\"; 5.category)}}<br><b>From:</b> {{1.`Name`}} ({{1.`Email`}})<br><b>Received:</b> {{1.`Timestamp`}}<br><b>Summary:</b> {{5.summary}}</p><hr><p><b>Original message</b></p><p>{{1.`Message`}}</p><p style=\"color:#55605e\">Follow your safeguarding or complaints procedure. Do not reply from this email thread.</p>",
+                        "content": "<p><b>Human action needed.</b> This message was marked high priority and has not been answered. No draft reply was created.</p><p><b>Reason:</b> {{if(5.child_safety_concern = true; \"Possible child safety concern\"; 5.category)}}<br><b>From:</b> {{1.`Name`}} ({{1.`Email`}})<br><b>Received:</b> {{1.`Timestamp`}}<br><b>Summary:</b> {{5.summary}}</p><hr><p><b>Original message</b></p><p>{{1.`Message`}}</p><p style=\"color:#5f5456\">Follow your safeguarding or complaints procedure. Do not reply from this email thread.</p>",
                         "bodyType": "rawHtml"
                       },
                       "metadata": {

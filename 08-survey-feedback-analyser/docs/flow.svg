@@ -1,47 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 300" width="860" height="300" font-family="Segoe UI, Helvetica, Arial, sans-serif">
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#55605e"/></marker>
-<marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b8862e"/></marker></defs>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5f5456"/></marker>
+<marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b3202a"/></marker></defs>
 <rect width="860" height="300" fill="#ffffff"/>
-<text x="20" y="32" font-size="16" font-weight="700" fill="#0f2a4a">08 Survey feedback analyser</text>
-<text x="20" y="52" font-size="12" fill="#55605e">Make.com scenario, left to right. Gold marks the human check.</text>
-<rect x="16" y="78" width="122" height="72" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="77.0" y="110.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Monthly schedule</text>
-<text x="77.0" y="126.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">1st of the month</text>
-<rect x="156" y="78" width="122" height="72" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="217.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Sheets</text>
-<text x="217.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">last month's rows</text>
-<text x="217.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">plus Stats tab</text>
-<rect x="296" y="78" width="122" height="72" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="357.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Aggregate</text>
-<text x="357.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">answers into</text>
-<text x="357.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">one text block</text>
-<rect x="436" y="78" width="122" height="72" rx="10" fill="#0f2a4a" stroke="#0f2a4a" stroke-width="1.2"/>
+<text x="20" y="32" font-size="16" font-weight="700" fill="#4a1424">08 Survey feedback analyser</text>
+<text x="20" y="52" font-size="12" fill="#5f5456">Make.com scenario, left to right. Gold marks the human check.</text>
+<rect x="16" y="78" width="122" height="72" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="77.0" y="110.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Monthly schedule</text>
+<text x="77.0" y="126.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">1st of the month</text>
+<rect x="156" y="78" width="122" height="72" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="217.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Sheets</text>
+<text x="217.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">last month's rows</text>
+<text x="217.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">plus Stats tab</text>
+<rect x="296" y="78" width="122" height="72" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="357.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Aggregate</text>
+<text x="357.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">answers into</text>
+<text x="357.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">one text block</text>
+<rect x="436" y="78" width="122" height="72" rx="10" fill="#4a1424" stroke="#4a1424" stroke-width="1.2"/>
 <text x="497.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Claude</text>
 <text x="497.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#ffffff">themes, quotes,</text>
 <text x="497.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#ffffff">flags as JSON</text>
-<rect x="576" y="78" width="122" height="72" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="637.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Checks</text>
-<text x="637.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">refusal, counts,</text>
-<text x="637.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">exact quotes</text>
-<rect x="716" y="78" width="122" height="72" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="777.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Report email</text>
-<text x="777.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">one page to the</text>
-<text x="777.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">programme lead</text>
-<line x1="138" y1="114.0" x2="154" y2="114.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="278" y1="114.0" x2="294" y2="114.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="418" y1="114.0" x2="434" y2="114.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="558" y1="114.0" x2="574" y2="114.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<line x1="698" y1="114.0" x2="714" y2="114.0" stroke="#55605e" stroke-width="1.5" marker-end="url(#a)"/>
-<rect x="156" y="198" width="122" height="72" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
-<text x="217.0" y="222.0" text-anchor="middle" font-size="13" font-weight="700" fill="#16201f">Ratings</text>
-<text x="217.0" y="238.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">averaged by</text>
-<text x="217.0" y="254.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">Sheets formulas</text>
-<line x1="217" y1="150" x2="217" y2="196" stroke="#55605e" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a)"/>
-<rect x="540" y="198" width="194" height="72" rx="10" fill="#fbf3e2" stroke="#b8862e" stroke-width="2"/>
-<text x="637.0" y="222.0" text-anchor="middle" font-size="13" font-weight="700" fill="#8a5d12">Human follow-up</text>
-<text x="637.0" y="238.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">safeguarding, harassment,</text>
-<text x="637.0" y="254.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#55605e">complaints, refusals</text>
-<line x1="637" y1="150" x2="637" y2="196" stroke="#b8862e" stroke-width="1.5" marker-end="url(#ag)"/>
-<polyline points="217,270 217,286 800,286 800,152" fill="none" stroke="#55605e" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#a)"/>
-<text x="292" y="279" font-size="11" fill="#55605e">averages skip the AI step</text>
+<rect x="576" y="78" width="122" height="72" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="637.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Checks</text>
+<text x="637.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">refusal, counts,</text>
+<text x="637.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">exact quotes</text>
+<rect x="716" y="78" width="122" height="72" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="777.0" y="102.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Report email</text>
+<text x="777.0" y="118.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">one page to the</text>
+<text x="777.0" y="134.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">programme lead</text>
+<line x1="138" y1="114.0" x2="154" y2="114.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="278" y1="114.0" x2="294" y2="114.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="418" y1="114.0" x2="434" y2="114.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="558" y1="114.0" x2="574" y2="114.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="698" y1="114.0" x2="714" y2="114.0" stroke="#5f5456" stroke-width="1.5" marker-end="url(#a)"/>
+<rect x="156" y="198" width="122" height="72" rx="10" fill="#ffffff" stroke="#d9d4d5" stroke-width="1.2"/>
+<text x="217.0" y="222.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1416">Ratings</text>
+<text x="217.0" y="238.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">averaged by</text>
+<text x="217.0" y="254.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">Sheets formulas</text>
+<line x1="217" y1="150" x2="217" y2="196" stroke="#5f5456" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="540" y="198" width="194" height="72" rx="10" fill="#ffffff" stroke="#b3202a" stroke-width="2"/>
+<text x="637.0" y="222.0" text-anchor="middle" font-size="13" font-weight="700" fill="#b3202a">Human follow-up</text>
+<text x="637.0" y="238.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">safeguarding, harassment,</text>
+<text x="637.0" y="254.0" text-anchor="middle" font-size="11.5" font-weight="400" fill="#5f5456">complaints, refusals</text>
+<line x1="637" y1="150" x2="637" y2="196" stroke="#b3202a" stroke-width="1.5" marker-end="url(#ag)"/>
+<polyline points="217,270 217,286 800,286 800,152" fill="none" stroke="#5f5456" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<text x="292" y="279" font-size="11" fill="#5f5456">averages skip the AI step</text>
 </svg>
