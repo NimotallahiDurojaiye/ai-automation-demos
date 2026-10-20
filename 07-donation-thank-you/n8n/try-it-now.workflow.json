@@ -1,0 +1,145 @@
+{
+  "name": "Demo 07: Donation thank-you (try it now)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Donation thank-you: try it now\nClick **Test workflow**. It runs on made-up data and needs no accounts.\n\nThen click each node to see its output: receipt numbers, the fund-specific thank-you emails (open the `html` field), one trustee alert, and the ledger with totals kept separate per fund.\n\nCrescent Hope Foundation is fictional.",
+        "height": 280,
+        "width": 400
+      },
+      "id": "f3cd5ae1-82d0-597b-a208-4543a79e81e2",
+      "name": "Read me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -40
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "717a4538-7ced-5bb4-ac28-cd91d39480c9",
+      "name": "Click to try it",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Made-up donations from sample/donations.csv. The full version reads your Google Sheet instead.\nconst rows = [\n {\n  \"timestamp\": \"2026-10-12 09:14\",\n  \"donor\": \"Amina Example\",\n  \"email\": \"amina.example@example.com\",\n  \"amount\": 250.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Zakat\",\n  \"message\": \"Please use it where the need is greatest.\"\n },\n {\n  \"timestamp\": \"2026-10-12 11:02\",\n  \"donor\": \"Yusuf Sample\",\n  \"email\": \"yusuf.sample@example.com\",\n  \"amount\": 40.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Sadaqah\",\n  \"message\": \"\"\n },\n {\n  \"timestamp\": \"2026-10-12 15:47\",\n  \"donor\": \"Maryam Test\",\n  \"email\": \"maryam.test@example.com\",\n  \"amount\": 500.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Waqf\",\n  \"message\": \"In memory of my grandmother.\"\n },\n {\n  \"timestamp\": \"2026-10-13 08:30\",\n  \"donor\": \"Ibrahim Demo\",\n  \"email\": \"ibrahim.demo@example.com\",\n  \"amount\": 20.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"General\",\n  \"message\": \"\"\n },\n {\n  \"timestamp\": \"2026-10-13 19:21\",\n  \"donor\": \"Khadija Placeholder\",\n  \"email\": \"khadija.placeholder@example.com\",\n  \"amount\": 1500.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Zakat\",\n  \"message\": \"Zakat for this year.\"\n },\n {\n  \"timestamp\": \"2026-10-14 07:55\",\n  \"donor\": \"Bilal Example\",\n  \"email\": \"bilal.example@example.com\",\n  \"amount\": 75.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Sadaqah\",\n  \"message\": \"For the food parcels.\"\n },\n {\n  \"timestamp\": \"2026-10-14 13:10\",\n  \"donor\": \"Hafsa Sample\",\n  \"email\": \"hafsa.sample@example.com\",\n  \"amount\": 60.0,\n  \"currency\": \"EUR\",\n  \"fund\": \"Zakat\",\n  \"message\": \"\"\n },\n {\n  \"timestamp\": \"2026-10-15 10:42\",\n  \"donor\": \"Umar Test\",\n  \"email\": \"umar.test@example.com\",\n  \"amount\": 100.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Building appeal\",\n  \"message\": \"For the new centre.\"\n },\n {\n  \"timestamp\": \"2026-10-15 21:03\",\n  \"donor\": \"Sumayyah Demo\",\n  \"email\": \"\",\n  \"amount\": 30.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Sadaqah\",\n  \"message\": \"Paid by bank transfer, no email.\"\n },\n {\n  \"timestamp\": \"2026-10-16 12:18\",\n  \"donor\": \"Idris Example\",\n  \"email\": \"idris.example@example.com\",\n  \"amount\": 1000.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"Waqf\",\n  \"message\": \"\"\n },\n {\n  \"timestamp\": \"2026-10-17 16:36\",\n  \"donor\": \"Ruqayyah Sample\",\n  \"email\": \"ruqayyah.sample@example.com\",\n  \"amount\": 15.0,\n  \"currency\": \"GBP\",\n  \"fund\": \"General\",\n  \"message\": \"Small, but from the heart.\"\n },\n {\n  \"timestamp\": \"2026-10-18 09:59\",\n  \"donor\": \"Hamza Test\",\n  \"email\": \"hamza.test@example.com\",\n  \"amount\": 120.0,\n  \"currency\": \"USD\",\n  \"fund\": \"Zakat\",\n  \"message\": \"\"\n }\n];\nreturn rows.map((r, i) => ({ json: { ...r, row: i + 2 } }));"
+      },
+      "id": "a880726f-4c51-51e9-ba0b-27589b234821",
+      "name": "Sample donations",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Receipt number, fund check and trustee flags. Change LARGE_GIFT here only.\nconst LARGE_GIFT = 1000;\nconst FUNDS = ['Zakat', 'Sadaqah', 'Waqf', 'General'];\nreturn $input.all().map((item, i) => {\n  const d = item.json;\n  const row = d.row ?? (i + 2);\n  const fundKnown = FUNDS.includes(d.fund);\n  const hasEmail = /@/.test(d.email || '');\n  const reasons = [];\n  if (Number(d.amount) >= LARGE_GIFT) reasons.push('Large gift: please check the payment and thank the donor personally');\n  if (!fundKnown) reasons.push('Fund not recognised: confirm with the donor before it is used');\n  if (!hasEmail) reasons.push('No email address: thank the donor another way');\n  return { json: {\n    ...d,\n    receipt: 'CHF-2026-' + String(row).padStart(6, '0'),\n    fundKnown, hasEmail,\n    sendThankYou: fundKnown && hasEmail,\n    trusteeAlert: reasons.length > 0,\n    trusteeReasons: reasons.join('; '),\n  }};\n});"
+      },
+      "id": "9ca65053-8c1e-5f90-a148-5ad75c7d83d5",
+      "name": "Receipt number and checks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the fund-specific thank-you email. Confirm the Zakat wording with the charity's Shariah adviser.\nconst WINE = '#4a1424', RED = '#b3202a', INK = '#1d1416', MUTED = '#5f5456', LINE = '#d9d4d5';\nconst FUND_TEXT = {\n  Zakat: \"We keep all Zakat in a separate account, apart from our other funds. Your Zakat will be given only to people who are eligible to receive it, within the eight categories (asnaf) named in the Qur'an (Surah At-Tawbah, 9:60). We do not use Zakat to pay our running costs.\",\n  Sadaqah: 'Your Sadaqah supports our general programmes, including food parcels, school supplies and emergency help for families.',\n  Waqf: 'Your gift joins our Waqf fund. The principal is preserved, and only the returns it earns are spent on our programmes, so your gift keeps giving.',\n  General: 'Your gift supports our work wherever the need is greatest, including the costs of running our programmes well.',\n};\nconst cell = 'border:1px solid ' + LINE + ';padding:9px';\nconst out = [];\nfor (const item of $input.all()) {\n  const d = item.json;\n  if (!d.sendThankYou) continue;\n  const amount = Number(d.amount).toFixed(2);\n  const first = String(d.donor || '').split(' ')[0];\n  const label = d.fund === 'General' ? 'gift' : d.fund;\n  const html =\n    '<div style=\"font-family:Helvetica,Arial,sans-serif;color:' + INK + ';max-width:600px;margin:0 auto;border:1px solid ' + LINE + '\">' +\n    '<div style=\"background:' + WINE + ';color:#fff;padding:22px 28px\"><div style=\"font-family:Georgia,serif;font-size:20px;letter-spacing:2px\">CRESCENT HOPE FOUNDATION</div>' +\n    '<div style=\"width:48px;height:2px;background:' + RED + ';margin-top:8px\"></div></div>' +\n    '<div style=\"padding:26px 28px\"><h1 style=\"font-family:Georgia,serif;color:' + WINE + ';font-size:24px;margin:0 0 14px\">Thank you for your ' + label + '</h1>' +\n    '<p>As-salamu alaykum ' + first + ',</p><p>Thank you for trusting us with your ' + label + '. We have received it safely.</p>' +\n    '<p>May Allah accept it from you and reward you.</p>' +\n    '<table style=\"width:100%;border-collapse:collapse;margin:16px 0;font-size:14px\">' +\n    '<tr><td style=\"' + cell + ';color:' + MUTED + '\">Receipt number</td><td style=\"' + cell + '\"><b>' + d.receipt + '</b></td></tr>' +\n    '<tr><td style=\"' + cell + ';color:' + MUTED + '\">Amount</td><td style=\"' + cell + '\"><b>' + d.currency + ' ' + amount + '</b></td></tr>' +\n    '<tr><td style=\"' + cell + ';color:' + MUTED + '\">Fund</td><td style=\"' + cell + '\"><b>' + d.fund + '</b></td></tr></table>' +\n    '<p style=\"font-size:13px;color:' + RED + ';margin:0 0 4px;font-weight:bold;letter-spacing:1px\">HOW YOUR ' + label.toUpperCase() + ' IS USED</p>' +\n    '<p>' + FUND_TEXT[d.fund] + '</p><p>Please keep this email for your records.</p>' +\n    '<p>With thanks,<br>The Crescent Hope Foundation team</p></div>' +\n    '<div style=\"border-top:1px solid ' + LINE + ';padding:14px 28px;font-size:12px;color:' + MUTED + '\">This email is an acknowledgement of your gift. It is not a tax receipt. Crescent Hope Foundation (a fictional organisation).</div></div>';\n  out.push({ json: { to: d.email, subject: 'Your ' + label + ' has been received: receipt ' + d.receipt, receipt: d.receipt, fund: d.fund, html } });\n}\nreturn out;"
+      },
+      "id": "82ffa69e-3ce2-5a84-b372-f2c86ac4309b",
+      "name": "Thank-you emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// One alert listing every gift a trustee should look at.\nconst flagged = $input.all().map(i => i.json).filter(d => d.trusteeAlert);\nif (!flagged.length) return [];\nconst lines = flagged.map(d => d.receipt + ' | ' + d.donor + ' | ' + d.currency + ' ' + Number(d.amount).toFixed(2) + ' | ' + d.fund + ' | ' + d.trusteeReasons);\nreturn [{ json: { to: 'trustee@example.org', subject: 'Gifts to check: ' + flagged.length, count: flagged.length,\n  text: 'As-salamu alaykum,\\n\\nPlease check these gifts:\\n\\n' + lines.join('\\n') } }];"
+      },
+      "id": "ebe54a62-ddf5-535b-8230-7c27e979bbbb",
+      "name": "Trustee alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Ledger rows with the fund kept in its own column, and totals per fund.\nconst ledger = $input.all().map(i => i.json).map(d => ({ receipt: d.receipt, date: d.timestamp, donor: d.donor,\n  amount: Number(d.amount), currency: d.currency, fund: d.fund, trustee_flag: d.trusteeReasons || '' }));\nconst totals = {};\nfor (const d of ledger) { const k = d.fund + ' (' + d.currency + ')'; totals[k] = Math.round(((totals[k] || 0) + d.amount) * 100) / 100; }\nreturn [...ledger.map(json => ({ json })), { json: { summary: 'Totals per fund, kept separate', totals } }];"
+      },
+      "id": "c8af3da2-cdbd-5893-8aaf-2b6b1814c117",
+      "name": "Ledger and fund totals",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        480
+      ]
+    }
+  ],
+  "connections": {
+    "Click to try it": {
+      "main": [
+        [
+          {
+            "node": "Sample donations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample donations": {
+      "main": [
+        [
+          {
+            "node": "Receipt number and checks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receipt number and checks": {
+      "main": [
+        [
+          {
+            "node": "Thank-you emails",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Trustee alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Ledger and fund totals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

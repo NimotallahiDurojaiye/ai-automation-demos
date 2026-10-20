@@ -15,7 +15,7 @@ Demos 01 to 08 are sample scenarios: the organisations are fictional and every f
 | 04 | [Weekly research digest](04-weekly-research-digest/) | New papers on Islamic finance and sustainable finance appear across dozens of journals and preprint servers every week | Researchers, policy teams and PhD students who follow a fast-moving field | Sample scenario (AI) |
 | 05 | [Shariah screening alert](05-shariah-screening-alert/) | A volunteer works out the AAOIFI ratios for every share on the club's watchlist by hand each month | Islamic investment clubs, Muslim investors and analysts who track a share watchlist | Sample scenario (AI) |
 | 06 | [Receipt and invoice reader](06-receipt-reader/) | A small catering business photographs every supplier receipt and types it into a spreadsheet by hand | Small businesses, caterers and NGOs that log receipts in a spreadsheet | Sample scenario (AI) |
-| 07 | [Donation thank-you and receipts](07-donation-thank-you/) | Donors to a small Muslim charity wait days for a thank-you and a receipt while a volunteer copies each gift into a spreadsheet by hand | Charities, mosques, schools | Sample scenario (No AI) |
+| 07 | [Donation thank-you and receipts](07-donation-thank-you/) | Donors to a small Muslim charity wait days for a thank-you and a receipt while a volunteer copies each gift into a spreadsheet by hand | Charities, mosques, schools | Sample scenario (No AI), Make and n8n |
 | 08 | [Survey feedback analyser](08-survey-feedback-analyser/) | A teacher training academy collects 30 to 40 feedback forms a month, but nobody has time to read the open answers | Trainers, schools, HR | Sample scenario (AI) |
 
 ## How every demo is built

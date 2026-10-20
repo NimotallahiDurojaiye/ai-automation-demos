@@ -1,0 +1,247 @@
+{
+  "name": "Demo 07: Donation thank-you (Google Sheets and Gmail)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Donation thank-you: full version\n1. Open **New donation row** and **Ledger row**: connect Google Sheets and pick your sheet and tab.\n2. Open both Gmail nodes and connect your Gmail.\n3. Change the trustee address in **Trustee alert**.\n4. Test with your own email in the sheet before you switch it on.",
+        "height": 260,
+        "width": 400
+      },
+      "id": "153b51fd-47c0-5f61-bb68-70f1ba11f768",
+      "name": "Read me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "85f446cc-f7aa-5f78-9d1f-c62bef00d986",
+      "name": "New donation row",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Rename the form's column headers to the names the rules use.\nreturn $input.all().map(i => ({ json: {\n  timestamp: i.json['Timestamp'], donor: i.json['Donor name'], email: i.json['Email'],\n  amount: Number(i.json['Amount']), currency: i.json['Currency'], fund: i.json['Fund type'],\n  message: i.json['Message'], row: i.json['row_number'] } }));"
+      },
+      "id": "9a39b37b-f619-55c4-9264-b6a4217e8a8f",
+      "name": "Map form columns",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Receipt number, fund check and trustee flags. Change LARGE_GIFT here only.\nconst LARGE_GIFT = 1000;\nconst FUNDS = ['Zakat', 'Sadaqah', 'Waqf', 'General'];\nreturn $input.all().map((item, i) => {\n  const d = item.json;\n  const row = d.row ?? (i + 2);\n  const fundKnown = FUNDS.includes(d.fund);\n  const hasEmail = /@/.test(d.email || '');\n  const reasons = [];\n  if (Number(d.amount) >= LARGE_GIFT) reasons.push('Large gift: please check the payment and thank the donor personally');\n  if (!fundKnown) reasons.push('Fund not recognised: confirm with the donor before it is used');\n  if (!hasEmail) reasons.push('No email address: thank the donor another way');\n  return { json: {\n    ...d,\n    receipt: 'CHF-2026-' + String(row).padStart(6, '0'),\n    fundKnown, hasEmail,\n    sendThankYou: fundKnown && hasEmail,\n    trusteeAlert: reasons.length > 0,\n    trusteeReasons: reasons.join('; '),\n  }};\n});"
+      },
+      "id": "4f804ed2-36b7-5587-b2e5-9b01eb238a62",
+      "name": "Receipt number and checks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the fund-specific thank-you email. Confirm the Zakat wording with the charity's Shariah adviser.\nconst WINE = '#4a1424', RED = '#b3202a', INK = '#1d1416', MUTED = '#5f5456', LINE = '#d9d4d5';\nconst FUND_TEXT = {\n  Zakat: \"We keep all Zakat in a separate account, apart from our other funds. Your Zakat will be given only to people who are eligible to receive it, within the eight categories (asnaf) named in the Qur'an (Surah At-Tawbah, 9:60). We do not use Zakat to pay our running costs.\",\n  Sadaqah: 'Your Sadaqah supports our general programmes, including food parcels, school supplies and emergency help for families.',\n  Waqf: 'Your gift joins our Waqf fund. The principal is preserved, and only the returns it earns are spent on our programmes, so your gift keeps giving.',\n  General: 'Your gift supports our work wherever the need is greatest, including the costs of running our programmes well.',\n};\nconst cell = 'border:1px solid ' + LINE + ';padding:9px';\nconst out = [];\nfor (const item of $input.all()) {\n  const d = item.json;\n  if (!d.sendThankYou) continue;\n  const amount = Number(d.amount).toFixed(2);\n  const first = String(d.donor || '').split(' ')[0];\n  const label = d.fund === 'General' ? 'gift' : d.fund;\n  const html =\n    '<div style=\"font-family:Helvetica,Arial,sans-serif;color:' + INK + ';max-width:600px;margin:0 auto;border:1px solid ' + LINE + '\">' +\n    '<div style=\"background:' + WINE + ';color:#fff;padding:22px 28px\"><div style=\"font-family:Georgia,serif;font-size:20px;letter-spacing:2px\">CRESCENT HOPE FOUNDATION</div>' +\n    '<div style=\"width:48px;height:2px;background:' + RED + ';margin-top:8px\"></div></div>' +\n    '<div style=\"padding:26px 28px\"><h1 style=\"font-family:Georgia,serif;color:' + WINE + ';font-size:24px;margin:0 0 14px\">Thank you for your ' + label + '</h1>' +\n    '<p>As-salamu alaykum ' + first + ',</p><p>Thank you for trusting us with your ' + label + '. We have received it safely.</p>' +\n    '<p>May Allah accept it from you and reward you.</p>' +\n    '<table style=\"width:100%;border-collapse:collapse;margin:16px 0;font-size:14px\">' +\n    '<tr><td style=\"' + cell + ';color:' + MUTED + '\">Receipt number</td><td style=\"' + cell + '\"><b>' + d.receipt + '</b></td></tr>' +\n    '<tr><td style=\"' + cell + ';color:' + MUTED + '\">Amount</td><td style=\"' + cell + '\"><b>' + d.currency + ' ' + amount + '</b></td></tr>' +\n    '<tr><td style=\"' + cell + ';color:' + MUTED + '\">Fund</td><td style=\"' + cell + '\"><b>' + d.fund + '</b></td></tr></table>' +\n    '<p style=\"font-size:13px;color:' + RED + ';margin:0 0 4px;font-weight:bold;letter-spacing:1px\">HOW YOUR ' + label.toUpperCase() + ' IS USED</p>' +\n    '<p>' + FUND_TEXT[d.fund] + '</p><p>Please keep this email for your records.</p>' +\n    '<p>With thanks,<br>The Crescent Hope Foundation team</p></div>' +\n    '<div style=\"border-top:1px solid ' + LINE + ';padding:14px 28px;font-size:12px;color:' + MUTED + '\">This email is an acknowledgement of your gift. It is not a tax receipt. Crescent Hope Foundation (a fictional organisation).</div></div>';\n  out.push({ json: { to: d.email, subject: 'Your ' + label + ' has been received: receipt ' + d.receipt, receipt: d.receipt, fund: d.fund, html } });\n}\nreturn out;"
+      },
+      "id": "7085ebc9-2179-5a6a-8a3d-de9a89fc1c6e",
+      "name": "Thank-you emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "cc49f034-9f40-5573-9f67-2c4b2c6079ad",
+      "name": "Send thank-you",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1040,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// One alert listing every gift a trustee should look at.\nconst flagged = $input.all().map(i => i.json).filter(d => d.trusteeAlert);\nif (!flagged.length) return [];\nconst lines = flagged.map(d => d.receipt + ' | ' + d.donor + ' | ' + d.currency + ' ' + Number(d.amount).toFixed(2) + ' | ' + d.fund + ' | ' + d.trusteeReasons);\nreturn [{ json: { to: 'trustee@example.org', subject: 'Gifts to check: ' + flagged.length, count: flagged.length,\n  text: 'As-salamu alaykum,\\n\\nPlease check these gifts:\\n\\n' + lines.join('\\n') } }];"
+      },
+      "id": "64d6ba24-3a4d-558c-baa9-1cadc2a0ea6f",
+      "name": "Trustee alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "29997de1-a42b-5c39-b33f-c8c0e777e162",
+      "name": "Email trustee",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1040,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Receipt no": "={{ $json.receipt }}",
+            "Date": "={{ $json.timestamp }}",
+            "Donor": "={{ $json.donor }}",
+            "Amount": "={{ $json.amount }}",
+            "Currency": "={{ $json.currency }}",
+            "Fund": "={{ $json.fund }}",
+            "Trustee flag": "={{ $json.trusteeReasons }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "2826a2dc-8a30-5e01-9cb1-3aa5370c89b0",
+      "name": "Ledger row",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        780,
+        480
+      ]
+    }
+  ],
+  "connections": {
+    "New donation row": {
+      "main": [
+        [
+          {
+            "node": "Map form columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map form columns": {
+      "main": [
+        [
+          {
+            "node": "Receipt number and checks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receipt number and checks": {
+      "main": [
+        [
+          {
+            "node": "Thank-you emails",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Trustee alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Ledger row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Thank-you emails": {
+      "main": [
+        [
+          {
+            "node": "Send thank-you",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trustee alert": {
+      "main": [
+        [
+          {
+            "node": "Email trustee",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

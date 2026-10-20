@@ -106,4 +106,21 @@ After importing, reconnect your own accounts and check each module's settings be
 ## Tools
 Google Forms, Google Sheets, Gmail, Make.com.
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Runs on the made-up donations with no accounts or keys. Import it and click **Test workflow** to see receipt numbers, the thank-you emails, the trustee alert and the fund totals. |
+| `n8n/full.workflow.json` | The working version: Google Sheets trigger, the same rules, Gmail thank-yous, a trustee email and a ledger row. |
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above.
+
+**For the full version:** connect Google Sheets in **New donation row** and **Ledger row**, connect Gmail in **Send thank-you** and **Email trustee**, and change the trustee address in **Trustee alert**. Test with your own email in the sheet before you switch it on.
+
+The rules live in one Code node, **Receipt number and checks**. The large-gift threshold is `LARGE_GIFT` at the top of that node.
+
+![Thank-you email produced by the n8n workflow code from the sample data](docs/n8n-email-output.png)
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)
