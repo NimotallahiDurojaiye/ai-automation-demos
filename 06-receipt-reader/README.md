@@ -184,8 +184,8 @@ To regenerate the sample receipts and expected CSV: `pip install pillow`, then `
 - **Category is a suggestion.** The model picks from a fixed list. The bookkeeper can change it; tax treatment is for the accountant, not this tool.
 - **Privacy.** Receipt images are sent to the Claude API for reading. Do not upload documents with personal data you are not allowed to share with a processor.
 
-## Status
-Blueprint drafted. Not yet test-run in Make; verify module settings after import. Points to check: the Google Drive trigger and download module names and fields (`google-drive:watchFilesInAFolder`, `google-drive:getAFile`), the HTTP module's raw JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`), and whether `base64(2.data)` or another function is needed to turn the downloaded file into base64 in your Make version. These are my best reading of Make's export format.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on. Points to check: the Google Drive trigger and download module names and fields (`google-drive:watchFilesInAFolder`, `google-drive:getAFile`), the HTTP module's raw JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`), and whether `base64(2.data)` or another function is needed to turn the downloaded file into base64 in your Make version. These are my best reading of Make's export format.
 
 ## Tools
 Google Drive, Google Sheets, Make.com, Claude API (`claude-opus-5-5`, vision and PDF input), Gmail, Python 3 with Pillow (sample generation only).

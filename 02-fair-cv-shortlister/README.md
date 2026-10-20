@@ -183,9 +183,8 @@ The blueprint uses `claude-opus-5-5`. For high volume you can change the `model`
 - **Personal data and the law.** CVs are sent to the Anthropic API for processing. Tell applicants in your privacy notice. Check local law on automated decision-making in hiring before using this with real candidates, for example GDPR Article 22 in the UK and EU, and Malaysia's PDPA. In many places you must tell candidates that AI is used and offer a human review.
 - **Failures go to a human.** Errors, refusals and cut-off answers land in `Needs_Human` with the candidate ID, so nobody drops out of the process silently.
 
-## Status
-
-Blueprint drafted. Not yet test-run in Make; verify module settings after import.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on.
 
 Points to check after import: the HTTP module's raw JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`) are my best reading of the current module; the Set variable module (`util:SetVariable2`); that **Transform to JSON** returns the prompt as a quoted, escaped JSON string; and the Make expressions for the total and the quote check (`contains()` with `&` and `|`). If the name or phone field is empty, the text-replace step may behave oddly, so test with blank fields too. Connection IDs are placeholders and will need picking again.
 

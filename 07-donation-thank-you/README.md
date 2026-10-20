@@ -100,8 +100,8 @@ Weekly summary built from `sample/weekly-summary.csv` (what the Sheets formulas 
 - **Refunds and corrections** are not handled. A person edits the ledger and replies to the donor.
 - **Data.** Donor details stay in your own Google account. Keep the ledger shared only with the people who need it.
 
-## Status
-Blueprint drafted. Not yet test-run in Make; verify module settings after import. Points to check: the receipt-number formula (Make has no pad function, so it uses `substring`), the `&` operator inside `if()`, the row-number field name (`__ROW_NUMBER__`), the `util:SetVariables` and `util:TextAggregator` module names, and the filter operator names (`number:greater`, `text:notcontain`, `exist`). These are my best match to Make's export format.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on. Points to check: the receipt-number formula (Make has no pad function, so it uses `substring`), the `&` operator inside `if()`, the row-number field name (`__ROW_NUMBER__`), the `util:SetVariables` and `util:TextAggregator` module names, and the filter operator names (`number:greater`, `text:notcontain`, `exist`). These are my best match to Make's export format.
 
 ## Tools
 Google Forms, Google Sheets, Gmail, Make.com.

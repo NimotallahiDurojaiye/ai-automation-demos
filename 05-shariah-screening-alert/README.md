@@ -187,8 +187,8 @@ This tool is for education and club discussion. It is not a fatwa and it is not 
 - **Text in the request body.** Changed rows are inserted into a JSON body. Company names containing double quotes would break it; keep names plain or strip quotes in the sheet.
 - **Not advice.** Education only, not a fatwa or investment advice. The admin and the club's Shariah adviser review before anything is shared.
 
-## Status
-Blueprint drafted. Not yet test-run in Make; verify module settings after import. Points to check: the HTTP module's raw JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`) and the Text aggregator settings (`util:TextAggregator`, row separator) are my best reading of Make's export format; the monthly schedule lives in the scenario settings, not in the blueprint.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on. Points to check: the HTTP module's raw JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`) and the Text aggregator settings (`util:TextAggregator`, row separator) are my best reading of Make's export format; the monthly schedule lives in the scenario settings, not in the blueprint.
 
 ## Tools
 Google Sheets, Make.com, Claude API (`claude-opus-5-5`), Gmail, Python 3 standard library (`screen.py`).

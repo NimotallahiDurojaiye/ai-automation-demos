@@ -446,8 +446,8 @@ The ratings line (36 responses, average 4.00, spread 12 / 14 / 8 / 2 / 0) is wha
 - **Empty months.** If the `Stats` row shows 0 responses, the scenario stops before the AI step.
 - **Privacy.** Response text is sent to the Anthropic API. Tell attendees this in the form, and do not ask for names unless you need them.
 
-## Status
-Blueprint drafted. Not yet test-run in Make; verify module settings after import. Points to check: the HTTP module's JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`), the `json:TransformToJSON` module used to escape the prompt safely, `util:TextAggregator` settings, `builtin:Ignore` after the failure email, and the `&` and `!=` operators inside `if()`. These are my best match to Make's export format. `json:ParseJSON` has no data structure set, so map its fields after one test run.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on. Points to check: the HTTP module's JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`), the `json:TransformToJSON` module used to escape the prompt safely, `util:TextAggregator` settings, `builtin:Ignore` after the failure email, and the `&` and `!=` operators inside `if()`. These are my best match to Make's export format. `json:ParseJSON` has no data structure set, so map its fields after one test run.
 
 ## Tools
 Google Forms, Google Sheets, Gmail, Make.com, Claude API (Anthropic).

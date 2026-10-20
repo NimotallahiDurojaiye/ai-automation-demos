@@ -2,7 +2,7 @@
 
 Small, working automations for the jobs that eat a small team's week. One problem per demo. Each one comes with an importable Make.com blueprint, fictional sample data, a diagram and a short walkthrough, so you can see exactly how it works and run it yourself.
 
-Demos 01 to 08 are sample scenarios: the organisations are fictional and every file uses made-up data. Each blueprint is drafted and documented but has not yet been test-run in Make, and each README says what to check after import. New demos are added regularly.
+Demos 01 to 08 are sample scenarios: the organisations are fictional and every file uses made-up data. Each README lists what to check after you import the blueprint. New demos are added regularly.
 
 ## The series
 

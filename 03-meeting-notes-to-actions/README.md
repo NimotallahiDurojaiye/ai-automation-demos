@@ -142,8 +142,8 @@ Switching the `model` field to `claude-haiku-5-5` ($0.10 / $0.50 per million) br
 - **No actions found.** If the notes contain no action items, the text aggregator may produce no bundle and the draft may not be written. Test this case after import.
 - **Long transcripts.** Text after 60,000 characters is cut off before it reaches the model.
 
-## Status
-Blueprint drafted. Not yet test-run in Make; verify module settings after import. Points to check: the raw JSON body field names on the HTTP module (`inputMethod: jsonString`, `jsonStringBodyContent`), the use of `json:TransformToJSON` to escape the notes into the request body, the `google-sheets:updateRow` and `filterRows` field and operator names in scenario B, and whether the text aggregator behaves as expected when there are zero action items.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on. Points to check: the raw JSON body field names on the HTTP module (`inputMethod: jsonString`, `jsonStringBodyContent`), the use of `json:TransformToJSON` to escape the notes into the request body, the `google-sheets:updateRow` and `filterRows` field and operator names in scenario B, and whether the text aggregator behaves as expected when there are zero action items.
 
 ## Tools
 Google Forms, Google Sheets, Gmail, Make.com (HTTP, JSON, router, iterator, text aggregator), Claude API (`claude-opus-5-5`).

@@ -139,9 +139,8 @@ The blueprint uses `claude-opus-5-5`. For high volume you can change the `model`
 - **Prompt injection.** A message could try to give the AI instructions. The prompt tells it to treat the message as data, structured output limits what it can return, and it has no tools or sending rights.
 - **Personal data.** Messages are sent to the Anthropic API for processing. Tell enquirers in your privacy notice, and check your data protection duties before you use it with real messages.
 
-## Status
-
-Blueprint drafted. Not yet test-run in Make; verify module settings after import.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on.
 
 Points to check after import: the HTTP module's raw JSON body fields (`contentType: json`, `inputMethod: jsonString`, `jsonStringBodyContent`) are my best reading of the current module; the Gmail draft module name (`google-email:createDraft`) and its fields; and that **Transform to JSON** (module 2) returns the prompt as a quoted, escaped JSON string so it can drop straight into the request body. Connection IDs are placeholders and will need picking again.
 

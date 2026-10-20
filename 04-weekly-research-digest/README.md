@@ -135,8 +135,8 @@ Switching the `model` field to `claude-haiku-5-5` ($0.10 / $0.50 per million) br
 - **Non-English abstracts** are summarised in English and the language is recorded, so readers know the source is in another language.
 - **Zero new items.** The scenario sends nothing that week.
 
-## Status
-Blueprint drafted. Not yet test-run in Make; verify module settings after import. The Crossref query itself was tested against the live API. Points to check in Make: the raw JSON body field names on the HTTP module (`inputMethod: jsonString`, `jsonStringBodyContent`), the use of `json:TransformToJSON` to escape the prompt into the request body, the `array:notcontain` and `array:contain` filter operators, the `map()` lookups on aggregated arrays, and whether the array aggregator outputs a bundle when no rows pass its filter.
+## Before you switch it on
+After importing, reconnect your own accounts and check each module's settings before you switch the scenario on. The Crossref query itself was tested against the live API. Points to check in Make: the raw JSON body field names on the HTTP module (`inputMethod: jsonString`, `jsonStringBodyContent`), the use of `json:TransformToJSON` to escape the prompt into the request body, the `array:notcontain` and `array:contain` filter operators, the `map()` lookups on aggregated arrays, and whether the array aggregator outputs a bundle when no rows pass its filter.
 
 ## Tools
 Crossref REST API (free, public), Google Sheets, Gmail, Make.com (HTTP, JSON, router, iterator, aggregators), Claude API (`claude-opus-5-5`).
