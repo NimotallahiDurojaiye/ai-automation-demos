@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 300" width="860" height="300" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#55605e"/>
+    </marker>
+  </defs>
+  <rect width="860" height="300" fill="#ffffff"/>
+  <text x="20" y="30" font-size="15" font-weight="700" fill="#0f2a4a">01 AI enquiry sorter</text>
+  <text x="20" y="48" font-size="11" fill="#55605e">Nothing is sent to the enquirer until a person presses send.</text>
+
+  <!-- 1 trigger -->
+  <rect x="20" y="110" width="120" height="70" rx="8" fill="#f2ede1" stroke="#d8d2c4"/>
+  <text x="80" y="138" font-size="12" font-weight="700" fill="#16201f" text-anchor="middle">Contact form</text>
+  <text x="80" y="155" font-size="10.5" fill="#55605e" text-anchor="middle">new row in</text>
+  <text x="80" y="169" font-size="10.5" fill="#55605e" text-anchor="middle">Google Sheets</text>
+
+  <!-- 2 claude -->
+  <rect x="170" y="110" width="140" height="70" rx="8" fill="#0f2a4a" stroke="#0f2a4a"/>
+  <text x="240" y="135" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">Claude sorts</text>
+  <text x="240" y="152" font-size="10.5" fill="#f2ede1" text-anchor="middle">category, urgency,</text>
+  <text x="240" y="166" font-size="10.5" fill="#f2ede1" text-anchor="middle">language, summary, draft</text>
+
+  <!-- 3 router -->
+  <rect x="340" y="110" width="120" height="70" rx="8" fill="#f2ede1" stroke="#d8d2c4"/>
+  <text x="400" y="138" font-size="12" font-weight="700" fill="#16201f" text-anchor="middle">Router</text>
+  <text x="400" y="155" font-size="10.5" fill="#55605e" text-anchor="middle">safety rules</text>
+  <text x="400" y="169" font-size="10.5" fill="#55605e" text-anchor="middle">set in Make</text>
+
+  <!-- branches -->
+  <rect x="494" y="64" width="162" height="50" rx="8" fill="#ffffff" stroke="#b8862e" stroke-width="1.5"/>
+  <text x="575" y="85" font-size="11.5" font-weight="700" fill="#16201f" text-anchor="middle">Complaint or child safety</text>
+  <text x="575" y="101" font-size="10.5" fill="#55605e" text-anchor="middle">high, to a lead, no draft</text>
+
+  <rect x="494" y="124" width="162" height="50" rx="8" fill="#ffffff" stroke="#d8d2c4"/>
+  <text x="575" y="145" font-size="11.5" font-weight="700" fill="#16201f" text-anchor="middle">Other enquiries</text>
+  <text x="575" y="161" font-size="10.5" fill="#55605e" text-anchor="middle">team inbox + Gmail draft</text>
+
+  <rect x="494" y="184" width="162" height="50" rx="8" fill="#ffffff" stroke="#d8d2c4"/>
+  <text x="575" y="205" font-size="11.5" font-weight="700" fill="#16201f" text-anchor="middle">Spam or failed call</text>
+  <text x="575" y="221" font-size="10.5" fill="#55605e" text-anchor="middle">logged for a weekly check</text>
+
+  <!-- human -->
+  <rect x="690" y="110" width="150" height="70" rx="8" fill="#b8862e" stroke="#b8862e"/>
+  <text x="765" y="135" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">Human review</text>
+  <text x="765" y="152" font-size="10.5" fill="#ffffff" text-anchor="middle">staff edit and send,</text>
+  <text x="765" y="166" font-size="10.5" fill="#ffffff" text-anchor="middle">or follow procedure</text>
+
+  <!-- log -->
+  <rect x="340" y="230" width="120" height="44" rx="8" fill="#f2ede1" stroke="#d8d2c4"/>
+  <text x="400" y="250" font-size="11.5" font-weight="700" fill="#16201f" text-anchor="middle">Enquiry log</text>
+  <text x="400" y="265" font-size="10.5" fill="#55605e" text-anchor="middle">every message</text>
+
+  <!-- arrows -->
+  <line x1="140" y1="145" x2="166" y2="145" stroke="#55605e" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="310" y1="145" x2="336" y2="145" stroke="#55605e" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M460,140 C480,140 480,89 490,89" fill="none" stroke="#55605e" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="460" y1="149" x2="490" y2="149" stroke="#55605e" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M460,158 C480,158 480,209 490,209" fill="none" stroke="#55605e" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M656,89 C670,89 670,135 686,135" fill="none" stroke="#55605e" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="656" y1="149" x2="686" y2="149" stroke="#55605e" stroke-width="1.4" marker-end="url(#arr)"/>
+  <path d="M656,209 C670,209 670,162 686,162" fill="none" stroke="#55605e" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+  <line x1="400" y1="180" x2="400" y2="226" stroke="#55605e" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+</svg>

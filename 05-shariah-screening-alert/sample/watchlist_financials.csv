@@ -1,0 +1,11 @@
+ticker,company,sector,business_activity,market_cap_myr_m,interest_bearing_debt_myr_m,interest_bearing_deposits_myr_m,total_revenue_myr_m,non_permissible_income_myr_m,shares_outstanding_m,prev_debt_ratio,prev_deposits_ratio,prev_income_ratio,prev_status
+CSOL,Cahaya Solar Works,Renewable energy,permissible,1850,410,120,640,6.4,925,0.2310,0.0700,0.0095,PASS
+TLOG,Teratai Logistics,Logistics,permissible,920,248,61,1310,9.8,460,0.2650,0.0640,0.0071,PASS
+SHFD,Sinar Halal Foods,Food manufacturing,permissible,2400,300,180,2950,11.2,1600,0.1290,0.0770,0.0040,PASS
+BSTF,Bukit Steel Fabricators,Industrial,permissible,610,230,40,880,3.1,305,0.3920,0.0610,0.0036,FAIL
+PTEL,Pelangi Telecom Services,Telecommunications,permissible,3100,890,210,2200,18.7,2480,0.3240,0.0700,0.0081,FAIL
+MHRT,Mutiara Hotels and Resorts,Hospitality,permissible,780,190,35,410,23.0,520,0.2380,0.0450,0.0480,PASS
+KCCR,Kenari Credit Services,Consumer lending,prohibited,1500,900,400,380,360,750,0.6100,0.2700,0.9400,FAIL
+DHCG,Delima Healthcare Group,Healthcare,review,2050,350,95,1120,14.0,1025,0.1750,0.0480,0.0130,REVIEW
+AWCS,Awan Cloud Systems,Technology,permissible,1400,40,436,520,15.6,1120,0.0300,0.2790,0.0290,PASS
+SPRD,Seroja Property Developers,Property,permissible,1150,352,70,690,5.2,1150,0.2880,0.0620,0.0074,PASS

@@ -1,0 +1,19 @@
+{
+  "number": "04",
+  "slug": "04-weekly-research-digest",
+  "title": "Weekly research digest",
+  "scenario_org": "Meridian Policy Lab (fictional think tank)",
+  "audience": "Researchers, policy teams and PhD students who follow a fast-moving field",
+  "problem": "New papers on Islamic finance and sustainable finance appear across dozens of journals and preprint servers every week. A small policy team has no time to search them, so new work is missed and old papers get sent round twice.",
+  "solution": "Once a week the scenario asks the free Crossref API for papers published in the last 7 days on the team's search terms and drops any DOI already sent. Claude writes a two-sentence plain summary and a topic tag for each item that has an abstract, and items without an abstract are listed by title only, marked 'no abstract available, not summarised'. The team gets one digest email with title, journal, DOI link and summary, and the DOIs are logged so they are not sent again.",
+  "human_check": "Readers decide what is worth reading, because the digest lists what Crossref returned and is not a quality filter, so they check the journal and the paper before relying on it.",
+  "tools": [
+    "Crossref REST API",
+    "Google Sheets",
+    "Gmail",
+    "Make.com",
+    "Claude API"
+  ],
+  "image": "docs/preview.png",
+  "linkedin_post": "Keeping up with new papers in your field is a job nobody has time for.\n\nA small policy team following Islamic finance and sustainable finance would need to check dozens of journals and preprint servers every week. In practice it happens once a month, if that.\n\nSo I built a demo that does the searching. Once a week it asks the free Crossref API for papers published in the last seven days, skips anything already sent, and Claude writes a two-sentence summary from each abstract with a topic tag. One email goes to the team with title, journal, DOI link and summary.\n\nTwo safeguards I built in. If a paper has no abstract, the AI does not summarise it from the title; it is listed as \"no abstract available, not summarised\". And every email says plainly that this is what Crossref returned, not a quality filter. Check the journal, read the paper.\n\nDemo build for a fictional think tank, tested on real Crossref metadata. Link in the comments.\n\n#IslamicFinance #Research #Automation"
+}

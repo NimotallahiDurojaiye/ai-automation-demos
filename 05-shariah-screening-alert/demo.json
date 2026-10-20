@@ -1,0 +1,19 @@
+{
+  "number": "05",
+  "slug": "05-shariah-screening-alert",
+  "title": "Shariah screening alert",
+  "scenario_org": "Al-Noor Family Investment Club (fictional)",
+  "audience": "Islamic investment clubs, Muslim investors and analysts who track a share watchlist",
+  "problem": "A volunteer works out the AAOIFI ratios for every share on the club's watchlist by hand each month. It takes an evening, and one calculator slip can put a share on the wrong side of a limit.",
+  "solution": "Spreadsheet formulas that mirror a small Python script compute the debt, deposit and income ratios, PASS or FAIL, and purification per share. Each month Make picks out only the shares whose status changed and asks Claude to explain why in plain words, using only the numbers it is given. The admin gets one email with the notes and the formula table.",
+  "human_check": "The club admin confirms every status change with the club's Shariah adviser before anything is shared with members.",
+  "tools": [
+    "Google Sheets",
+    "Make.com",
+    "Claude API",
+    "Gmail",
+    "Python"
+  ],
+  "image": "docs/preview.png",
+  "linkedin_post": "Numbers should come from code. Words can come from AI.\n\nI built a demo for a fictional family investment club that checks its share watchlist against AAOIFI Shari'ah Standard No. 21 every month. Someone does this by hand: debt over market cap, interest-bearing deposits over market cap, non-permissible income over revenue, then a purification figure per share.\n\nIn the build, spreadsheet formulas do all the maths, and a small Python script gives the same answers so the formulas can be checked. Make only looks at shares whose status changed since last month. Claude then writes two or three plain sentences on why, using only the numbers it is handed. It cannot recalculate, change a status or give a ruling.\n\nThe safeguard: the report goes to the club admin, who checks every change with a Shariah adviser before members see it. Screening methods also differ between standard setters, so the limits sit in one place.\n\nThis is a demo build on sample data with fictional companies. Blueprint, script and sample sheet are in the repo, link in comments.\n\n#IslamicFinance #Automation #AI"
+}

@@ -1,0 +1,10 @@
+Category,Routed to,Draft reply saved,Notes
+admissions,admissions@example.org,Yes,
+fees,accounts@example.org,Yes,
+donations,donations@example.org,Yes,
+teacher_application,recruitment@example.org,Yes,
+partnership,partnerships@example.org,Yes,
+other,office@example.org,Yes,
+complaint,"safeguarding@example.org, head@example.org",No,Always high urgency. Human only.
+safeguarding,"safeguarding@example.org, head@example.org",No,Always high urgency. Human only.
+spam,Not routed,No,Logged only. Check the log weekly for false positives.

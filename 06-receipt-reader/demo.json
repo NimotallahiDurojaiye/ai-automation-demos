@@ -1,0 +1,20 @@
+{
+  "number": "06",
+  "slug": "06-receipt-reader",
+  "title": "Receipt and invoice reader",
+  "scenario_org": "Kampung Fresh Catering (fictional)",
+  "audience": "Small businesses, caterers and NGOs that log receipts in a spreadsheet",
+  "problem": "A small catering business photographs every supplier receipt and types it into a spreadsheet by hand. Faded slips get misread and the same receipt sometimes goes in twice.",
+  "solution": "Receipts dropped into a Drive folder are read by Claude, which returns supplier, date, total, tax, line items, payment method, category and a confidence level, with null for anything it cannot read. Make checks the sums with formulas and writes a row to the bookkeeping sheet, where a formula also spots possible duplicates. Anything flagged is held back and the bookkeeper is emailed a link to the receipt.",
+  "human_check": "A person opens every flagged receipt, corrects the row and adds their initials before it counts in the totals.",
+  "tools": [
+    "Google Drive",
+    "Google Sheets",
+    "Make.com",
+    "Claude API",
+    "Gmail",
+    "Python"
+  ],
+  "image": "docs/preview.png",
+  "linkedin_post": "The receipt with the faded total is the one that costs you.\n\nI built a demo for a fictional catering business that photographs supplier receipts and types them into a spreadsheet by hand, usually late at night. Thermal paper fades, totals get misread, and the same slip gets photographed twice.\n\nIn the build, a photo or PDF goes into a Drive folder. Claude reads it and returns the supplier, date, total, tax, line items and payment method, with a confidence level for the key values. If something is unreadable it returns null. It is told not to guess and not to work out a missing total.\n\nThe checks are not AI. Make compares the total with the line items, and a sheet formula spots possible duplicates. Any row with a low confidence value, a missing total, a mismatch or a duplicate is held back until a person checks the receipt and adds their initials. Only then does it count.\n\nThis is a demo build on six sample receipts I generated, not a client project. Link in comments.\n\n#SmallBusiness #Automation #AI"
+}

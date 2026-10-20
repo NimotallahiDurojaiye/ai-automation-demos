@@ -1,0 +1,13 @@
+Receipt no,Date received,Donor name,Email,Amount,Currency,Fund,Thank-you sent,Trustee flag,Donor message
+CHF-2026-000002,2026-10-12,Amina Example,amina.example@example.com,250.00,GBP,Zakat,Yes,,Please use it where the need is greatest.
+CHF-2026-000003,2026-10-12,Yusuf Sample,yusuf.sample@example.com,40.00,GBP,Sadaqah,Yes,,
+CHF-2026-000004,2026-10-12,Maryam Test,maryam.test@example.com,500.00,GBP,Waqf,Yes,,In memory of my grandmother.
+CHF-2026-000005,2026-10-13,Ibrahim Demo,ibrahim.demo@example.com,20.00,GBP,General,Yes,,
+CHF-2026-000006,2026-10-13,Khadija Placeholder,khadija.placeholder@example.com,1500.00,GBP,Zakat,Yes,"Large gift, trustee to review",Zakat for this year.
+CHF-2026-000007,2026-10-14,Bilal Example,bilal.example@example.com,75.00,GBP,Sadaqah,Yes,,For the food parcels.
+CHF-2026-000008,2026-10-14,Hafsa Sample,hafsa.sample@example.com,60.00,EUR,Zakat,Yes,,
+CHF-2026-000009,2026-10-15,Umar Test,umar.test@example.com,100.00,GBP,Unrecognised: Building appeal,"No, held for trustee","Fund not recognised, trustee to confirm",For the new centre.
+CHF-2026-000010,2026-10-15,Sumayyah Demo,,30.00,GBP,Sadaqah,"No, held for trustee","No email, trustee to thank by phone or post","Paid by bank transfer, no email."
+CHF-2026-000011,2026-10-16,Idris Example,idris.example@example.com,1000.00,GBP,Waqf,Yes,"Large gift, trustee to review",
+CHF-2026-000012,2026-10-17,Ruqayyah Sample,ruqayyah.sample@example.com,15.00,GBP,General,Yes,,"Small, but from the heart."
+CHF-2026-000013,2026-10-18,Hamza Test,hamza.test@example.com,120.00,USD,Zakat,Yes,,

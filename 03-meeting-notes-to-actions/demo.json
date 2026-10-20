@@ -1,0 +1,19 @@
+{
+  "number": "03",
+  "slug": "03-meeting-notes-to-actions",
+  "title": "Meeting notes to action list",
+  "scenario_org": "Riverside Community Health Network (fictional)",
+  "audience": "Small NGOs and any team that runs a weekly call",
+  "problem": "A small team's weekly call produces rough notes or a transcript, and then nobody turns them into a list. Decisions are forgotten and tasks with no named owner quietly never get done.",
+  "solution": "After the call, the notes go into a short form and Claude pulls out a 5-line summary, the decisions, the action items and the open questions. Each action is added to a Google Sheets tracker with its owner and due date, or 'owner not stated' and 'no date stated' when the notes do not say. The meeting lead gets a draft first, and the team summary is emailed only after the lead ticks Approved.",
+  "human_check": "The meeting lead reviews and edits the draft in the sheet, and nothing reaches the team until they tick the Approved box.",
+  "tools": [
+    "Google Forms",
+    "Google Sheets",
+    "Gmail",
+    "Make.com",
+    "Claude API"
+  ],
+  "image": "docs/preview.png",
+  "linkedin_post": "How many tasks from last week's team call actually got done?\n\nIn a lot of small teams, someone types notes during the call and then the notes sit in a Google Doc. By Friday, people remember different versions of what was agreed, and the task nobody claimed is still nobody's.\n\nSo I built a demo automation for it. After the call, the notes go into a short form. Claude pulls out a five-line summary, the decisions, the action items and the open questions. Each action lands in a Google Sheets tracker with its owner and due date.\n\nThe rule I cared most about: it must not guess. If the notes don't name an owner, the row says \"owner not stated\". No date, \"no date stated\". Each row also keeps the exact line it came from.\n\nNothing goes to the team until the meeting lead checks the draft and ticks Approved.\n\nThis is a demo build on made-up sample data for a fictional NGO. Blueprint and walkthrough in the comments.\n\n#Automation #NonProfit #AI"
+}

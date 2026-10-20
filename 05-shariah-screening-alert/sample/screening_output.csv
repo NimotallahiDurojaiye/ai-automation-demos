@@ -1,0 +1,11 @@
+ticker,company,debt_ratio,deposits_ratio,income_ratio,prev_debt_ratio,prev_deposits_ratio,prev_income_ratio,business_screen,debt_screen,deposits_screen,income_screen,overall_status,prev_status,status_changed,purification_per_share_myr,notes
+CSOL,Cahaya Solar Works,0.2216,0.0649,0.0100,0.2310,0.0700,0.0095,PASS,PASS,PASS,PASS,PASS,PASS,NO,0.0069,
+TLOG,Teratai Logistics,0.2696,0.0663,0.0075,0.2650,0.0640,0.0071,PASS,PASS,PASS,PASS,PASS,PASS,NO,0.0213,
+SHFD,Sinar Halal Foods,0.1250,0.0750,0.0038,0.1290,0.0770,0.0040,PASS,PASS,PASS,PASS,PASS,PASS,NO,0.0070,
+BSTF,Bukit Steel Fabricators,0.3770,0.0656,0.0035,0.3920,0.0610,0.0036,PASS,FAIL,PASS,PASS,FAIL,FAIL,NO,0.0102,fails: debt
+PTEL,Pelangi Telecom Services,0.2871,0.0677,0.0085,0.3240,0.0700,0.0081,PASS,PASS,PASS,PASS,PASS,FAIL,YES,0.0075,
+MHRT,Mutiara Hotels and Resorts,0.2436,0.0449,0.0561,0.2380,0.0450,0.0480,PASS,PASS,PASS,FAIL,FAIL,PASS,YES,0.0442,fails: income
+KCCR,Kenari Credit Services,0.6000,0.2667,0.9474,0.6100,0.2700,0.9400,FAIL,FAIL,PASS,FAIL,FAIL,FAIL,NO,,"fails: business, debt, income; purification not applicable: core business fails"
+DHCG,Delima Healthcare Group,0.1707,0.0463,0.0125,0.1750,0.0480,0.0130,REVIEW,PASS,PASS,PASS,REVIEW,REVIEW,NO,0.0137,business activity needs a Shariah adviser's view
+AWCS,Awan Cloud Systems,0.0286,0.3114,0.0300,0.0300,0.2790,0.0290,PASS,PASS,FAIL,PASS,FAIL,PASS,YES,0.0139,fails: deposits
+SPRD,Seroja Property Developers,0.3061,0.0609,0.0075,0.2880,0.0620,0.0074,PASS,FAIL,PASS,PASS,FAIL,PASS,YES,0.0045,fails: debt

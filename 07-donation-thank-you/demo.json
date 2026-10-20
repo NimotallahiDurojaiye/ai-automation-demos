@@ -1,0 +1,13 @@
+{
+  "number": "07",
+  "slug": "07-donation-thank-you",
+  "title": "Donation thank-you and receipts",
+  "scenario_org": "Crescent Hope Foundation (fictional)",
+  "audience": "Charities, mosques, schools",
+  "problem": "Donors to a small Muslim charity wait days for a thank-you and a receipt while a volunteer copies each gift into a spreadsheet by hand. Zakat, Sadaqah, Waqf and general gifts need to be kept apart, and mistakes in the fund column are hard to spot later.",
+  "solution": "Each new form row gets a receipt number built from the row number and a branded thank-you email with wording for its fund. Every gift is logged to a ledger with the fund kept in its own column. A weekly summary goes to the treasurer and a second trustee, one line per fund, with no AI anywhere in the flow.",
+  "human_check": "Gifts of 1,000 or more, gifts with an unrecognised fund and gifts with no email go to a trustee, and the Zakat wording is to be confirmed with the charity's Shariah adviser.",
+  "tools": ["Google Forms", "Google Sheets", "Gmail", "Make.com"],
+  "image": "docs/preview.png",
+  "linkedin_post": "A donor gives Zakat on Friday night and hears nothing until Wednesday.\n\nThat gap is common in small charities. One volunteer, one spreadsheet, a pile of gifts to copy across.\n\nSo I built a demo for a fictional charity, Crescent Hope Foundation, using sample data only. Each new donation gets a receipt number and a thank-you email within minutes. The wording changes by fund. Zakat donors are told their gift is kept in a separate account and goes only to eligible recipients. Waqf donors are told the principal is preserved and only the returns are spent. Every gift lands in a ledger with the fund in its own column, and the treasurer and a second trustee get a weekly summary, one line per fund.\n\nThis one uses no AI. Rules are cheaper and more predictable here.\n\nThe safeguard: large gifts, unclear fund types and missing emails go to a trustee, and the Zakat wording should be checked with the charity's Shariah adviser.\n\nBlueprint and sample files are in the comments.\n\n#Automation #IslamicFinance #Charity"
+}

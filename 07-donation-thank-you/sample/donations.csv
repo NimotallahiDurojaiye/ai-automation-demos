@@ -1,0 +1,13 @@
+Timestamp,Donor name,Email,Amount,Currency,Fund type,Show my name in reports,Message
+2026-10-12 09:14,Amina Example,amina.example@example.com,250.00,GBP,Zakat,No,Please use it where the need is greatest.
+2026-10-12 11:02,Yusuf Sample,yusuf.sample@example.com,40.00,GBP,Sadaqah,Yes,
+2026-10-12 15:47,Maryam Test,maryam.test@example.com,500.00,GBP,Waqf,Yes,In memory of my grandmother.
+2026-10-13 08:30,Ibrahim Demo,ibrahim.demo@example.com,20.00,GBP,General,No,
+2026-10-13 19:21,Khadija Placeholder,khadija.placeholder@example.com,1500.00,GBP,Zakat,No,Zakat for this year.
+2026-10-14 07:55,Bilal Example,bilal.example@example.com,75.00,GBP,Sadaqah,Yes,For the food parcels.
+2026-10-14 13:10,Hafsa Sample,hafsa.sample@example.com,60.00,EUR,Zakat,No,
+2026-10-15 10:42,Umar Test,umar.test@example.com,100.00,GBP,Building appeal,Yes,For the new centre.
+2026-10-15 21:03,Sumayyah Demo,,30.00,GBP,Sadaqah,No,"Paid by bank transfer, no email."
+2026-10-16 12:18,Idris Example,idris.example@example.com,1000.00,GBP,Waqf,Yes,
+2026-10-17 16:36,Ruqayyah Sample,ruqayyah.sample@example.com,15.00,GBP,General,No,"Small, but from the heart."
+2026-10-18 09:59,Hamza Test,hamza.test@example.com,120.00,USD,Zakat,No,

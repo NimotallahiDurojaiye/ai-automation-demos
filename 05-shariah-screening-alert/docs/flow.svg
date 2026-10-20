@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 300" width="860" height="300" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="860" height="300" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f2a4a"/></marker></defs>
+<text x="20" y="38" font-size="19" font-weight="700" fill="#0f2a4a">05 Shariah screening alert</text>
+<text x="20" y="62" font-size="13" fill="#55605e">Numbers come from formulas. AI only explains them. A person reviews before members see it.</text>
+<rect x="18" y="84" width="124" height="124" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
+<text x="30" y="106" font-size="11" font-weight="700" fill="#55605e" letter-spacing="1">STEP 1</text>
+<text x="30" y="126" font-size="13.5" font-weight="700" fill="#0f2a4a">Monthly run</text>
+<text x="30" y="146" font-size="11.5" fill="#16201f">Make schedule,</text>
+<text x="30" y="161" font-size="11.5" fill="#16201f">first of the month</text>
+<line x1="144" y1="146.0" x2="155" y2="146.0" stroke="#0f2a4a" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="158" y="84" width="124" height="124" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
+<text x="170" y="106" font-size="11" font-weight="700" fill="#55605e" letter-spacing="1">STEP 2</text>
+<text x="170" y="126" font-size="13.5" font-weight="700" fill="#0f2a4a">Watchlist sheet</text>
+<text x="170" y="146" font-size="11.5" fill="#16201f">Formulas compute</text>
+<text x="170" y="161" font-size="11.5" fill="#16201f">ratios, PASS/FAIL,</text>
+<text x="170" y="176" font-size="11.5" fill="#16201f">purification</text>
+<line x1="284" y1="146.0" x2="295" y2="146.0" stroke="#0f2a4a" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="298" y="84" width="124" height="124" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
+<text x="310" y="106" font-size="11" font-weight="700" fill="#55605e" letter-spacing="1">STEP 3</text>
+<text x="310" y="126" font-size="13.5" font-weight="700" fill="#0f2a4a">Changed</text>
+<text x="310" y="142" font-size="13.5" font-weight="700" fill="#0f2a4a">status only</text>
+<text x="310" y="162" font-size="11.5" fill="#16201f">Rows where status</text>
+<text x="310" y="177" font-size="11.5" fill="#16201f">differs from last</text>
+<text x="310" y="192" font-size="11.5" fill="#16201f">month</text>
+<line x1="424" y1="146.0" x2="435" y2="146.0" stroke="#0f2a4a" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="438" y="84" width="124" height="124" rx="10" fill="#ffffff" stroke="#0f2a4a" stroke-width="1.6"/>
+<text x="450" y="106" font-size="11" font-weight="700" fill="#55605e" letter-spacing="1">STEP 4</text>
+<text x="450" y="126" font-size="13.5" font-weight="700" fill="#0f2a4a">Claude explains</text>
+<text x="450" y="146" font-size="11.5" fill="#16201f">Uses only the</text>
+<text x="450" y="161" font-size="11.5" fill="#16201f">numbers given.</text>
+<text x="450" y="176" font-size="11.5" fill="#16201f">Cannot change</text>
+<text x="450" y="191" font-size="11.5" fill="#16201f">them.</text>
+<line x1="564" y1="146.0" x2="575" y2="146.0" stroke="#0f2a4a" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="578" y="84" width="124" height="124" rx="10" fill="#f2ede1" stroke="#d8d2c4" stroke-width="1.2"/>
+<text x="590" y="106" font-size="11" font-weight="700" fill="#55605e" letter-spacing="1">STEP 5</text>
+<text x="590" y="126" font-size="13.5" font-weight="700" fill="#0f2a4a">Report email</text>
+<text x="590" y="146" font-size="11.5" fill="#16201f">Formula table plus</text>
+<text x="590" y="161" font-size="11.5" fill="#16201f">short notes, to</text>
+<text x="590" y="176" font-size="11.5" fill="#16201f">the club admin</text>
+<line x1="704" y1="146.0" x2="715" y2="146.0" stroke="#0f2a4a" stroke-width="1.6" marker-end="url(#a)"/>
+<rect x="718" y="84" width="124" height="124" rx="10" fill="#fbf3e2" stroke="#b8862e" stroke-width="2"/>
+<text x="730" y="106" font-size="11" font-weight="700" fill="#55605e" letter-spacing="1">STEP 6</text>
+<text x="730" y="126" font-size="13.5" font-weight="700" fill="#b8862e">Admin and</text>
+<text x="730" y="142" font-size="13.5" font-weight="700" fill="#b8862e">adviser review</text>
+<text x="730" y="162" font-size="11.5" fill="#16201f">Checks with the</text>
+<text x="730" y="177" font-size="11.5" fill="#16201f">Shariah adviser,</text>
+<text x="730" y="192" font-size="11.5" fill="#16201f">then shares</text>
+<line x1="500.0" y1="210" x2="500.0" y2="234" stroke="#55605e" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="410" y="238" width="430" height="40" rx="8" fill="#ffffff" stroke="#d8d2c4"/>
+<text x="422" y="254" font-size="11.5" fill="#55605e">Refusal or error: the email still goes with the formula table,</text>
+<text x="422" y="269" font-size="11.5" fill="#55605e">marked for the admin to write the notes by hand.</text>
+<rect x="480" y="14" width="12" height="12" rx="3" fill="#ffffff" stroke="#0f2a4a" stroke-width="1.6"/>
+<text x="498" y="24" font-size="11.5" fill="#55605e">AI step</text>
+<rect x="560" y="14" width="12" height="12" rx="3" fill="#fbf3e2" stroke="#b8862e" stroke-width="2"/>
+<text x="578" y="24" font-size="11.5" fill="#55605e">Human review</text>
+<rect x="680" y="14" width="12" height="12" rx="3" fill="#f2ede1" stroke="#d8d2c4"/>
+<text x="698" y="24" font-size="11.5" fill="#55605e">Code, formulas or Make</text>
+</svg>
