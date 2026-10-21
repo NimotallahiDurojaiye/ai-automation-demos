@@ -121,7 +121,9 @@ The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
 
 The rules live in one Code node, **Receipt number and checks**. The large-gift threshold is `LARGE_GIFT` at the top of that node.
 
-![The try-it-now workflow after a run in n8n: 12 donations, 10 thank-you emails, 1 trustee alert](docs/n8n-run.png)
+![The try-it-now workflow after a run in n8n: 12 donations, 10 thank-you emails, 1 trustee alert, 13 ledger rows](docs/n8n-run.png)
+
+![The trustee alert from the same run, listing the four gifts a person should check](docs/n8n-trustee-alert.png)
 
 ![Thank-you email produced by the n8n workflow from the sample data](docs/n8n-email-output.png)
 
