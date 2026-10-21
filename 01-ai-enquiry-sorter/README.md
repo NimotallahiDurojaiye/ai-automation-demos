@@ -149,4 +149,31 @@ Points to check after import: the HTTP module's raw JSON body fields (`contentTy
 Google Forms, Google Sheets, Gmail, Make.com (HTTP, JSON, Router), Claude API (`claude-opus-5-5`).
 
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Runs on the 20 made-up enquiries with no accounts or keys. Import it and click **Test workflow** to see the prompt, the routing, 15 draft replies, 15 team alerts, 3 safeguarding alerts and 20 log rows. |
+| `n8n/full.workflow.json` | The working version: Google Sheets trigger, one Claude call per enquiry, the same safety rules, Gmail drafts, team and safeguarding emails, and rows in `Enquiry_Log` and `Needs_Human`. |
+
+The try-it-now file has no AI in it. The node **Sample AI reply (illustrative)** holds replies written for this demo in the same JSON shape Claude must return; they are not AI output. Everything after that node (reading the reply, the safety rules, the drafts, the alerts and the log) is the same code as in the full version.
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above.
+
+**For the full version:**
+
+1. Connect Google Sheets in **New enquiry row**, **Enquiry_Log row** and **Needs_Human row**, and pick your sheet and tabs.
+2. **The Claude key.** In n8n, create a credential of type **Header Auth** with Name `x-api-key` and your Anthropic API key as the Value, then pick it in the HTTP Request node **Ask Claude**. The key stays in n8n's credential store; never type it into a node, a sheet or a file you share.
+3. Connect the shared inbox Gmail account in **Save Gmail draft**, so drafts land where the team can see them, and connect Gmail in the three email nodes.
+4. Change the team inboxes in **Safety rules and routing** to your own.
+5. Test with your own email address in the sheet before you switch it on.
+
+The safety rules live in one Code node, **Safety rules and routing**: the team inboxes are `TEAM` at the top, and complaint, safeguarding and the child safety flag always go to people with no draft. If Claude refuses, is cut off, errors or sends JSON that will not parse, **Read Claude reply** sends the message to `office@example.org` and the `Needs_Human` tab.
+
+![Team alert produced by the n8n workflow code from the sample data](docs/n8n-output.png)
+
+*Team alert produced by the n8n workflow code from the sample data. The category, urgency, language and summary in it come from the illustrative stand-in reply, not from a live Claude call.*
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)

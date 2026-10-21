@@ -12,7 +12,8 @@
     "Google Sheets",
     "Gmail",
     "Make.com",
-    "Claude API"
+    "Claude API",
+    "n8n"
   ],
   "image": "docs/preview.png",
   "linkedin_post": "Keeping up with new papers in your field is a job nobody has time for.\n\nA small policy team following Islamic finance and sustainable finance would need to check dozens of journals and preprint servers every week. In practice it happens once a month, if that.\n\nSo I built a demo that does the searching. Once a week it asks the free Crossref API for papers published in the last seven days, skips anything already sent, and Claude writes a two-sentence summary from each abstract with a topic tag. One email goes to the team with title, journal, DOI link and summary.\n\nTwo safeguards I built in. If a paper has no abstract, the AI does not summarise it from the title; it is listed as \"no abstract available, not summarised\". And every email says plainly that this is what Crossref returned, not a quality filter. Check the journal, read the paper.\n\nDemo build for a fictional think tank, tested on real Crossref metadata. Link in the comments.\n\n#IslamicFinance #Research #Automation"

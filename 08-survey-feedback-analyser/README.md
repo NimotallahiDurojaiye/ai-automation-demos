@@ -452,4 +452,28 @@ After importing, reconnect your own accounts and check each module's settings be
 ## Tools
 Google Forms, Google Sheets, Gmail, Make.com, Claude API (Anthropic).
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Runs on the 36 made-up responses with no accounts, keys or network. Import it and click **Test workflow** to see the ratings, the checks, the report email and the follow-up email. The AI step is replaced by an illustrative reply written for this demo, so you can see the checks without a Claude key. |
+| `n8n/full.workflow.json` | The working version: a monthly schedule, a Google Sheets read of last month's responses, the same code, a live Claude call, and Gmail for the report and the follow-up email. |
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above.
+
+**For the full version:**
+1. Connect Google Sheets in **Read last month's responses** and pick your sheet and the `Form_Responses` tab.
+2. In **Claude call**, under **Credential for Header Auth**, create a new credential. Set **Name** to `x-api-key` and **Value** to your Anthropic API key. The key stays in n8n's credential store, not in the workflow file, so never paste it into the JSON body or a header field.
+3. Connect Gmail in **Send report** and **Send follow-up**.
+4. Change `lead@example.org` and `safeguarding.lead@example.org` in the **Report email** and **Follow-up email** nodes.
+5. Run it once on a test sheet before you switch it on. It runs on the 1st of each month at 08:00.
+
+In n8n the ratings and the keyword check are worked out in a Code node, **Ratings and keyword check**, so the `Stats` tab is not needed; the keyword list is `KEYWORDS` at the top of that node. **Read Claude reply** takes the block whose `type` is `text` and parses it. If the stop reason is not `end_turn`, the reply is not valid JSON or the call fails, the lead gets the raw responses instead of a report. **Check the AI's work** compares the AI's total with the sheet count, warns about any theme with fewer than 2 responses or a count that differs from its list of IDs, checks every quote word for word against the response it is attributed to, and sends the union of AI flags and keyword flags to **Needs a person**.
+
+![Report email produced by the n8n try-it-now workflow from the sample data](docs/n8n-output.png)
+
+The report above was produced by the try-it-now workflow's code from `sample/responses.csv`. The ratings, checks and flags come from that code. The themes, quotes and suggestions come from the illustrative reply that stands in for Claude, not from a live AI call.
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)

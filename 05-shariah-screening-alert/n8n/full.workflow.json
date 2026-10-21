@@ -1,0 +1,328 @@
+{
+  "name": "Demo 05: Shariah screening alert (Google Sheets, Claude and Gmail)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Shariah screening alert: full version\n1. **Read watchlist**: connect Google Sheets and pick your sheet and the `Watchlist` tab (columns A to N, as in `sample/watchlist_financials.csv`). The ratios are worked out in code, so no formula columns are needed.\n2. **Claude: explain changes**: create a **Header Auth** credential with Name `x-api-key` and your Anthropic key as the Value. Never paste the key into the workflow.\n3. **Email admin**: connect Gmail. Change `admin@example.org` in **Admin report**.\n4. Run it once by hand and check the email before you switch it on. It runs on the 1st of each month at 09:00.\n\nEducation only, not a fatwa. The admin reviews with a Shariah adviser before sharing.",
+        "height": 380,
+        "width": 460
+      },
+      "id": "c0fc920d-34a1-55e5-a145-dd9885e6ca9b",
+      "name": "Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "monthsInterval": 1,
+              "triggerAtDayOfMonth": 1,
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "1fb7b507-f854-52f7-8d9f-2758a8eda649",
+      "name": "Every month",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "id": "a2c9de48-82f5-5ae6-881d-bee00c130bed",
+      "name": "Read watchlist",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        200,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Tidies the rows read from the Watchlist tab (columns A to N). The ratios are worked out in the next node.\n// If the prev_ ratio columns are formatted as percentages, '32.40%' becomes '0.3240'.\nconst COLS = [\"ticker\", \"company\", \"sector\", \"business_activity\", \"market_cap_myr_m\", \"interest_bearing_debt_myr_m\", \"interest_bearing_deposits_myr_m\", \"total_revenue_myr_m\", \"non_permissible_income_myr_m\", \"shares_outstanding_m\", \"prev_debt_ratio\", \"prev_deposits_ratio\", \"prev_income_ratio\", \"prev_status\"];\nconst frac = v => {\n  const s = String(v ?? '').trim();\n  if (!s.endsWith('%')) return s;\n  const n = Number(s.slice(0, -1).replace(/,/g, ''));\n  return Number.isFinite(n) ? (n / 100).toFixed(4) : '';\n};\nreturn $input.all().filter(i => String(i.json.ticker ?? '').trim()).map(i => {\n  const r = {};\n  for (const c of COLS) r[c] = String(i.json[c] ?? '');\n  for (const c of ['prev_debt_ratio', 'prev_deposits_ratio', 'prev_income_ratio']) r[c] = frac(r[c]);\n  return { json: r };\n});"
+      },
+      "id": "454cbf30-d9bb-5728-ab9e-cba2806a193c",
+      "name": "Map watchlist columns",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Monthly Shariah ratio screen, ported line for line from screen.py. The numbers come from this code, never from AI.\n// Limits: AAOIFI Shari'ah Standard No. 21, Financial Paper (Shares and Bonds), clause 3/4.\n// \"Does not exceed\" means a ratio exactly at the limit passes. Change the limits here only.\nconst MAX_DEBT_TO_MCAP = 0.30;              // 3/4/2 interest-bearing borrowing / market capitalisation\nconst MAX_DEPOSITS_TO_MCAP = 0.30;          // 3/4/3 interest-taking deposits / market capitalisation\nconst MAX_NONPERMISSIBLE_TO_REVENUE = 0.05; // 3/4/4 prohibited income / total income\n// 3/4/1 business activity is set by a person in the sheet: permissible, prohibited or review.\n// 3/4/6/4 purification per share = prohibited income / number of shares.\nconst PASS = 'PASS', FAIL = 'FAIL', REVIEW = 'REVIEW', MISSING = 'DATA MISSING';\n\nconst toNumber = v => {\n  const t = String(v ?? '').replace(/,/g, '').trim();\n  if (!t) return null;\n  const n = Number(t);\n  return Number.isNaN(n) ? null : n;\n};\nconst ratioScreen = (r, limit) => r === null ? MISSING : (r <= limit ? PASS : FAIL);\nconst businessScreen = f => {\n  f = String(f ?? '').trim().toLowerCase();\n  if (f === 'permissible') return PASS;\n  if (f === 'prohibited') return FAIL;\n  return REVIEW; // \"review\" or anything unexpected goes to a person\n};\nconst safeDiv = (a, b) => (a === null || b === null || b <= 0) ? null : a / b;\nconst fmt = r => r === null ? '' : r.toFixed(4);\nconst text = v => String(v ?? '').trim();\n\nreturn $input.all().map(item => {\n  const row = item.json;\n  const n = k => toNumber(row[k]);\n  const debt = safeDiv(n('interest_bearing_debt_myr_m'), n('market_cap_myr_m'));\n  const deposits = safeDiv(n('interest_bearing_deposits_myr_m'), n('market_cap_myr_m'));\n  const income = safeDiv(n('non_permissible_income_myr_m'), n('total_revenue_myr_m'));\n  const screens = {\n    business_screen: businessScreen(row.business_activity),\n    debt_screen: ratioScreen(debt, MAX_DEBT_TO_MCAP),\n    deposits_screen: ratioScreen(deposits, MAX_DEPOSITS_TO_MCAP),\n    income_screen: ratioScreen(income, MAX_NONPERMISSIBLE_TO_REVENUE),\n  };\n  const values = Object.values(screens);\n  const overall = values.includes(FAIL) ? FAIL : values.includes(MISSING) ? MISSING : values.includes(REVIEW) ? REVIEW : PASS;\n\n  const notes = [];\n  const failed = Object.entries(screens).filter(([, v]) => v === FAIL).map(([k]) => k.replace('_screen', ''));\n  if (failed.length) notes.push('fails: ' + failed.join(', '));\n  if (values.includes(MISSING)) notes.push('missing figures, check source data');\n  if (screens.business_screen === REVIEW) notes.push(\"business activity needs a Shariah adviser's view\");\n\n  // Not shown where the core business fails: the screen result there is to exit, not purify and hold.\n  let purification = '';\n  if (screens.business_screen !== FAIL) {\n    const perShare = safeDiv(n('non_permissible_income_myr_m'), n('shares_outstanding_m'));\n    if (perShare !== null && perShare > 0) purification = perShare.toFixed(4);\n  } else {\n    notes.push('purification not applicable: core business fails');\n  }\n\n  const prev = text(row.prev_status).toUpperCase();\n  return { json: {\n    ticker: text(row.ticker), company: text(row.company),\n    debt_ratio: fmt(debt), deposits_ratio: fmt(deposits), income_ratio: fmt(income),\n    prev_debt_ratio: text(row.prev_debt_ratio), prev_deposits_ratio: text(row.prev_deposits_ratio),\n    prev_income_ratio: text(row.prev_income_ratio),\n    ...screens,\n    overall_status: overall, prev_status: prev,\n    status_changed: prev && prev !== overall ? 'YES' : 'NO',\n    purification_per_share_myr: purification,\n    notes: notes.join('; '),\n  }};\n});"
+      },
+      "id": "abcadf4e-20e4-595d-9582-13de66d2d375",
+      "name": "Screen ratios (AAOIFI SS 21)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Keeps only the shares whose overall status changed since last month, as one item for one Claude call.\n// If nothing changed, it returns nothing, so no Claude call and no email.\nconst pct = v => (v === '' || v === null || v === undefined || Number.isNaN(Number(v))) ? 'n/a' : (Number(v) * 100).toFixed(2) + '%';\nconst changed = $input.all().map(i => i.json).filter(r => r.status_changed === 'YES');\nif (!changed.length) return [];\nconst shares = changed.map(r => ({\n  ticker: r.ticker, company: r.company, prev_status: r.prev_status, status: r.overall_status,\n  business_screen: r.business_screen,\n  debt_now: pct(r.debt_ratio), debt_prev: pct(r.prev_debt_ratio),\n  deposits_now: pct(r.deposits_ratio), deposits_prev: pct(r.prev_deposits_ratio),\n  income_now: pct(r.income_ratio), income_prev: pct(r.prev_income_ratio),\n  raw: { debt: [r.prev_debt_ratio, r.debt_ratio], deposits: [r.prev_deposits_ratio, r.deposits_ratio],\n         income: [r.prev_income_ratio, r.income_ratio] },\n}));\nconst lines = shares.map(s =>\n  `ticker=${s.ticker}, company=${s.company}, status last month=${s.prev_status}, status now=${s.status}, ` +\n  `debt ratio now=${s.debt_now} (last month ${s.debt_prev}), deposits ratio now=${s.deposits_now} (last month ${s.deposits_prev}), ` +\n  `income ratio now=${s.income_now} (last month ${s.income_prev}), business activity screen=${s.business_screen}`);\nreturn [{ json: { count: shares.length, shares, text: lines.join('\\n') } }];"
+      },
+      "id": "0ef392a2-dc9d-5f41-94b1-785ad5b26785",
+      "name": "Changed shares only",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the Claude request: the prompt from the README, with this month's changed shares at the end.\nconst PROMPT = \"You are helping the admin of a small family investment club write a monthly Shariah screening note. The shares below changed screening status since last month. Every ratio, limit and status was computed by a spreadsheet formula before you saw it.\\n\\nScreens and limits (AAOIFI Shari'ah Standard No. 21, clause 3/4): interest-bearing debt up to 30% of market capitalisation; interest-bearing deposits up to 30% of market capitalisation; non-permissible income up to 5% of total revenue; business activity must be permissible.\\n\\nFor each share, write two or three short, plain-English sentences saying which screen or screens caused the change. Quote this month's ratio, last month's ratio and the limit exactly as given.\\n\\nRules:\\n1. Use only the numbers given. Do not recalculate, re-round, estimate or add any number.\\n2. Do not change or contradict any status. If the data looks inconsistent, write 'figures need checking' and set needs_human_check to true.\\n3. Do not say why the company's figures moved (for example, new borrowing) unless the data says so. If the cause is not in the data, say the figures alone do not show why.\\n4. Do not give a Shariah ruling, a fatwa, or a buy, sell or hold recommendation.\\n5. Plain British English. No em dashes.\\n\\nShares: \";\nconst SCHEMA = {\n \"type\": \"object\",\n \"properties\": {\n  \"explanations\": {\n   \"type\": \"array\",\n   \"items\": {\n    \"type\": \"object\",\n    \"properties\": {\n     \"ticker\": {\n      \"type\": \"string\"\n     },\n     \"screens_that_changed\": {\n      \"type\": \"array\",\n      \"items\": {\n       \"type\": \"string\",\n       \"enum\": [\n        \"debt\",\n        \"deposits\",\n        \"income\",\n        \"business_activity\"\n       ]\n      }\n     },\n     \"explanation\": {\n      \"type\": \"string\"\n     },\n     \"needs_human_check\": {\n      \"type\": \"boolean\"\n     }\n    },\n    \"required\": [\n     \"ticker\",\n     \"screens_that_changed\",\n     \"explanation\",\n     \"needs_human_check\"\n    ],\n    \"additionalProperties\": false\n   }\n  }\n },\n \"required\": [\n  \"explanations\"\n ],\n \"additionalProperties\": false\n};\nconst d = $input.first().json;\nreturn [{ json: {\n  output_config: { effort: 'low', format: { type: 'json_schema', schema: SCHEMA } },\n  messages: [{ role: 'user', content: PROMPT + d.text }],\n} }];"
+      },
+      "id": "49188962-be71-5813-a93b-90ca0a79999d",
+      "name": "Build Claude request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "anthropic-beta",
+              "value": "server-side-fallback-2026-07-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'claude-opus-5-5', max_tokens: 2048, fallbacks: 'default', output_config: $json.output_config, messages: $json.messages }) }}",
+        "options": {}
+      },
+      "id": "50650612-e1f8-5615-93de-d1341fbe764b",
+      "name": "Claude: explain changes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        340
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Reads Claude's reply from the content block whose type is \"text\".\n// It is used only when stop_reason is end_turn and the text parses as JSON. Otherwise the admin writes the notes by hand.\nconst r = $input.first().json;\nconst stop = r.stop_reason || 'no reply';\nconst block = (Array.isArray(r.content) ? r.content : []).find(b => b.type === 'text');\nlet parsed = null, problem = '';\nif (r.error) problem = 'API error: ' + (r.error.message || JSON.stringify(r.error));\nelse if (stop !== 'end_turn') problem = 'stop reason ' + stop;\nelse if (!block) problem = 'no text block in the reply';\nelse { try { parsed = JSON.parse(block.text); } catch (e) { problem = 'the reply was not valid JSON'; } }\nif (!parsed || !Array.isArray(parsed.explanations)) {\n  return [{ json: { aiOk: false, problem: problem || 'reply did not match the schema', explanations: [] } }];\n}\nreturn [{ json: { aiOk: true, ...parsed } }];"
+      },
+      "id": "659fe19d-ff2d-5ecd-97bd-d4219b17af22",
+      "name": "Read Claude reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Code check on the explanations. Every percentage quoted must be one of the computed numbers for that share\n// (this month, last month, or the 30% and 5% limits), and the screens named must match the ratios.\nconst LIMITS = { debt: 0.30, deposits: 0.30, income: 0.05 };\nconst reply = $input.first().json;\nconst shares = $('Changed shares only').first().json.shares;\nconst aiOk = reply.aiOk !== false;\nconst byTicker = {};\nfor (const e of (reply.explanations || [])) byTicker[String(e.ticker).trim().toUpperCase()] = e;\nconst two = s => { const n = parseFloat(String(s).replace('%', '')); return Number.isNaN(n) ? null : n.toFixed(2); };\n\nconst out = shares.map(s => {\n  const e = byTicker[s.ticker];\n  delete byTicker[s.ticker];\n  const problems = [];\n  let quoted = [];\n  if (!aiOk) problems.push('No explanation was drafted (' + reply.problem + '). Please write this note by hand');\n  else if (!e) problems.push('No explanation came back for this share');\n  if (e) {\n    const allowed = new Set(['30.00', '5.00', ...[s.debt_now, s.debt_prev, s.deposits_now, s.deposits_prev, s.income_now, s.income_prev].map(two)].filter(Boolean));\n    quoted = [...String(e.explanation).matchAll(/(\\d+(?:\\.\\d+)?)\\s*%/g)].map(m => m[1] + '%');\n    const unmatched = quoted.filter(q => !allowed.has(two(q)));\n    if (unmatched.length) problems.push('Figures quoted that are not in the computed numbers: ' + unmatched.join(', '));\n    const computed = Object.keys(LIMITS).filter(k => {\n      const [prev, now] = s.raw[k];\n      if (prev === '' || now === '' || prev == null || now == null) return false;\n      return (Number(prev) <= LIMITS[k]) !== (Number(now) <= LIMITS[k]);\n    });\n    const named = (e.screens_that_changed || []).filter(x => x !== 'business_activity');\n    if ([...named].sort().join(',') !== [...computed].sort().join(',')) {\n      problems.push('Screens named (' + (named.join(', ') || 'none') + ') do not match the ratios (' + (computed.join(', ') || 'none') + ')');\n    }\n    if (e.needs_human_check) problems.push('The draft itself asks for a person to check the figures');\n  }\n  return { json: { ticker: s.ticker, company: s.company, prev_status: s.prev_status, status: s.status,\n    explanation: e ? String(e.explanation) : '', quoted: quoted.join(', '),\n    check: problems.length ? 'CHECK' : 'OK', problems: problems.join('; ') } };\n});\nfor (const t of Object.keys(byTicker)) {\n  out.push({ json: { ticker: t, company: '', prev_status: '', status: '', explanation: String(byTicker[t].explanation), quoted: '',\n    check: 'CHECK', problems: 'Explanation for a share whose status did not change' } });\n}\nreturn out;"
+      },
+      "id": "12bd481f-ab94-5be9-8965-3eea35b7a42f",
+      "name": "Check quoted numbers",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the admin's monthly report. The table comes from the screen node, never from the AI text.\nconst WINE = '#4a1424', RED = '#b3202a', INK = '#1d1416', MUTED = '#5f5456', LINE = '#d9d4d5';\nconst rows = $('Screen ratios (AAOIFI SS 21)').all().map(i => i.json);\nconst notes = $input.all().map(i => i.json);\nif (!notes.length) return [];\nconst pct = v => v === '' ? 'n/a' : (Number(v) * 100).toFixed(2) + '%';\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst th = 'text-align:left;padding:7px 8px;background:' + WINE + ';color:#ffffff;border:1px solid ' + WINE + ';font-weight:bold';\nconst td = 'padding:7px 8px;border:1px solid ' + LINE;\nconst heads = ['Ticker', 'Company', 'Debt / mcap', 'Deposits / mcap', 'Non-perm. income / revenue', 'Business', 'Status', 'Last month', 'Changed', 'Purification per share (MYR)'];\nconst table = '<table cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;font-size:13px;width:100%\">' +\n  '<tr>' + heads.map(h => '<th style=\"' + th + '\">' + h + '</th>').join('') + '</tr>' +\n  rows.map(r => '<tr>' + [\n    '<b>' + esc(r.ticker) + '</b>', esc(r.company), pct(r.debt_ratio), pct(r.deposits_ratio), pct(r.income_ratio),\n    r.business_screen, '<b style=\"color:' + (r.overall_status === 'PASS' ? INK : RED) + '\">' + r.overall_status + '</b>',\n    r.prev_status, r.status_changed === 'YES' ? '<b>Yes</b>' : '', r.purification_per_share_myr || 'n/a',\n  ].map(c => '<td style=\"' + td + '\">' + c + '</td>').join('') + '</tr>').join('') + '</table>';\nconst flagged = notes.filter(n => n.check !== 'OK').length;\nconst changes = notes.map(n =>\n  '<div style=\"border:1px solid ' + LINE + ';padding:12px 14px;margin:0 0 10px\">' +\n  '<div style=\"font-weight:bold;color:' + WINE + ';margin:0 0 4px\">' + esc(n.ticker) + ' ' + esc(n.company) +\n  (n.prev_status ? ': ' + n.prev_status + ' to ' + n.status : '') + '</div>' +\n  (n.explanation ? '<div>' + esc(n.explanation) + '</div>' : '') +\n  (n.check === 'OK'\n    ? '<div style=\"font-size:12px;color:' + MUTED + ';margin-top:6px\">Code check: every figure quoted matches the table.</div>'\n    : '<div style=\"color:' + RED + ';font-weight:bold;margin-top:6px\">Check before sharing: ' + esc(n.problems) + '</div>') +\n  '</div>').join('');\nconst month = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });\nconst html =\n  '<div style=\"font-family:Helvetica,Arial,sans-serif;color:' + INK + ';max-width:880px;margin:0 auto;border:1px solid ' + LINE + '\">' +\n  '<div style=\"background:' + WINE + ';color:#ffffff;padding:20px 26px\"><div style=\"font-family:Georgia,serif;font-size:19px;letter-spacing:2px\">AL-NOOR FAMILY INVESTMENT CLUB</div>' +\n  '<div style=\"width:48px;height:2px;background:' + RED + ';margin-top:8px\"></div></div>' +\n  '<div style=\"padding:22px 26px\"><h1 style=\"font-family:Georgia,serif;color:' + WINE + ';font-size:23px;margin:0 0 6px\">Monthly Shariah screen</h1>' +\n  '<p style=\"margin:0 0 18px;color:' + MUTED + '\">For the club admin. Please review this with the club\\'s Shariah adviser before sharing it with members.</p>' +\n  '<p style=\"font-size:13px;color:' + RED + ';margin:0 0 8px;font-weight:bold;letter-spacing:1px\">WHAT CHANGED (' + notes.length + ')</p>' + changes +\n  '<p style=\"font-size:13px;color:' + RED + ';margin:20px 0 8px;font-weight:bold;letter-spacing:1px\">FULL WATCHLIST</p>' + table + '</div>' +\n  '<div style=\"border-top:1px solid ' + LINE + ';padding:14px 26px;font-size:12px;color:' + MUTED + '\">' +\n  'Ratios, statuses and purification amounts are worked out by code that mirrors screen.py. Limits follow AAOIFI Shari\\'ah Standard No. 21, clause 3/4: ' +\n  'interest-bearing debt and deposits up to 30% of market capitalisation each, non-permissible income up to 5% of total revenue. ' +\n  'The short explanations are drafted from those numbers only, and code checks every percentage they quote against the table. ' +\n  'This report is for education and club discussion. It is not a fatwa or investment advice. ' +\n  'Al-Noor Family Investment Club (a fictional organisation).</div></div>';\nreturn [{ json: { to: 'admin@example.org',\n  subject: 'Monthly Shariah screen: ' + notes.length + ' status change' + (notes.length === 1 ? '' : 's') + ' for review (' + month + ')' + (flagged ? ', ' + flagged + ' to check' : ''),\n  changes: notes.length, flagged, html } }];"
+      },
+      "id": "7952af0c-7105-563e-b4c8-93a19b24e9aa",
+      "name": "Admin report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "b0de5183-16bd-5897-8b01-5da10954600c",
+      "name": "Email admin",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2000,
+        340
+      ]
+    }
+  ],
+  "connections": {
+    "Every month": {
+      "main": [
+        [
+          {
+            "node": "Read watchlist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read watchlist": {
+      "main": [
+        [
+          {
+            "node": "Map watchlist columns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map watchlist columns": {
+      "main": [
+        [
+          {
+            "node": "Screen ratios (AAOIFI SS 21)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screen ratios (AAOIFI SS 21)": {
+      "main": [
+        [
+          {
+            "node": "Changed shares only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Changed shares only": {
+      "main": [
+        [
+          {
+            "node": "Build Claude request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Claude request": {
+      "main": [
+        [
+          {
+            "node": "Claude: explain changes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude: explain changes": {
+      "main": [
+        [
+          {
+            "node": "Read Claude reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Claude reply": {
+      "main": [
+        [
+          {
+            "node": "Check quoted numbers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check quoted numbers": {
+      "main": [
+        [
+          {
+            "node": "Admin report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Admin report": {
+      "main": [
+        [
+          {
+            "node": "Email admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

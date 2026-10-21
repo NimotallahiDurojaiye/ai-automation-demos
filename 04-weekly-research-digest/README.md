@@ -141,4 +141,33 @@ After importing, reconnect your own accounts and check each module's settings be
 ## Tools
 Crossref REST API (free, public), Google Sheets, Gmail, Make.com (HTTP, JSON, router, iterator, aggregators), Claude API (`claude-opus-5-5`).
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Needs no accounts or keys. Import it and click **Test workflow**. The top row runs the saved Crossref results from `sample/` through the real logic and builds the digest. The bottom row makes one live request to the free public Crossref API for the last 7 days and shows the cleaned results. |
+| `n8n/full.workflow.json` | The working version: weekly schedule, the `Sent_DOIs` log in Google Sheets, the Crossref search, the Claude call, the digest by Gmail, and the log updated after the email has gone. |
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above.
+
+**Two paths in the try-it-now file.**
+- **Offline, saved sample (top row).** **Saved sample results** holds the 20 records from `sample/crossref-results-2026-10-20.csv`, in the same shape as a Crossref response. This row always runs, even with no internet.
+- **Live Crossref (bottom row).** **Search Crossref (live)** sends the same GET request as the full version, with the dates worked out for the last 7 days. If you are offline it carries on and **Clean live results** shows a note instead. To run the whole chain on live results, connect **Clean live results** to **Find new items** and remove the link from **Clean Crossref results**.
+
+**About the AI step in the try-it-now file.** The node **Sample AI reply (illustrative)** holds replies written for this demo, standing in for the live Claude call in the full version. They are not AI output. They are keyed by DOI for the saved sample only, written from the 300-character abstracts in it, and follow the JSON schema the real call must return. Two of them carry DOIs that were never sent to the model, so you can see the digest drop them. Every node after it is the same code as in the full version. On live results, papers outside the saved sample show under "Sent for a summary, none came back".
+
+**For the full version:**
+1. Make the `Sent_DOIs` tab as in "Set it up" above, with the `seed` row.
+2. In **Sent DOI log** and **Add to Sent DOI log**, connect Google Sheets and pick the sheet and tab.
+3. In **Search Crossref**, change `query.bibliographic` to your field and put your team's address in `mailto`.
+4. **Claude API key.** In **Ask Claude**, create a new credential of type **Header Auth**. Set **Name** to `x-api-key` and **Value** to your Anthropic API key. The key stays in n8n's credential store; never type it into the node or into a copy of the file.
+5. Connect Gmail in **Send digest**, **Send titles-only digest** and **Email research lead**. Change `TO` in **Build digest** and **Titles-only digest**, and the address in **Hold digest**.
+6. Set the schedule in **Every Monday 07:00**, run it once by hand, and compare the email with what Crossref returns for the same query in your browser.
+
+The rules live in the Code nodes: **Clean Crossref results** (tags stripped, abstracts under 40 characters count as none), **Find new items** (DOIs already logged are dropped), **Prepare AI request** (only items with an abstract go to the model), **Read Claude reply** (only `end_turn` replies are used), **Build digest** (a summary is shown only when its DOI matches a paper that was sent; titles and journals come from Crossref) and **Rows for Sent DOI log** (runs only after the email has gone).
+
+![Digest email produced by the n8n try-it-now workflow from the saved sample. Titles, journals and DOIs are real Crossref records; the summaries and tags are the illustrative stand-in replies, not AI output.](docs/n8n-output.png)
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)

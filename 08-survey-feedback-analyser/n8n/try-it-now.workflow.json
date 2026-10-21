@@ -1,0 +1,190 @@
+{
+  "name": "Demo 08: Survey feedback analyser (try it now)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Survey feedback analyser: try it now\nClick **Test workflow**. It runs on 36 made-up survey responses and needs no accounts, keys or network.\n\nThen click each node: the ratings worked out by code, the illustrative AI reply, the checks (counts, themes, word-for-word quotes, flags) and the report email (open the `html` field).\n\nLumen Teacher Training Academy is fictional.",
+        "height": 300,
+        "width": 420
+      },
+      "id": "f1d4b919-0762-5972-ad2b-c558e58c5d74",
+      "name": "Read me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### About the AI reply\nIllustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output.",
+        "height": 160,
+        "width": 300
+      },
+      "id": "13b8e0cd-8477-5d96-b56c-81d7bfda3a1a",
+      "name": "About the AI reply",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        700,
+        40
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "77e9664a-98de-5298-93fc-c92b875a8084",
+      "name": "Click to try it",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Made-up survey responses from sample/responses.csv. The full version reads your Google Sheet instead.\nconst rows = [\n {\n  \"timestamp\": \"2026-09-10 19:07\",\n  \"id\": \"R01\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"The worked examples of open questions I can use on Monday.\",\n  \"improve\": \"Nothing really, it was well run.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 20:14\",\n  \"id\": \"R02\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"Seeing real classroom examples of wait time.\",\n  \"improve\": \"Please send the slides before the session so I can follow along.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 18:21\",\n  \"id\": \"R03\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The question stems handout.\",\n  \"improve\": \"The breakout rooms were too short to finish the task.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 19:28\",\n  \"id\": \"R04\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Practical ideas I can try straight away.\",\n  \"improve\": \"\",\n  \"other\": \"Thank you, very clear trainer.\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 20:35\",\n  \"id\": \"R05\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The examples from a Year 4 class were really useful.\",\n  \"improve\": \"The second half felt rushed.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 18:42\",\n  \"id\": \"R06\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"Hearing from other teachers.\",\n  \"improve\": \"Breakout rooms need more time, we had barely started.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 19:49\",\n  \"id\": \"R07\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"The video clips of real lessons.\",\n  \"improve\": \"\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 20:56\",\n  \"id\": \"R08\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"The ideas on hinge questions.\",\n  \"improve\": \"My audio kept cutting out and I missed parts of the input.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 18:03\",\n  \"id\": \"R09\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"Classroom examples that felt realistic.\",\n  \"improve\": \"Share the slides afterwards please.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 19:10\",\n  \"id\": \"R10\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"The discussion task.\",\n  \"improve\": \"Breakout rooms were 8 minutes, which is not enough.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 20:17\",\n  \"id\": \"R11\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Practical strategies, not just theory.\",\n  \"improve\": \"\",\n  \"other\": \"Could future sessions have French subtitles?\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 18:24\",\n  \"id\": \"R12\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"The trainer's examples.\",\n  \"improve\": \"Sound quality was poor for the first 20 minutes.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 19:31\",\n  \"id\": \"R13\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The examples of follow-up questions.\",\n  \"improve\": \"Remind people not to share pupil details in the chat.\",\n  \"other\": \"Someone shared a pupil's full name and family situation in the chat. That felt like a safeguarding concern.\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 20:38\",\n  \"id\": \"R14\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"Planning questions with a partner.\",\n  \"improve\": \"Longer breakout rooms.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 18:45\",\n  \"id\": \"R15\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The reading list.\",\n  \"improve\": \"I would like the slides in advance.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 19:52\",\n  \"id\": \"R16\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Seeing the strategies modelled with real examples.\",\n  \"improve\": \"\",\n  \"other\": \"Could we get a printed certificate?\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-10 20:59\",\n  \"id\": \"R17\",\n  \"workshop\": \"Questioning that makes pupils think (10 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"The hinge question examples.\",\n  \"improve\": \"The connection dropped twice and I had to rejoin.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 18:06\",\n  \"id\": \"R18\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Exit ticket examples I can adapt for my class.\",\n  \"improve\": \"\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 19:13\",\n  \"id\": \"R19\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The traffic light idea.\",\n  \"improve\": \"Breakout rooms too short again.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 20:20\",\n  \"id\": \"R20\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Practical examples from primary and secondary.\",\n  \"improve\": \"\",\n  \"other\": \"A Saturday session would suit me better than evenings.\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 18:27\",\n  \"id\": \"R21\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The feedback grid.\",\n  \"improve\": \"Please share the slides before the workshop.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 19:34\",\n  \"id\": \"R22\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"The marking shortcuts.\",\n  \"improve\": \"Too much content for one hour, the pace was too fast.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 20:41\",\n  \"id\": \"R23\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Real examples of feedback that pupils acted on.\",\n  \"improve\": \"\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 18:48\",\n  \"id\": \"R24\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 2,\n  \"useful\": \"Some of the examples.\",\n  \"improve\": \"The breakout room time was too short.\",\n  \"other\": \"Another attendee kept sending me private messages during the session that made me uncomfortable. I did not know how to report it.\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 19:55\",\n  \"id\": \"R25\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Practical, classroom-ready ideas.\",\n  \"improve\": \"\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 20:02\",\n  \"id\": \"R26\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"The peer assessment section.\",\n  \"improve\": \"Audio echo made it hard to hear the trainer.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 18:09\",\n  \"id\": \"R27\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The model answers.\",\n  \"improve\": \"Slides in advance would help me take notes.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 19:16\",\n  \"id\": \"R28\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"The examples of success criteria from real lessons.\",\n  \"improve\": \"\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 20:23\",\n  \"id\": \"R29\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"Working with a partner from another school.\",\n  \"improve\": \"Give us longer in the breakout rooms.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 18:30\",\n  \"id\": \"R30\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The question bank.\",\n  \"improve\": \"Can you email the slides after the session?\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 19:37\",\n  \"id\": \"R31\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Very practical, I used an exit ticket the next day.\",\n  \"improve\": \"\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 20:44\",\n  \"id\": \"R32\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 3,\n  \"useful\": \"The self-assessment ideas.\",\n  \"improve\": \"The last 20 minutes went too fast.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 18:51\",\n  \"id\": \"R33\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 2,\n  \"useful\": \"The trainer was knowledgeable.\",\n  \"improve\": \"My audio froze for most of the second half.\",\n  \"other\": \"I still have not received my certificate from the last workshop after two emails. I would like to make a formal complaint.\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 19:58\",\n  \"id\": \"R34\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 5,\n  \"useful\": \"Practical examples I can share with my department.\",\n  \"improve\": \"\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 20:05\",\n  \"id\": \"R35\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The checklist.\",\n  \"improve\": \"Send the slides a day before.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n },\n {\n  \"timestamp\": \"2026-09-24 18:12\",\n  \"id\": \"R36\",\n  \"workshop\": \"Assessment for learning in practice (24 Sept)\",\n  \"rating\": 4,\n  \"useful\": \"The hinge questions recap.\",\n  \"improve\": \"Slow down in the second half, it was a lot to take in.\",\n  \"other\": \"\",\n  \"month\": \"2026-09\"\n }\n];\nreturn rows.map(r => ({ json: r }));"
+      },
+      "id": "cb7b33aa-1851-58c5-80b5-2772c734903c",
+      "name": "Sample responses",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Ratings are worked out here by code, never by the AI. The keyword check is a backup to the AI flags.\nconst KEYWORDS = /safeguard|harass|complain|bully|unsafe|uncomfortable|abuse|discriminat/;\nconst rows = $input.all().map(i => i.json);\nif (!rows.length) return [];  // empty month: stop before the AI step\nconst spread = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };\nlet total = 0, rated = 0;\nfor (const r of rows) {\n  const n = Number(r.rating);\n  if (n >= 1 && n <= 5) { spread[n]++; total += n; rated++; }\n}\nconst responses = rows.map(r => ({ id: r.id, useful: r.useful || '', improve: r.improve || '', other: r.other || '' }));\nconst keywordFlagged = responses\n  .filter(r => KEYWORDS.test((r.useful + ' ' + r.improve + ' ' + r.other).toLowerCase()))\n  .map(r => r.id);\n// One line per response, with its ID. Ratings are left out of the AI input on purpose.\nconst responsesText = rows.map(r => '[' + r.id + '] Workshop: ' + r.workshop + ' | Most useful: ' + (r.useful || '') +\n  ' | Improve: ' + (r.improve || '') + ' | Other comments: ' + (r.other || '')).join('\\n');\nreturn [{ json: {\n  month: rows[0].month,\n  count: rows.length,\n  average: rated ? (Math.round(total / rated * 100) / 100).toFixed(2) : 'n/a',\n  spread, keywordFlagged, responses, responsesText,\n} }];"
+      },
+      "id": "9c726a3c-a157-521c-b9be-0d4fc24e29ed",
+      "name": "Ratings and keyword check",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Illustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output.\n// It returns exactly the JSON schema the real Claude call must return, so the checks below run on it.\nconst stats = $input.first().json;\nconst ai = {\n \"total_responses_analysed\": 36,\n \"themes\": [\n  {\n   \"name\": \"Practical, real classroom examples\",\n   \"sentiment\": \"positive\",\n   \"response_count\": 15,\n   \"response_ids\": [\n    \"R01\",\n    \"R02\",\n    \"R04\",\n    \"R05\",\n    \"R07\",\n    \"R09\",\n    \"R11\",\n    \"R16\",\n    \"R18\",\n    \"R20\",\n    \"R23\",\n    \"R25\",\n    \"R28\",\n    \"R31\",\n    \"R34\"\n   ],\n   \"quotes\": [\n    {\n     \"response_id\": \"R04\",\n     \"text\": \"Practical ideas I can try straight away.\"\n    },\n    {\n     \"response_id\": \"R31\",\n     \"text\": \"Very practical, I used an exit ticket the next day.\"\n    }\n   ]\n  },\n  {\n   \"name\": \"Breakout rooms too short\",\n   \"sentiment\": \"negative\",\n   \"response_count\": 7,\n   \"response_ids\": [\n    \"R03\",\n    \"R06\",\n    \"R10\",\n    \"R14\",\n    \"R19\",\n    \"R24\",\n    \"R29\"\n   ],\n   \"quotes\": [\n    {\n     \"response_id\": \"R10\",\n     \"text\": \"Breakout rooms were 8 minutes, which is not enough.\"\n    },\n    {\n     \"response_id\": \"R06\",\n     \"text\": \"Breakout rooms need more time, we had barely started.\"\n    }\n   ]\n  },\n  {\n   \"name\": \"Wanting the slides before or after\",\n   \"sentiment\": \"mixed\",\n   \"response_count\": 7,\n   \"response_ids\": [\n    \"R02\",\n    \"R09\",\n    \"R15\",\n    \"R21\",\n    \"R27\",\n    \"R30\",\n    \"R35\"\n   ],\n   \"quotes\": [\n    {\n     \"response_id\": \"R27\",\n     \"text\": \"Slides in advance would help me take notes.\"\n    }\n   ]\n  },\n  {\n   \"name\": \"Audio and connection problems\",\n   \"sentiment\": \"negative\",\n   \"response_count\": 5,\n   \"response_ids\": [\n    \"R08\",\n    \"R12\",\n    \"R17\",\n    \"R26\",\n    \"R33\"\n   ],\n   \"quotes\": [\n    {\n     \"response_id\": \"R08\",\n     \"text\": \"My audio kept cutting out and I missed parts of the input.\"\n    },\n    {\n     \"response_id\": \"R26\",\n     \"text\": \"Audio echo made it hard to hear the trainer.\"\n    }\n   ]\n  },\n  {\n   \"name\": \"Pace too fast in the second half\",\n   \"sentiment\": \"negative\",\n   \"response_count\": 4,\n   \"response_ids\": [\n    \"R05\",\n    \"R22\",\n    \"R32\",\n    \"R36\"\n   ],\n   \"quotes\": [\n    {\n     \"response_id\": \"R22\",\n     \"text\": \"Too much content for one hour, the pace was too fast.\"\n    }\n   ]\n  },\n  {\n   \"name\": \"Clear, knowledgeable trainer\",\n   \"sentiment\": \"positive\",\n   \"response_count\": 2,\n   \"response_ids\": [\n    \"R04\",\n    \"R33\"\n   ],\n   \"quotes\": [\n    {\n     \"response_id\": \"R04\",\n     \"text\": \"Thank you, very clear trainer.\"\n    }\n   ]\n  }\n ],\n \"other_comments\": [\n  {\n   \"response_id\": \"R11\",\n   \"comment\": \"Asks for French subtitles in future sessions.\"\n  },\n  {\n   \"response_id\": \"R16\",\n   \"comment\": \"Asks for a printed certificate.\"\n  },\n  {\n   \"response_id\": \"R20\",\n   \"comment\": \"Would prefer a Saturday session to evenings.\"\n  }\n ],\n \"suggestions\": [\n  {\n   \"suggestion\": \"Make breakout rooms longer than 8 minutes.\",\n   \"response_ids\": [\n    \"R06\",\n    \"R10\",\n    \"R14\",\n    \"R29\"\n   ]\n  },\n  {\n   \"suggestion\": \"Send the slides before the session.\",\n   \"response_ids\": [\n    \"R02\",\n    \"R15\",\n    \"R21\",\n    \"R27\",\n    \"R35\"\n   ]\n  },\n  {\n   \"suggestion\": \"Email the slides after the session.\",\n   \"response_ids\": [\n    \"R09\",\n    \"R30\"\n   ]\n  },\n  {\n   \"suggestion\": \"Cover less content or slow down in the second half.\",\n   \"response_ids\": [\n    \"R22\",\n    \"R36\"\n   ]\n  },\n  {\n   \"suggestion\": \"Remind attendees not to share pupil details in the chat.\",\n   \"response_ids\": [\n    \"R13\"\n   ]\n  }\n ],\n \"flagged_for_follow_up\": [\n  {\n   \"response_id\": \"R13\",\n   \"category\": \"safeguarding\",\n   \"reason\": \"Reports that a pupil's full name and family situation were shared in the chat.\"\n  },\n  {\n   \"response_id\": \"R24\",\n   \"category\": \"harassment\",\n   \"reason\": \"Reports unwanted private messages from another attendee and did not know how to report it.\"\n  },\n  {\n   \"response_id\": \"R33\",\n   \"category\": \"complaint\",\n   \"reason\": \"Certificate not received after two emails; asks to make a formal complaint.\"\n  }\n ]\n};\nreturn [{ json: { ...stats, ok: true, problem: '', ai } }];"
+      },
+      "id": "d41d4d42-1139-598c-8a3f-c7525f1b32f2",
+      "name": "Sample AI reply (illustrative)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Checks the AI's work against the data. Nothing here trusts the AI's own numbers.\nconst d = $input.first().json;\nconst norm = s => String(s || '').replace(/[\\u2018\\u2019]/g, \"'\").replace(/[\\u201c\\u201d]/g, '\"').replace(/\\s+/g, ' ').trim();\nconst byId = {};\nfor (const r of d.responses) byId[r.id] = [r.useful, r.improve, r.other].map(norm);\nconst warnings = [], quoteChecks = [];\nconst flags = {};\nfor (const id of d.keywordFlagged) flags[id] = { id, byAI: false, byKeyword: true, category: '' };\nif (d.ok) {\n  const ai = d.ai;\n  if (ai.total_responses_analysed !== d.count)\n    warnings.push('The sheet has ' + d.count + ' responses but the AI reports reading ' + ai.total_responses_analysed + '. Theme counts may be off.');\n  for (const t of ai.themes) {\n    const ids = [...new Set(t.response_ids || [])];\n    if (t.response_count < 2 || ids.length < 2)\n      warnings.push('Theme \"' + t.name + '\" has fewer than 2 responses. It belongs in other comments.');\n    if ((t.response_ids || []).length !== t.response_count)\n      warnings.push('Theme \"' + t.name + '\" says ' + t.response_count + ' responses but lists ' + (t.response_ids || []).length + ' IDs.');\n    for (const q of t.quotes || []) {\n      const fields = byId[q.response_id];\n      const found = !!fields && fields.some(f => f.includes(norm(q.text)));\n      quoteChecks.push({ theme: t.name, response_id: q.response_id, text: q.text, found });\n      if (!found) warnings.push('Quote \"' + q.text + '\" (' + q.response_id + ') was not found word for word in that response. Check the sheet.');\n    }\n  }\n  for (const f of ai.flagged_for_follow_up || []) {\n    flags[f.response_id] = { id: f.response_id, byAI: true, byKeyword: !!(flags[f.response_id] && flags[f.response_id].byKeyword), category: f.category };\n  }\n}\nconst needsPerson = Object.values(flags).sort((a, b) => a.id.localeCompare(b.id, 'en', { numeric: true }));\nreturn [{ json: { ...d, warnings, quoteChecks, needsPerson } }];"
+      },
+      "id": "f969e970-29a3-5f36-9542-8b0da5a32d62",
+      "name": "Check the AI's work",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        980,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the one-page report email for the programme lead, or the raw responses if the AI step failed.\nconst WINE = '#4a1424', RED = '#b3202a', INK = '#1d1416', MUTED = '#5f5456', LINE = '#d9d4d5';\nconst TO = 'lead@example.org';\nconst d = $input.first().json;\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst [y, m] = String(d.month).split('-');\nconst monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][Number(m) - 1] + ' ' + y;\nconst label = t => '<div style=\"margin:22px 0 8px;font:700 12px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:' + (t[1] || WINE) + '\">' + t[0] + '</div>';\nconst box = inner => '<div style=\"padding:12px 14px;border:1px solid ' + RED + ';border-radius:6px\">' + inner + '</div>';\nconst list = items => items.length ? '<ul style=\"margin:0;padding-left:20px\">' + items.map(x => '<li style=\"margin:3px 0\">' + x + '</li>').join('') + '</ul>' : '<p style=\"margin:0;color:' + MUTED + '\">None.</p>';\nconst head =\n  '<div style=\"font-family:Helvetica,Arial,sans-serif;color:' + INK + ';max-width:640px;margin:0 auto;border:1px solid ' + LINE + ';background:#fff\">' +\n  '<div style=\"background:' + WINE + ';color:#fff;padding:20px 28px\"><div style=\"font-family:Georgia,serif;font-size:19px;font-weight:700;letter-spacing:1.5px\">LUMEN TEACHER TRAINING ACADEMY</div>' +\n  '<div style=\"width:44px;height:2px;background:' + RED + ';margin:8px 0\"></div><div style=\"font-size:12px;letter-spacing:1px\">Monthly workshop feedback</div></div>' +\n  '<div style=\"padding:26px 28px;font-size:14px;line-height:1.6\">';\nconst foot = '</div><div style=\"border-top:1px solid ' + LINE + ';padding:14px 28px;font-size:12px;color:' + MUTED + '\">' +\n  'Themes, quotes and flags are drafted by AI and checked by the flow. Ratings are worked out by code. Lumen Teacher Training Academy (a fictional organisation).</div></div>';\nconst flagLine = d.needsPerson.length ? d.needsPerson.map(f => '<b>' + esc(f.id) + '</b> (' +\n  [f.byAI ? 'AI: ' + esc(f.category) : '', f.byKeyword ? 'keyword check' : ''].filter(Boolean).join(', ') + ')').join('<br>') : 'None this month.';\n\nif (!d.ok) {\n  const html = head + '<h1 style=\"margin:0 0 12px;font-family:Georgia,serif;font-size:22px;color:' + WINE + '\">Please read these responses yourself</h1>' +\n    '<p>The AI step did not return a usable report this month (' + esc(d.problem) + '). Nothing has been summarised.</p>' +\n    '<p><b>Responses:</b> ' + d.count + ' &middot; <b>Average rating:</b> ' + d.average + ' &middot; <b>Keyword-flagged:</b> ' + (esc(d.keywordFlagged.join(', ')) || 'none') + '</p>' +\n    '<pre style=\"white-space:pre-wrap;font-family:Consolas,monospace;font-size:12px;padding:12px;border:1px solid ' + LINE + '\">' + esc(d.responsesText) + '</pre>' + foot;\n  return [{ json: { to: TO, subject: 'Feedback for ' + monthName + ' needs a manual read', html } }];\n}\n\nconst ai = d.ai;\nconst cell = 'padding:9px 10px;border-top:1px solid ' + LINE + ';vertical-align:top';\nconst tile = (big, small) => '<td style=\"width:33%;padding:12px;border:1px solid ' + LINE + ';text-align:center\">' + big + '<div style=\"font-size:12px;color:' + MUTED + '\">' + small + '</div></td>';\nconst s = d.spread;\nconst rowsHtml = ai.themes.map(t => {\n  const qs = (t.quotes || []).map(q => {\n    const ok = d.quoteChecks.find(c => c.theme === t.name && c.response_id === q.response_id && c.text === q.text);\n    return '<div style=\"font-style:italic\">&ldquo;' + esc(q.text) + '&rdquo; <span style=\"font-style:normal;font-size:11px;color:' + MUTED + '\">' + esc(q.response_id) + '</span>' +\n      (ok && ok.found ? '' : '<br><span style=\"font-style:normal;font-size:11px;color:' + RED + ';font-weight:700\">not found word for word, check the sheet</span>') + '</div>';\n  }).join('');\n  return '<tr><td style=\"' + cell + '\"><b>' + esc(t.name) + '</b><br><span style=\"font-size:12px;color:' + MUTED + '\">' + esc(t.sentiment) + '</span></td>' +\n    '<td style=\"' + cell + ';text-align:center\">' + t.response_count + (t.response_count < 2 ? '<br><span style=\"font-size:11px;color:' + RED + ';font-weight:700\">under 2</span>' : '') + '</td>' +\n    '<td style=\"' + cell + '\">' + (qs || '<span style=\"color:' + MUTED + '\">No exact quote</span>') + '</td></tr>';\n}).join('');\nconst found = d.quoteChecks.filter(c => c.found).length;\nconst html = head +\n  '<h1 style=\"margin:0 0 14px;font-family:Georgia,serif;font-size:22px;color:' + WINE + '\">Workshop feedback, ' + monthName + '</h1>' +\n  (d.warnings.length ? box('<div style=\"font-weight:700;color:' + RED + ';margin-bottom:4px\">Check before you rely on this</div>' + list(d.warnings.map(esc))) + '<div style=\"height:14px\"></div>' : '') +\n  '<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse\"><tr>' +\n  tile('<div style=\"font-size:26px;font-weight:700;color:' + WINE + '\">' + d.count + '</div>', 'responses') +\n  tile('<div style=\"font-size:26px;font-weight:700;color:' + WINE + '\">' + d.average + '</div>', 'average rating out of 5') +\n  tile('<div style=\"font-size:13px\">5: ' + s[5] + ' &middot; 4: ' + s[4] + ' &middot; 3: ' + s[3] + '<br>2: ' + s[2] + ' &middot; 1: ' + s[1] + '</div>', 'ratings spread') +\n  '</tr></table>' +\n  '<div style=\"font-size:12px;color:' + MUTED + ';margin-top:6px\">AI analysed ' + ai.total_responses_analysed + ' responses. ' + found + ' of ' + d.quoteChecks.length + ' quotes found word for word.</div>' +\n  label(['Themes']) +\n  '<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;border:1px solid ' + LINE + ';font-size:13.5px\"><tr>' +\n  '<th style=\"text-align:left;padding:8px 10px;background:' + WINE + ';color:#fff\">Theme</th><th style=\"padding:8px 10px;background:' + WINE + ';color:#fff\">Responses</th>' +\n  '<th style=\"text-align:left;padding:8px 10px;background:' + WINE + ';color:#fff\">In their words</th></tr>' + rowsHtml + '</table>' +\n  label(['Suggestions from respondents']) + list(ai.suggestions.map(x => esc(x.suggestion) + ' <span style=\"font-size:11px;color:' + MUTED + '\">' + esc(x.response_ids.join(', ')) + '</span>')) +\n  label(['Other comments (raised once)']) + list(ai.other_comments.map(x => esc(x.comment) + ' <span style=\"font-size:11px;color:' + MUTED + '\">' + esc(x.response_id) + '</span>')) +\n  label(['Needs a person', RED]) +\n  box(flagLine + '<div style=\"margin-top:6px;font-size:13px;color:' + MUTED + '\">Please read these responses in full in the sheet. A flag is a prompt to look, not a judgement.</div>') +\n  foot;\nreturn [{ json: { to: TO, subject: 'Workshop feedback report: ' + monthName + (d.warnings.length ? ' (check warnings)' : ''), warnings: d.warnings, html } }];"
+      },
+      "id": "f84ad863-15e6-52b0-b071-25bfdb8dfc2c",
+      "name": "Report email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// A separate email to the safeguarding lead and the programme lead when anything is flagged, by the AI or by keyword.\nconst d = $input.first().json;\nif (!d.needsPerson.length) return [];\nconst lines = d.needsPerson.map(f => f.id + ': ' + [f.byAI ? 'AI flag (' + f.category + ')' : '', f.byKeyword ? 'keyword check' : ''].filter(Boolean).join(' and '));\nreturn [{ json: { to: 'safeguarding.lead@example.org, lead@example.org', subject: 'Feedback to follow up today: ' + d.month,\n  count: d.needsPerson.length,\n  text: 'Last month\\'s feedback has responses that may need follow-up. Please read them in full in the sheet today.\\n\\n' +\n    lines.join('\\n') + '\\n\\nA flag is a prompt to look, not a judgement. Follow the academy\\'s safeguarding and complaints procedures.' } }];"
+      },
+      "id": "28bb937d-31b8-5f05-a914-6c5eec34cb8a",
+      "name": "Follow-up email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        400
+      ]
+    }
+  ],
+  "connections": {
+    "Click to try it": {
+      "main": [
+        [
+          {
+            "node": "Sample responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample responses": {
+      "main": [
+        [
+          {
+            "node": "Ratings and keyword check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ratings and keyword check": {
+      "main": [
+        [
+          {
+            "node": "Sample AI reply (illustrative)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample AI reply (illustrative)": {
+      "main": [
+        [
+          {
+            "node": "Check the AI's work",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check the AI's work": {
+      "main": [
+        [
+          {
+            "node": "Report email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Follow-up email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

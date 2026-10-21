@@ -190,4 +190,25 @@ After importing, reconnect your own accounts and check each module's settings be
 ## Tools
 Google Drive, Google Sheets, Make.com, Claude API (`claude-opus-5-5`, vision and PDF input), Gmail, Python 3 with Pillow (sample generation only).
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Runs on the six sample receipts with no accounts or keys. Import it and click **Test workflow** to see each receipt's figures, the checks (OK or NEEDS CHECK, and why) and the bookkeeper's alert. |
+| `n8n/full.workflow.json` | The working version: a Google Drive folder trigger, download, Claude reading the image or PDF, the same checks, a row in `Receipts_Log` and a Gmail alert to the bookkeeper. |
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above.
+
+**For the full version:** connect Google Drive in **New receipt in folder** and **Download receipt**, and pick your receipts folder. Connect Google Sheets in **Receipts already logged** and **Log row**, and pick a tab named `Receipts_Log` with these headers in row 1: `Received`, `File`, `Supplier`, `Date`, `Currency`, `Total`, `Tax`, `Tax inclusive`, `Rounding`, `Line items`, `Items sum`, `Payment method`, `Category`, `Confidence`, `Flags`, `Status`, `Checked by`, `Counts`, `File link`. No formula columns are needed: the n8n version works out the flags, duplicates and `Counts` in code. Connect Gmail in **Email bookkeeper** and change `bookkeeper@example.org` in **Bookkeeper alert**. Drop the six images from `sample/receipts/` into the folder and compare the log with `sample/expected_extraction.csv`.
+
+**Claude key:** in n8n, open **Credentials**, choose **Create credential** and pick **Header Auth**. Set Name to `x-api-key` and Value to your Anthropic API key, then select that credential in the **Claude: read receipt** node. The key stays in n8n's credential store, never in the workflow file.
+
+The checks live in one Code node, **Receipt checks**, with the same rules as `make_samples.py`: total against the line items plus any added tax and rounding (tolerance `TOLERANCE = 0.01`), missing or low-confidence key fields, unreadable fields, and possible duplicates (same supplier, date and total as another receipt in the batch or a row already in the log). Any flag sets the status to NEEDS CHECK and `Counts` to NO. When a person has checked the row, they add their initials in `Checked by` and change `Counts` to YES. A Claude refusal, an API error or a reply that does not parse becomes a NEEDS CHECK row with the file link, so no receipt is lost.
+
+In the try-it-now file, the node **Sample AI reply (illustrative)** holds illustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output. They use the same JSON schema the real call must return, and everything after that node is real code. Here they hold the expected values for the six receipts and stand in for Claude reading the images.
+
+![The bookkeeper alert produced by the try-it-now workflow: the four flagged receipts with the reasons from the check code, and the two OK receipts counted at MYR 186.40. The figures it starts from are the illustrative replies.](docs/n8n-output.png)
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)

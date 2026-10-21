@@ -148,4 +148,32 @@ After importing, reconnect your own accounts and check each module's settings be
 ## Tools
 Google Forms, Google Sheets, Gmail, Make.com (HTTP, JSON, router, iterator, text aggregator), Claude API (`claude-opus-5-5`).
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Runs on the sample notes with no accounts or keys. Import it and click **Test workflow** to see the prompt, the tracker rows, the approval row (Approved unticked), the draft email to the lead, and an empty team email because nobody has approved yet. |
+| `n8n/full.workflow.json` | The drafting workflow: Google Sheets trigger on `Form_Responses`, the Claude call, then rows in `Action_Tracker` and `Approvals` and the draft email to the lead. If the AI step does not finish normally, the lead gets a "please do this by hand" email instead. |
+| `n8n/full-send-approved.workflow.json` | The sending workflow: every 30 minutes it reads `Approvals`, emails the team only for rows that are ticked and not yet sent, then writes **Sent at**. |
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above. Import the two full files as two separate workflows.
+
+**About the AI step in the try-it-now file.** The node **Sample AI reply (illustrative)** holds replies written for this demo, standing in for the live Claude call in the full version. They are not AI output. They follow the same JSON schema the real call must return, and every node after it is the same code as in the full version.
+
+**To see the approval step in the try-it-now file:** open the node **Lead ticks Approved?**, change `const APPROVED = false;` to `const APPROVED = true;`, and click **Test workflow** again. **Team email (only if approved)** now builds the team email. Set it back to `false` and it builds nothing.
+
+**For the full version:**
+1. Set up the Google Sheet and Form as in "Set it up" above.
+2. In **New form row**, **Add to Action_Tracker**, **Add to Approvals**, **Approvals rows** and **Write Sent at**, connect Google Sheets and pick the sheet and tab.
+3. **Claude API key.** In **Ask Claude**, create a new credential of type **Header Auth**. Set **Name** to `x-api-key` and **Value** to your Anthropic API key. The key stays in n8n's credential store; never type it into the node or into a copy of the file.
+4. Connect Gmail in **Email the lead**, **Email the lead (AI step failed)** and **Send to team**.
+5. Change `ORG` and `SHEET_URL` at the top of **Draft email to lead** and **Team email (only if approved)**.
+6. Paste `sample/meeting-notes-2026-10-14.txt` into the form with your own address as lead, check the draft, then switch both workflows on.
+
+The rules live in the Code nodes: **Check notes and build prompt** (the exact prompt and the 60,000-character limit), **Read Claude reply** (only `end_turn` replies are used), **Tracker rows** and **Approval row** (owners and dates copied, never filled in) and **Team email (only if approved)** (ticked and not yet sent only).
+
+![Draft email to the lead, produced by the n8n try-it-now workflow from the sample notes. The reply it is built from is the illustrative stand-in, not AI output.](docs/n8n-output.png)
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)

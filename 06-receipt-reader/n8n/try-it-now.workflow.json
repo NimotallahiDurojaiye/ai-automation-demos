@@ -1,0 +1,148 @@
+{
+  "name": "Demo 06: Receipt reader (try it now)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Receipt reader: try it now\nClick **Test workflow**. It runs on the six made-up receipts and needs no accounts or keys.\n\nThen click each node: the figures for each receipt, the checks (OK or NEEDS CHECK, and why), and the bookkeeper's alert (open the `html` field).\n\nKampung Fresh Catering and its suppliers are fictional.",
+        "height": 280,
+        "width": 420
+      },
+      "id": "0cc219a7-037c-5992-834d-f8827ad1c1e8",
+      "name": "Read me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Sample AI reply\nIllustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output.\n\nThey stand in for Claude reading the receipt images, using the expected values in `sample/expected_extraction.csv`. Everything after it is real code.",
+        "height": 240,
+        "width": 320
+      },
+      "id": "19032b0f-86dd-50bb-a1c3-ab2bea41dfa1",
+      "name": "About the AI step",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        420,
+        60
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "acef6d98-74c4-5ba2-a0b0-4cf027006592",
+      "name": "Click to try it",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// The six made-up receipt images in sample/receipts/. The full version picks up new files from a Google Drive folder.\nconst files = [\n {\n  \"file\": \"R01-segar-harian.png\",\n  \"mimeType\": \"image/png\",\n  \"link\": \"sample/receipts/R01-segar-harian.png\"\n },\n {\n  \"file\": \"R02-rempah-ratu.png\",\n  \"mimeType\": \"image/png\",\n  \"link\": \"sample/receipts/R02-rempah-ratu.png\"\n },\n {\n  \"file\": \"R03-gas-biru.png\",\n  \"mimeType\": \"image/png\",\n  \"link\": \"sample/receipts/R03-gas-biru.png\"\n },\n {\n  \"file\": \"R04-kotak-hijau.png\",\n  \"mimeType\": \"image/png\",\n  \"link\": \"sample/receipts/R04-kotak-hijau.png\"\n },\n {\n  \"file\": \"R05-dapur-kita-hire.png\",\n  \"mimeType\": \"image/png\",\n  \"link\": \"sample/receipts/R05-dapur-kita-hire.png\"\n },\n {\n  \"file\": \"R06-segar-harian-again.png\",\n  \"mimeType\": \"image/png\",\n  \"link\": \"sample/receipts/R06-segar-harian-again.png\"\n }\n];\nreturn files.map(f => ({ json: f }));"
+      },
+      "id": "3d83876b-e989-59fb-bc16-70c4a7d2ed50",
+      "name": "Sample receipts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Illustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output.\n// They stand in for Claude reading the six receipt images, and hold the expected values from sample/expected_extraction.csv.\n// Each reply follows the JSON schema the real Claude call must return; file and link are carried over from the previous node.\n// Note R03 (faded total: null, low confidence, unreadable) and R04 (printed total copied as it is, not corrected).\nconst REPLIES = {\n \"R01-segar-harian.png\": {\n  \"is_receipt\": true,\n  \"supplier\": \"Segar Harian Produce\",\n  \"date\": \"2026-10-05\",\n  \"currency\": \"MYR\",\n  \"total\": 100.1,\n  \"tax\": null,\n  \"tax_inclusive\": null,\n  \"rounding\": 0.0,\n  \"line_items\": [\n   {\n    \"description\": \"Tomatoes 5kg\",\n    \"amount\": 22.5\n   },\n   {\n    \"description\": \"Onions 10kg\",\n    \"amount\": 38.0\n   },\n   {\n    \"description\": \"Cabbage 6kg\",\n    \"amount\": 15.6\n   },\n   {\n    \"description\": \"Red chillies 2kg\",\n    \"amount\": 24.0\n   }\n  ],\n  \"payment_method\": \"Cash\",\n  \"category\": \"Ingredients: produce\",\n  \"confidence\": {\n   \"supplier\": \"high\",\n   \"date\": \"high\",\n   \"total\": \"high\",\n   \"tax\": \"high\"\n  },\n  \"unreadable_fields\": []\n },\n \"R02-rempah-ratu.png\": {\n  \"is_receipt\": true,\n  \"supplier\": \"Rempah Ratu Spice Store\",\n  \"date\": \"2026-10-07\",\n  \"currency\": \"MYR\",\n  \"total\": 89.2,\n  \"tax\": null,\n  \"tax_inclusive\": null,\n  \"rounding\": 0.0,\n  \"line_items\": [\n   {\n    \"description\": \"Turmeric powder 1kg\",\n    \"amount\": 18.9\n   },\n   {\n    \"description\": \"Cumin 500g\",\n    \"amount\": 14.5\n   },\n   {\n    \"description\": \"Coriander seed 1kg\",\n    \"amount\": 16.8\n   },\n   {\n    \"description\": \"Curry powder 2kg\",\n    \"amount\": 39.0\n   }\n  ],\n  \"payment_method\": \"Cash\",\n  \"category\": \"Ingredients: dry goods\",\n  \"confidence\": {\n   \"supplier\": \"high\",\n   \"date\": \"high\",\n   \"total\": \"high\",\n   \"tax\": \"high\"\n  },\n  \"unreadable_fields\": []\n },\n \"R03-gas-biru.png\": {\n  \"is_receipt\": true,\n  \"supplier\": \"Gas Biru Supply\",\n  \"date\": \"2026-10-09\",\n  \"currency\": \"MYR\",\n  \"total\": null,\n  \"tax\": null,\n  \"tax_inclusive\": null,\n  \"rounding\": 0.0,\n  \"line_items\": [\n   {\n    \"description\": \"LPG 14kg x3 @26.60\",\n    \"amount\": 79.8\n   },\n   {\n    \"description\": \"Delivery\",\n    \"amount\": 10.0\n   }\n  ],\n  \"payment_method\": null,\n  \"category\": \"Fuel and gas\",\n  \"confidence\": {\n   \"supplier\": \"high\",\n   \"date\": \"high\",\n   \"total\": \"low\",\n   \"tax\": \"high\"\n  },\n  \"unreadable_fields\": [\n   \"total\",\n   \"payment_method\"\n  ]\n },\n \"R04-kotak-hijau.png\": {\n  \"is_receipt\": true,\n  \"supplier\": \"Kotak Hijau Packaging\",\n  \"date\": \"2026-10-12\",\n  \"currency\": \"MYR\",\n  \"total\": 131.0,\n  \"tax\": null,\n  \"tax_inclusive\": null,\n  \"rounding\": 0.0,\n  \"line_items\": [\n   {\n    \"description\": \"Food box 750ml x200\",\n    \"amount\": 56.0\n   },\n   {\n    \"description\": \"Paper bag x100\",\n    \"amount\": 35.0\n   },\n   {\n    \"description\": \"Cutlery set x200\",\n    \"amount\": 30.0\n   }\n  ],\n  \"payment_method\": \"Debit Card\",\n  \"category\": \"Packaging\",\n  \"confidence\": {\n   \"supplier\": \"high\",\n   \"date\": \"high\",\n   \"total\": \"high\",\n   \"tax\": \"high\"\n  },\n  \"unreadable_fields\": []\n },\n \"R05-dapur-kita-hire.png\": {\n  \"is_receipt\": true,\n  \"supplier\": \"Dapur Kita Equipment Hire\",\n  \"date\": \"2026-10-14\",\n  \"currency\": \"MYR\",\n  \"total\": 97.2,\n  \"tax\": 7.2,\n  \"tax_inclusive\": false,\n  \"rounding\": 0.0,\n  \"line_items\": [\n   {\n    \"description\": \"Chafing dish hire x6\",\n    \"amount\": 90.0\n   }\n  ],\n  \"payment_method\": \"Credit Card\",\n  \"category\": \"Equipment hire\",\n  \"confidence\": {\n   \"supplier\": \"high\",\n   \"date\": \"high\",\n   \"total\": \"high\",\n   \"tax\": \"high\"\n  },\n  \"unreadable_fields\": []\n },\n \"R06-segar-harian-again.png\": {\n  \"is_receipt\": true,\n  \"supplier\": \"Segar Harian Produce\",\n  \"date\": \"2026-10-05\",\n  \"currency\": \"MYR\",\n  \"total\": 100.1,\n  \"tax\": null,\n  \"tax_inclusive\": null,\n  \"rounding\": 0.0,\n  \"line_items\": [\n   {\n    \"description\": \"Tomatoes 5kg\",\n    \"amount\": 22.5\n   },\n   {\n    \"description\": \"Onions 10kg\",\n    \"amount\": 38.0\n   },\n   {\n    \"description\": \"Cabbage 6kg\",\n    \"amount\": 15.6\n   },\n   {\n    \"description\": \"Red chillies 2kg\",\n    \"amount\": 24.0\n   }\n  ],\n  \"payment_method\": \"Cash\",\n  \"category\": \"Ingredients: produce\",\n  \"confidence\": {\n   \"supplier\": \"high\",\n   \"date\": \"high\",\n   \"total\": \"high\",\n   \"tax\": \"high\"\n  },\n  \"unreadable_fields\": []\n }\n};\nreturn $input.all().map(i => ({ json: { file: i.json.file, link: i.json.link, ...REPLIES[i.json.file] } }));"
+      },
+      "id": "f3f18843-23a3-55f8-8fda-59fc1b3af059",
+      "name": "Sample AI reply (illustrative)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Checks on the figures Claude read. Code, not AI, decides the flags and whether a receipt counts.\n// Same rules as make_samples.py and the Make version. Change TOLERANCE here only.\nconst TOLERANCE = 0.01;\nconst KEYS = ['supplier', 'date', 'total', 'tax'];\nconst money = v => (v === null || v === undefined || v === '' || Number.isNaN(Number(v))) ? null : Number(v);\nconst f2 = v => v === null ? '' : v.toFixed(2);\nconst items = $input.all().map(i => i.json);\nconst earlier = (items[0] && items[0].earlierLog) || [];\nconst received = new Date().toISOString().slice(0, 16).replace('T', ' ');\n\nconst rows = items.map(d => {\n  const flags = [];\n  if (d.aiOk === false) {\n    return { file: d.file, link: d.link, received, supplier: '', date: '', currency: '', total: '', tax: '', tax_inclusive: '',\n      rounding: '', items_sum: '', line_items: '', payment_method: '', category: '', conf_supplier: '', conf_date: '',\n      conf_total: '', conf_tax: '', unreadable_fields: '',\n      flags: 'AI did not return a result (' + d.problem + '). Enter this receipt by hand', _key: null };\n  }\n  const total = money(d.total), tax = money(d.tax), rounding = money(d.rounding);\n  const lines = Array.isArray(d.line_items) ? d.line_items : [];\n  const itemsSum = Math.round(lines.reduce((s, l) => s + (money(l.amount) || 0), 0) * 100) / 100;\n  const conf = d.confidence || {};\n  const unreadable = Array.isArray(d.unreadable_fields) ? d.unreadable_fields : [];\n  if (d.is_receipt === false) flags.push('Not a receipt');\n  if (!d.supplier) flags.push('Missing supplier');\n  if (!d.date) flags.push('Missing date');\n  if (total === null) flags.push('Missing total');\n  for (const k of KEYS) if ((conf[k] || 'low') === 'low') flags.push('Low confidence: ' + k);\n  if (unreadable.length) flags.push('Unreadable: ' + unreadable.join(', '));\n  if (total !== null) {\n    const taxExtra = d.tax_inclusive === false ? (tax || 0) : 0;\n    const expected = itemsSum + taxExtra + (rounding || 0);\n    if (Math.abs(total - expected) > TOLERANCE) flags.push('Total ' + total.toFixed(2) + ' does not match items ' + expected.toFixed(2));\n  }\n  return {\n    file: d.file, link: d.link, received,\n    supplier: d.supplier || '', date: d.date || '', currency: d.currency || '',\n    total: f2(total), tax: f2(tax), tax_inclusive: d.tax_inclusive === null || d.tax_inclusive === undefined ? '' : String(d.tax_inclusive),\n    rounding: f2(rounding), items_sum: itemsSum.toFixed(2),\n    line_items: lines.map(l => (l.description || '?') + ' ' + (money(l.amount) === null ? '?' : money(l.amount).toFixed(2))).join(' | '),\n    payment_method: d.payment_method || '', category: d.category || '',\n    conf_supplier: conf.supplier || '', conf_date: conf.date || '', conf_total: conf.total || '', conf_tax: conf.tax || '',\n    unreadable_fields: unreadable.join(', '),\n    flags: flags.join('; '),\n    _key: total === null ? null : [String(d.supplier || '').trim().toLowerCase(), d.date, total.toFixed(2)].join('|'),\n  };\n});\n\n// Possible duplicates: same supplier, date and total as another receipt in this batch or already in the log.\n// Both copies are flagged, so a person decides which one to keep.\nfor (const r of rows) {\n  if (!r._key) continue;\n  const twins = rows.filter(o => o !== r && o._key === r._key).map(o => o.file)\n    .concat(earlier.filter(e => e.total !== null && [e.supplier.toLowerCase(), e.date, e.total.toFixed(2)].join('|') === r._key).map(e => e.file));\n  if (twins.length) r.flags = (r.flags ? r.flags + '; ' : '') + 'Possible duplicate of ' + twins.join(', ');\n}\nreturn rows.map(({ _key, ...r }) => ({ json: { ...r,\n  status: r.flags ? 'NEEDS CHECK' : 'OK',\n  counts: r.flags ? 'NO' : 'YES' } }));"
+      },
+      "id": "639af37c-009c-5182-8407-56b2138946b1",
+      "name": "Receipt checks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// One email to the bookkeeper listing every receipt that needs a check. Flagged receipts do not count until a person clears them.\nconst WINE = '#4a1424', RED = '#b3202a', INK = '#1d1416', MUTED = '#5f5456', LINE = '#d9d4d5';\nconst all = $input.all().map(i => i.json);\nconst flagged = all.filter(r => r.status !== 'OK');\nif (!flagged.length) return [];\nconst counted = all.filter(r => r.counts === 'YES');\nconst sums = {};\nfor (const r of counted) sums[r.currency] = Math.round(((sums[r.currency] || 0) + Number(r.total)) * 100) / 100;\nconst sumText = Object.entries(sums).map(([c, v]) => c + ' ' + v.toFixed(2)).join(', ') || 'nothing';\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst th = 'text-align:left;padding:7px 8px;background:' + WINE + ';color:#ffffff;border:1px solid ' + WINE;\nconst td = 'padding:7px 8px;border:1px solid ' + LINE + ';vertical-align:top';\nconst table = '<table cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;font-size:13px;width:100%\">' +\n  '<tr>' + ['Receipt', 'Supplier', 'Date', 'Total read', 'Items sum', 'Why it needs a check'].map(h => '<th style=\"' + th + '\">' + h + '</th>').join('') + '</tr>' +\n  flagged.map(r => '<tr>' + [\n    r.link && /^https?:/.test(r.link) ? '<a style=\"color:' + RED + '\" href=\"' + esc(r.link) + '\">' + esc(r.file) + '</a>' : esc(r.file),\n    esc(r.supplier) || '<i>not read</i>', '<span style=\"white-space:nowrap\">' + esc(r.date) + '</span>',\n    r.total ? '<span style=\"white-space:nowrap\">' + esc(r.currency + ' ' + r.total) + '</span>' : '<b style=\"color:' + RED + '\">missing</b>',\n    esc(r.items_sum), '<span style=\"color:' + RED + '\">' + esc(r.flags) + '</span>',\n  ].map(c => '<td style=\"' + td + '\">' + c + '</td>').join('') + '</tr>').join('') + '</table>';\nconst html =\n  '<div style=\"font-family:Helvetica,Arial,sans-serif;color:' + INK + ';max-width:820px;margin:0 auto;border:1px solid ' + LINE + '\">' +\n  '<div style=\"background:' + WINE + ';color:#ffffff;padding:20px 26px\"><div style=\"font-family:Georgia,serif;font-size:19px;letter-spacing:2px\">KAMPUNG FRESH CATERING</div>' +\n  '<div style=\"width:48px;height:2px;background:' + RED + ';margin-top:8px\"></div></div>' +\n  '<div style=\"padding:22px 26px\"><h1 style=\"font-family:Georgia,serif;color:' + WINE + ';font-size:23px;margin:0 0 10px\">' +\n  flagged.length + ' receipt' + (flagged.length === 1 ? '' : 's') + ' to check</h1>' +\n  '<p>These receipts were added to Receipts_Log but marked NEEDS CHECK. They do not count in the totals until you correct the row and put your initials in Checked by.</p>' +\n  table +\n  '<table cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;font-size:14px;margin-top:18px\">' +\n  '<tr><td style=\"' + td + ';color:' + MUTED + '\">Receipts in this batch</td><td style=\"' + td + '\"><b>' + all.length + '</b></td></tr>' +\n  '<tr><td style=\"' + td + ';color:' + MUTED + '\">Counted (status OK)</td><td style=\"' + td + '\"><b>' + counted.length + ', ' + sumText + '</b></td></tr>' +\n  '<tr><td style=\"' + td + ';color:' + MUTED + '\">Waiting for a check</td><td style=\"' + td + '\"><b>' + flagged.length + '</b></td></tr></table></div>' +\n  '<div style=\"border-top:1px solid ' + LINE + ';padding:14px 26px;font-size:12px;color:' + MUTED + '\">The figures were read from the receipt images. ' +\n  'The flags (sums, missing or low-confidence fields, possible duplicates) come from code, not AI. ' +\n  'Kampung Fresh Catering (a fictional organisation).</div></div>';\nreturn [{ json: { to: 'bookkeeper@example.org', subject: 'Receipts to check: ' + flagged.length,\n  flagged: flagged.length, counted: counted.length, countedTotal: sumText, html } }];"
+      },
+      "id": "f2314720-84c7-5e7d-8f27-cba5883c0325",
+      "name": "Bookkeeper alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        340
+      ]
+    }
+  ],
+  "connections": {
+    "Click to try it": {
+      "main": [
+        [
+          {
+            "node": "Sample receipts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample receipts": {
+      "main": [
+        [
+          {
+            "node": "Sample AI reply (illustrative)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample AI reply (illustrative)": {
+      "main": [
+        [
+          {
+            "node": "Receipt checks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receipt checks": {
+      "main": [
+        [
+          {
+            "node": "Bookkeeper alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

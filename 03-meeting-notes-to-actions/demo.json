@@ -12,7 +12,8 @@
     "Google Sheets",
     "Gmail",
     "Make.com",
-    "Claude API"
+    "Claude API",
+    "n8n"
   ],
   "image": "docs/preview.png",
   "linkedin_post": "How many tasks from last week's team call actually got done?\n\nIn a lot of small teams, someone types notes during the call and then the notes sit in a Google Doc. By Friday, people remember different versions of what was agreed, and the task nobody claimed is still nobody's.\n\nSo I built a demo automation for it. After the call, the notes go into a short form. Claude pulls out a five-line summary, the decisions, the action items and the open questions. Each action lands in a Google Sheets tracker with its owner and due date.\n\nThe rule I cared most about: it must not guess. If the notes don't name an owner, the row says \"owner not stated\". No date, \"no date stated\". Each row also keeps the exact line it came from.\n\nNothing goes to the team until the meeting lead checks the draft and ticks Approved.\n\nThis is a demo build on made-up sample data for a fictional NGO. Blueprint and walkthrough in the comments.\n\n#Automation #NonProfit #AI"

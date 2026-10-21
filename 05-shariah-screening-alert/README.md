@@ -193,4 +193,25 @@ After importing, reconnect your own accounts and check each module's settings be
 ## Tools
 Google Sheets, Make.com, Claude API (`claude-opus-5-5`), Gmail, Python 3 standard library (`screen.py`).
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Runs on the made-up watchlist with no accounts or keys. Import it and click **Test workflow** to see the ratios for all 10 shares, the 4 status changes, the number check on each explanation and the admin's report. |
+| `n8n/full.workflow.json` | The working version: a monthly schedule, a Google Sheets read of the `Watchlist` tab, the same screen in code, Claude over HTTP, the number check and a Gmail report to the admin. |
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above.
+
+**For the full version:** connect Google Sheets in **Read watchlist** and pick your sheet and the `Watchlist` tab. Only columns A to N are needed, because the ratios are worked out in code rather than sheet formulas. Connect Gmail in **Email admin** and change `admin@example.org` in **Admin report**. The schedule is set to the 1st of each month at 09:00 in **Every month**. Run it once by hand and check the email before you switch it on.
+
+**Claude key:** in n8n, open **Credentials**, choose **Create credential** and pick **Header Auth**. Set Name to `x-api-key` and Value to your Anthropic API key, then select that credential in the **Claude: explain changes** node. The key stays in n8n's credential store, never in the workflow file.
+
+The screen lives in one Code node, **Screen ratios (AAOIFI SS 21)**, ported line for line from `screen.py`. The limits are constants at the top of that node, each with its SS 21 clause (3/4/2, 3/4/3, 3/4/4), so a club that follows another method changes them in one place. The node **Check quoted numbers** is code too: every percentage quoted in an explanation must be one of that share's computed figures (this month, last month, or the 30% and 5% limits), and the screens it names must match the ratios. Anything else is marked "Check before sharing" in the report. If Claude stops for any reason other than `end_turn`, or its reply does not parse, the report still goes out with the full table and asks the admin to write the notes by hand.
+
+In the try-it-now file, the node **Sample AI reply (illustrative)** holds illustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output. They use the same JSON schema the real call must return, and everything after that node is real code.
+
+![The admin report produced by the try-it-now workflow from the sample figures. The table comes from the screen code; the four explanations are the illustrative replies, each passed by the number check.](docs/n8n-output.png)
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)

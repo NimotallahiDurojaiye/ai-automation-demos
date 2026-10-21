@@ -1,0 +1,196 @@
+{
+  "name": "Demo 05: Shariah screening alert (try it now)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Shariah screening alert: try it now\nClick **Test workflow**. It runs on made-up figures and needs no accounts or keys.\n\nThen click each node: the AAOIFI ratios for 10 shares, the 4 shares whose status changed, the code check on each explanation, and the admin's report (open the `html` field).\n\nAl-Noor Family Investment Club and its companies are fictional. Education only, not a fatwa or investment advice.",
+        "height": 300,
+        "width": 420
+      },
+      "id": "8adef6f4-50fa-51ab-b9d8-780b0fa52d4d",
+      "name": "Read me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Sample AI reply\nIllustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output.\n\nEverything after it is real code: the check on every quoted percentage, and the report.",
+        "height": 200,
+        "width": 300
+      },
+      "id": "0d7402a2-0c40-57e7-8f3a-df74fe878900",
+      "name": "About the AI step",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        80
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c37bb89c-1749-5513-bec9-98e4a4ecca74",
+      "name": "Click to try it",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Made-up figures from sample/watchlist_financials.csv (fictional companies). The full version reads your Watchlist tab instead.\nconst rows = [\n {\n  \"ticker\": \"CSOL\",\n  \"company\": \"Cahaya Solar Works\",\n  \"sector\": \"Renewable energy\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"1850\",\n  \"interest_bearing_debt_myr_m\": \"410\",\n  \"interest_bearing_deposits_myr_m\": \"120\",\n  \"total_revenue_myr_m\": \"640\",\n  \"non_permissible_income_myr_m\": \"6.4\",\n  \"shares_outstanding_m\": \"925\",\n  \"prev_debt_ratio\": \"0.2310\",\n  \"prev_deposits_ratio\": \"0.0700\",\n  \"prev_income_ratio\": \"0.0095\",\n  \"prev_status\": \"PASS\"\n },\n {\n  \"ticker\": \"TLOG\",\n  \"company\": \"Teratai Logistics\",\n  \"sector\": \"Logistics\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"920\",\n  \"interest_bearing_debt_myr_m\": \"248\",\n  \"interest_bearing_deposits_myr_m\": \"61\",\n  \"total_revenue_myr_m\": \"1310\",\n  \"non_permissible_income_myr_m\": \"9.8\",\n  \"shares_outstanding_m\": \"460\",\n  \"prev_debt_ratio\": \"0.2650\",\n  \"prev_deposits_ratio\": \"0.0640\",\n  \"prev_income_ratio\": \"0.0071\",\n  \"prev_status\": \"PASS\"\n },\n {\n  \"ticker\": \"SHFD\",\n  \"company\": \"Sinar Halal Foods\",\n  \"sector\": \"Food manufacturing\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"2400\",\n  \"interest_bearing_debt_myr_m\": \"300\",\n  \"interest_bearing_deposits_myr_m\": \"180\",\n  \"total_revenue_myr_m\": \"2950\",\n  \"non_permissible_income_myr_m\": \"11.2\",\n  \"shares_outstanding_m\": \"1600\",\n  \"prev_debt_ratio\": \"0.1290\",\n  \"prev_deposits_ratio\": \"0.0770\",\n  \"prev_income_ratio\": \"0.0040\",\n  \"prev_status\": \"PASS\"\n },\n {\n  \"ticker\": \"BSTF\",\n  \"company\": \"Bukit Steel Fabricators\",\n  \"sector\": \"Industrial\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"610\",\n  \"interest_bearing_debt_myr_m\": \"230\",\n  \"interest_bearing_deposits_myr_m\": \"40\",\n  \"total_revenue_myr_m\": \"880\",\n  \"non_permissible_income_myr_m\": \"3.1\",\n  \"shares_outstanding_m\": \"305\",\n  \"prev_debt_ratio\": \"0.3920\",\n  \"prev_deposits_ratio\": \"0.0610\",\n  \"prev_income_ratio\": \"0.0036\",\n  \"prev_status\": \"FAIL\"\n },\n {\n  \"ticker\": \"PTEL\",\n  \"company\": \"Pelangi Telecom Services\",\n  \"sector\": \"Telecommunications\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"3100\",\n  \"interest_bearing_debt_myr_m\": \"890\",\n  \"interest_bearing_deposits_myr_m\": \"210\",\n  \"total_revenue_myr_m\": \"2200\",\n  \"non_permissible_income_myr_m\": \"18.7\",\n  \"shares_outstanding_m\": \"2480\",\n  \"prev_debt_ratio\": \"0.3240\",\n  \"prev_deposits_ratio\": \"0.0700\",\n  \"prev_income_ratio\": \"0.0081\",\n  \"prev_status\": \"FAIL\"\n },\n {\n  \"ticker\": \"MHRT\",\n  \"company\": \"Mutiara Hotels and Resorts\",\n  \"sector\": \"Hospitality\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"780\",\n  \"interest_bearing_debt_myr_m\": \"190\",\n  \"interest_bearing_deposits_myr_m\": \"35\",\n  \"total_revenue_myr_m\": \"410\",\n  \"non_permissible_income_myr_m\": \"23.0\",\n  \"shares_outstanding_m\": \"520\",\n  \"prev_debt_ratio\": \"0.2380\",\n  \"prev_deposits_ratio\": \"0.0450\",\n  \"prev_income_ratio\": \"0.0480\",\n  \"prev_status\": \"PASS\"\n },\n {\n  \"ticker\": \"KCCR\",\n  \"company\": \"Kenari Credit Services\",\n  \"sector\": \"Consumer lending\",\n  \"business_activity\": \"prohibited\",\n  \"market_cap_myr_m\": \"1500\",\n  \"interest_bearing_debt_myr_m\": \"900\",\n  \"interest_bearing_deposits_myr_m\": \"400\",\n  \"total_revenue_myr_m\": \"380\",\n  \"non_permissible_income_myr_m\": \"360\",\n  \"shares_outstanding_m\": \"750\",\n  \"prev_debt_ratio\": \"0.6100\",\n  \"prev_deposits_ratio\": \"0.2700\",\n  \"prev_income_ratio\": \"0.9400\",\n  \"prev_status\": \"FAIL\"\n },\n {\n  \"ticker\": \"DHCG\",\n  \"company\": \"Delima Healthcare Group\",\n  \"sector\": \"Healthcare\",\n  \"business_activity\": \"review\",\n  \"market_cap_myr_m\": \"2050\",\n  \"interest_bearing_debt_myr_m\": \"350\",\n  \"interest_bearing_deposits_myr_m\": \"95\",\n  \"total_revenue_myr_m\": \"1120\",\n  \"non_permissible_income_myr_m\": \"14.0\",\n  \"shares_outstanding_m\": \"1025\",\n  \"prev_debt_ratio\": \"0.1750\",\n  \"prev_deposits_ratio\": \"0.0480\",\n  \"prev_income_ratio\": \"0.0130\",\n  \"prev_status\": \"REVIEW\"\n },\n {\n  \"ticker\": \"AWCS\",\n  \"company\": \"Awan Cloud Systems\",\n  \"sector\": \"Technology\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"1400\",\n  \"interest_bearing_debt_myr_m\": \"40\",\n  \"interest_bearing_deposits_myr_m\": \"436\",\n  \"total_revenue_myr_m\": \"520\",\n  \"non_permissible_income_myr_m\": \"15.6\",\n  \"shares_outstanding_m\": \"1120\",\n  \"prev_debt_ratio\": \"0.0300\",\n  \"prev_deposits_ratio\": \"0.2790\",\n  \"prev_income_ratio\": \"0.0290\",\n  \"prev_status\": \"PASS\"\n },\n {\n  \"ticker\": \"SPRD\",\n  \"company\": \"Seroja Property Developers\",\n  \"sector\": \"Property\",\n  \"business_activity\": \"permissible\",\n  \"market_cap_myr_m\": \"1150\",\n  \"interest_bearing_debt_myr_m\": \"352\",\n  \"interest_bearing_deposits_myr_m\": \"70\",\n  \"total_revenue_myr_m\": \"690\",\n  \"non_permissible_income_myr_m\": \"5.2\",\n  \"shares_outstanding_m\": \"1150\",\n  \"prev_debt_ratio\": \"0.2880\",\n  \"prev_deposits_ratio\": \"0.0620\",\n  \"prev_income_ratio\": \"0.0074\",\n  \"prev_status\": \"PASS\"\n }\n];\nreturn rows.map(r => ({ json: r }));"
+      },
+      "id": "cbf26ba2-c75a-5051-8eee-b1ef74b8ae64",
+      "name": "Sample watchlist",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Monthly Shariah ratio screen, ported line for line from screen.py. The numbers come from this code, never from AI.\n// Limits: AAOIFI Shari'ah Standard No. 21, Financial Paper (Shares and Bonds), clause 3/4.\n// \"Does not exceed\" means a ratio exactly at the limit passes. Change the limits here only.\nconst MAX_DEBT_TO_MCAP = 0.30;              // 3/4/2 interest-bearing borrowing / market capitalisation\nconst MAX_DEPOSITS_TO_MCAP = 0.30;          // 3/4/3 interest-taking deposits / market capitalisation\nconst MAX_NONPERMISSIBLE_TO_REVENUE = 0.05; // 3/4/4 prohibited income / total income\n// 3/4/1 business activity is set by a person in the sheet: permissible, prohibited or review.\n// 3/4/6/4 purification per share = prohibited income / number of shares.\nconst PASS = 'PASS', FAIL = 'FAIL', REVIEW = 'REVIEW', MISSING = 'DATA MISSING';\n\nconst toNumber = v => {\n  const t = String(v ?? '').replace(/,/g, '').trim();\n  if (!t) return null;\n  const n = Number(t);\n  return Number.isNaN(n) ? null : n;\n};\nconst ratioScreen = (r, limit) => r === null ? MISSING : (r <= limit ? PASS : FAIL);\nconst businessScreen = f => {\n  f = String(f ?? '').trim().toLowerCase();\n  if (f === 'permissible') return PASS;\n  if (f === 'prohibited') return FAIL;\n  return REVIEW; // \"review\" or anything unexpected goes to a person\n};\nconst safeDiv = (a, b) => (a === null || b === null || b <= 0) ? null : a / b;\nconst fmt = r => r === null ? '' : r.toFixed(4);\nconst text = v => String(v ?? '').trim();\n\nreturn $input.all().map(item => {\n  const row = item.json;\n  const n = k => toNumber(row[k]);\n  const debt = safeDiv(n('interest_bearing_debt_myr_m'), n('market_cap_myr_m'));\n  const deposits = safeDiv(n('interest_bearing_deposits_myr_m'), n('market_cap_myr_m'));\n  const income = safeDiv(n('non_permissible_income_myr_m'), n('total_revenue_myr_m'));\n  const screens = {\n    business_screen: businessScreen(row.business_activity),\n    debt_screen: ratioScreen(debt, MAX_DEBT_TO_MCAP),\n    deposits_screen: ratioScreen(deposits, MAX_DEPOSITS_TO_MCAP),\n    income_screen: ratioScreen(income, MAX_NONPERMISSIBLE_TO_REVENUE),\n  };\n  const values = Object.values(screens);\n  const overall = values.includes(FAIL) ? FAIL : values.includes(MISSING) ? MISSING : values.includes(REVIEW) ? REVIEW : PASS;\n\n  const notes = [];\n  const failed = Object.entries(screens).filter(([, v]) => v === FAIL).map(([k]) => k.replace('_screen', ''));\n  if (failed.length) notes.push('fails: ' + failed.join(', '));\n  if (values.includes(MISSING)) notes.push('missing figures, check source data');\n  if (screens.business_screen === REVIEW) notes.push(\"business activity needs a Shariah adviser's view\");\n\n  // Not shown where the core business fails: the screen result there is to exit, not purify and hold.\n  let purification = '';\n  if (screens.business_screen !== FAIL) {\n    const perShare = safeDiv(n('non_permissible_income_myr_m'), n('shares_outstanding_m'));\n    if (perShare !== null && perShare > 0) purification = perShare.toFixed(4);\n  } else {\n    notes.push('purification not applicable: core business fails');\n  }\n\n  const prev = text(row.prev_status).toUpperCase();\n  return { json: {\n    ticker: text(row.ticker), company: text(row.company),\n    debt_ratio: fmt(debt), deposits_ratio: fmt(deposits), income_ratio: fmt(income),\n    prev_debt_ratio: text(row.prev_debt_ratio), prev_deposits_ratio: text(row.prev_deposits_ratio),\n    prev_income_ratio: text(row.prev_income_ratio),\n    ...screens,\n    overall_status: overall, prev_status: prev,\n    status_changed: prev && prev !== overall ? 'YES' : 'NO',\n    purification_per_share_myr: purification,\n    notes: notes.join('; '),\n  }};\n});"
+      },
+      "id": "9b35b429-f1c7-5d71-b8ca-5a75f24313f9",
+      "name": "Screen ratios (AAOIFI SS 21)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Keeps only the shares whose overall status changed since last month, as one item for one Claude call.\n// If nothing changed, it returns nothing, so no Claude call and no email.\nconst pct = v => (v === '' || v === null || v === undefined || Number.isNaN(Number(v))) ? 'n/a' : (Number(v) * 100).toFixed(2) + '%';\nconst changed = $input.all().map(i => i.json).filter(r => r.status_changed === 'YES');\nif (!changed.length) return [];\nconst shares = changed.map(r => ({\n  ticker: r.ticker, company: r.company, prev_status: r.prev_status, status: r.overall_status,\n  business_screen: r.business_screen,\n  debt_now: pct(r.debt_ratio), debt_prev: pct(r.prev_debt_ratio),\n  deposits_now: pct(r.deposits_ratio), deposits_prev: pct(r.prev_deposits_ratio),\n  income_now: pct(r.income_ratio), income_prev: pct(r.prev_income_ratio),\n  raw: { debt: [r.prev_debt_ratio, r.debt_ratio], deposits: [r.prev_deposits_ratio, r.deposits_ratio],\n         income: [r.prev_income_ratio, r.income_ratio] },\n}));\nconst lines = shares.map(s =>\n  `ticker=${s.ticker}, company=${s.company}, status last month=${s.prev_status}, status now=${s.status}, ` +\n  `debt ratio now=${s.debt_now} (last month ${s.debt_prev}), deposits ratio now=${s.deposits_now} (last month ${s.deposits_prev}), ` +\n  `income ratio now=${s.income_now} (last month ${s.income_prev}), business activity screen=${s.business_screen}`);\nreturn [{ json: { count: shares.length, shares, text: lines.join('\\n') } }];"
+      },
+      "id": "cb42fe5a-6aac-5cd6-b785-c7f7d2c0b3ec",
+      "name": "Changed shares only",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Illustrative replies written for this demo, standing in for the live Claude call in the full version. They are not AI output.\n// They follow the same JSON schema the real Claude call must return, and only restate the numbers worked out above.\nreturn [{ json: {\n \"explanations\": [\n  {\n   \"ticker\": \"PTEL\",\n   \"screens_that_changed\": [\n    \"debt\"\n   ],\n   \"explanation\": \"Moved from FAIL to PASS. Interest-bearing debt is now 28.71% of market capitalisation, down from 32.40% last month, so it is back under the 30% limit. The figures alone do not show why the ratio fell.\",\n   \"needs_human_check\": false\n  },\n  {\n   \"ticker\": \"MHRT\",\n   \"screens_that_changed\": [\n    \"income\"\n   ],\n   \"explanation\": \"Moved from PASS to FAIL on the income screen. Non-permissible income is now 5.61% of total revenue, up from 4.80% last month, which is above the 5% limit. The figures alone do not show why it rose.\",\n   \"needs_human_check\": false\n  },\n  {\n   \"ticker\": \"AWCS\",\n   \"screens_that_changed\": [\n    \"deposits\"\n   ],\n   \"explanation\": \"Moved from PASS to FAIL on the deposits screen. Interest-bearing deposits are now 31.14% of market capitalisation, up from 27.90% last month, which is above the 30% limit. The figures alone do not show why.\",\n   \"needs_human_check\": false\n  },\n  {\n   \"ticker\": \"SPRD\",\n   \"screens_that_changed\": [\n    \"debt\"\n   ],\n   \"explanation\": \"Moved from PASS to FAIL on the debt screen. Interest-bearing debt is now 30.61% of market capitalisation, up from 28.80% last month, which is just above the 30% limit. The figures alone do not show why.\",\n   \"needs_human_check\": false\n  }\n ]\n} }];"
+      },
+      "id": "aa63108f-8631-58d1-9ab4-67551f610e8e",
+      "name": "Sample AI reply (illustrative)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Code check on the explanations. Every percentage quoted must be one of the computed numbers for that share\n// (this month, last month, or the 30% and 5% limits), and the screens named must match the ratios.\nconst LIMITS = { debt: 0.30, deposits: 0.30, income: 0.05 };\nconst reply = $input.first().json;\nconst shares = $('Changed shares only').first().json.shares;\nconst aiOk = reply.aiOk !== false;\nconst byTicker = {};\nfor (const e of (reply.explanations || [])) byTicker[String(e.ticker).trim().toUpperCase()] = e;\nconst two = s => { const n = parseFloat(String(s).replace('%', '')); return Number.isNaN(n) ? null : n.toFixed(2); };\n\nconst out = shares.map(s => {\n  const e = byTicker[s.ticker];\n  delete byTicker[s.ticker];\n  const problems = [];\n  let quoted = [];\n  if (!aiOk) problems.push('No explanation was drafted (' + reply.problem + '). Please write this note by hand');\n  else if (!e) problems.push('No explanation came back for this share');\n  if (e) {\n    const allowed = new Set(['30.00', '5.00', ...[s.debt_now, s.debt_prev, s.deposits_now, s.deposits_prev, s.income_now, s.income_prev].map(two)].filter(Boolean));\n    quoted = [...String(e.explanation).matchAll(/(\\d+(?:\\.\\d+)?)\\s*%/g)].map(m => m[1] + '%');\n    const unmatched = quoted.filter(q => !allowed.has(two(q)));\n    if (unmatched.length) problems.push('Figures quoted that are not in the computed numbers: ' + unmatched.join(', '));\n    const computed = Object.keys(LIMITS).filter(k => {\n      const [prev, now] = s.raw[k];\n      if (prev === '' || now === '' || prev == null || now == null) return false;\n      return (Number(prev) <= LIMITS[k]) !== (Number(now) <= LIMITS[k]);\n    });\n    const named = (e.screens_that_changed || []).filter(x => x !== 'business_activity');\n    if ([...named].sort().join(',') !== [...computed].sort().join(',')) {\n      problems.push('Screens named (' + (named.join(', ') || 'none') + ') do not match the ratios (' + (computed.join(', ') || 'none') + ')');\n    }\n    if (e.needs_human_check) problems.push('The draft itself asks for a person to check the figures');\n  }\n  return { json: { ticker: s.ticker, company: s.company, prev_status: s.prev_status, status: s.status,\n    explanation: e ? String(e.explanation) : '', quoted: quoted.join(', '),\n    check: problems.length ? 'CHECK' : 'OK', problems: problems.join('; ') } };\n});\nfor (const t of Object.keys(byTicker)) {\n  out.push({ json: { ticker: t, company: '', prev_status: '', status: '', explanation: String(byTicker[t].explanation), quoted: '',\n    check: 'CHECK', problems: 'Explanation for a share whose status did not change' } });\n}\nreturn out;"
+      },
+      "id": "ffe5ab6b-5af5-59e4-836d-79addd483134",
+      "name": "Check quoted numbers",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the admin's monthly report. The table comes from the screen node, never from the AI text.\nconst WINE = '#4a1424', RED = '#b3202a', INK = '#1d1416', MUTED = '#5f5456', LINE = '#d9d4d5';\nconst rows = $('Screen ratios (AAOIFI SS 21)').all().map(i => i.json);\nconst notes = $input.all().map(i => i.json);\nif (!notes.length) return [];\nconst pct = v => v === '' ? 'n/a' : (Number(v) * 100).toFixed(2) + '%';\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst th = 'text-align:left;padding:7px 8px;background:' + WINE + ';color:#ffffff;border:1px solid ' + WINE + ';font-weight:bold';\nconst td = 'padding:7px 8px;border:1px solid ' + LINE;\nconst heads = ['Ticker', 'Company', 'Debt / mcap', 'Deposits / mcap', 'Non-perm. income / revenue', 'Business', 'Status', 'Last month', 'Changed', 'Purification per share (MYR)'];\nconst table = '<table cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;font-size:13px;width:100%\">' +\n  '<tr>' + heads.map(h => '<th style=\"' + th + '\">' + h + '</th>').join('') + '</tr>' +\n  rows.map(r => '<tr>' + [\n    '<b>' + esc(r.ticker) + '</b>', esc(r.company), pct(r.debt_ratio), pct(r.deposits_ratio), pct(r.income_ratio),\n    r.business_screen, '<b style=\"color:' + (r.overall_status === 'PASS' ? INK : RED) + '\">' + r.overall_status + '</b>',\n    r.prev_status, r.status_changed === 'YES' ? '<b>Yes</b>' : '', r.purification_per_share_myr || 'n/a',\n  ].map(c => '<td style=\"' + td + '\">' + c + '</td>').join('') + '</tr>').join('') + '</table>';\nconst flagged = notes.filter(n => n.check !== 'OK').length;\nconst changes = notes.map(n =>\n  '<div style=\"border:1px solid ' + LINE + ';padding:12px 14px;margin:0 0 10px\">' +\n  '<div style=\"font-weight:bold;color:' + WINE + ';margin:0 0 4px\">' + esc(n.ticker) + ' ' + esc(n.company) +\n  (n.prev_status ? ': ' + n.prev_status + ' to ' + n.status : '') + '</div>' +\n  (n.explanation ? '<div>' + esc(n.explanation) + '</div>' : '') +\n  (n.check === 'OK'\n    ? '<div style=\"font-size:12px;color:' + MUTED + ';margin-top:6px\">Code check: every figure quoted matches the table.</div>'\n    : '<div style=\"color:' + RED + ';font-weight:bold;margin-top:6px\">Check before sharing: ' + esc(n.problems) + '</div>') +\n  '</div>').join('');\nconst month = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });\nconst html =\n  '<div style=\"font-family:Helvetica,Arial,sans-serif;color:' + INK + ';max-width:880px;margin:0 auto;border:1px solid ' + LINE + '\">' +\n  '<div style=\"background:' + WINE + ';color:#ffffff;padding:20px 26px\"><div style=\"font-family:Georgia,serif;font-size:19px;letter-spacing:2px\">AL-NOOR FAMILY INVESTMENT CLUB</div>' +\n  '<div style=\"width:48px;height:2px;background:' + RED + ';margin-top:8px\"></div></div>' +\n  '<div style=\"padding:22px 26px\"><h1 style=\"font-family:Georgia,serif;color:' + WINE + ';font-size:23px;margin:0 0 6px\">Monthly Shariah screen</h1>' +\n  '<p style=\"margin:0 0 18px;color:' + MUTED + '\">For the club admin. Please review this with the club\\'s Shariah adviser before sharing it with members.</p>' +\n  '<p style=\"font-size:13px;color:' + RED + ';margin:0 0 8px;font-weight:bold;letter-spacing:1px\">WHAT CHANGED (' + notes.length + ')</p>' + changes +\n  '<p style=\"font-size:13px;color:' + RED + ';margin:20px 0 8px;font-weight:bold;letter-spacing:1px\">FULL WATCHLIST</p>' + table + '</div>' +\n  '<div style=\"border-top:1px solid ' + LINE + ';padding:14px 26px;font-size:12px;color:' + MUTED + '\">' +\n  'Ratios, statuses and purification amounts are worked out by code that mirrors screen.py. Limits follow AAOIFI Shari\\'ah Standard No. 21, clause 3/4: ' +\n  'interest-bearing debt and deposits up to 30% of market capitalisation each, non-permissible income up to 5% of total revenue. ' +\n  'The short explanations are drafted from those numbers only, and code checks every percentage they quote against the table. ' +\n  'This report is for education and club discussion. It is not a fatwa or investment advice. ' +\n  'Al-Noor Family Investment Club (a fictional organisation).</div></div>';\nreturn [{ json: { to: 'admin@example.org',\n  subject: 'Monthly Shariah screen: ' + notes.length + ' status change' + (notes.length === 1 ? '' : 's') + ' for review (' + month + ')' + (flagged ? ', ' + flagged + ' to check' : ''),\n  changes: notes.length, flagged, html } }];"
+      },
+      "id": "2c5d7e7c-2ab9-5602-81a3-cc5c5a5cbab4",
+      "name": "Admin report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1380,
+        340
+      ]
+    }
+  ],
+  "connections": {
+    "Click to try it": {
+      "main": [
+        [
+          {
+            "node": "Sample watchlist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample watchlist": {
+      "main": [
+        [
+          {
+            "node": "Screen ratios (AAOIFI SS 21)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screen ratios (AAOIFI SS 21)": {
+      "main": [
+        [
+          {
+            "node": "Changed shares only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Changed shares only": {
+      "main": [
+        [
+          {
+            "node": "Sample AI reply (illustrative)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample AI reply (illustrative)": {
+      "main": [
+        [
+          {
+            "node": "Check quoted numbers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check quoted numbers": {
+      "main": [
+        [
+          {
+            "node": "Admin report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

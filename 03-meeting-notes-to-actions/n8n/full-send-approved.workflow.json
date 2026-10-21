@@ -1,0 +1,203 @@
+{
+  "name": "Demo 03: Meeting notes to actions (send approved)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Meeting notes to actions: send approved\nEvery 30 minutes this reads the `Approvals` tab and emails the team only for rows where **Approved** is ticked and **Sent at** is empty. The email uses the text in the cells, so the lead's edits are what the team sees.\n\n1. **Approvals rows** and **Write Sent at**: connect Google Sheets and pick the sheet and the `Approvals` tab.\n2. **Send to team**: connect Gmail.\n3. Change ORG and SHEET_URL in **Team email (only if approved)**.\n4. Sent at is written only after the email has gone, so a row is never sent twice.",
+        "height": 330,
+        "width": 420
+      },
+      "id": "299983d6-59d3-513a-9232-cc7be4043483",
+      "name": "Read me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "id": "227a642d-64d1-5f08-b3af-634bfc807b32",
+      "name": "Every 30 minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "id": "667b2241-ba92-551b-bc57-3d79a77a4995",
+      "name": "Approvals rows",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the team email only for Approvals rows that are ticked, not yet sent, and have a team address.\n// The text comes from the cells, so the lead's edits are what the team sees.\nconst WINE = '#4a1424', RED = '#b3202a', INK = '#1d1416', MUTED = '#5f5456', LINE = '#d9d4d5';\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst ORG = 'Riverside Community Health Network';\nconst SHEET_URL = 'https://docs.google.com/spreadsheets/d/PICK_YOUR_SHEET';\nconst ticked = v => v === true || String(v ?? '').trim().toUpperCase() === 'TRUE';\nconst pad = n => String(n).padStart(2, '0');\nconst t = new Date();\nconst sentAt = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()) + ' ' + pad(t.getHours()) + ':' + pad(t.getMinutes());\nconst h3 = s => '<h3 style=\"color:' + WINE + ';margin:20px 0 6px;font-size:15px\">' + s + '</h3>';\nconst lines = s => { const a = String(s ?? '').split('\\n').map(x => x.trim()).filter(Boolean);\n  return a.length ? '<ul style=\"margin:0;padding-left:18px\">' + a.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '<p style=\"margin:0;color:' + MUTED + '\">None.</p>'; };\nconst out = [];\nfor (const item of $input.all()) {\n  const d = item.json;\n  if (!ticked(d['Approved'])) continue;\n  if (String(d['Sent at'] ?? '').trim() !== '') continue;\n  if (!String(d['Team emails'] ?? '').includes('@')) continue;\n  const html =\n    '<div style=\"font-family:Helvetica,Arial,sans-serif;color:' + INK + ';max-width:640px;margin:0 auto;border:1px solid ' + LINE + ';line-height:1.55;font-size:14px\">' +\n    '<div style=\"background:' + WINE + ';color:#fff;padding:20px 26px\"><div style=\"font-family:Georgia,serif;font-size:17px;letter-spacing:2px\">' + esc(ORG.toUpperCase()) + '</div>' +\n    '<div style=\"width:48px;height:2px;background:' + RED + ';margin-top:8px\"></div></div>' +\n    '<div style=\"padding:22px 26px\"><h1 style=\"font-family:Georgia,serif;color:' + WINE + ';font-size:22px;margin:0 0 8px\">Meeting summary</h1>' +\n    '<p style=\"margin:0\">Summary of <b>' + esc(d['Meeting title']) + '</b> on ' + esc(d['Meeting date']) + ', checked by the meeting lead.</p>' +\n    h3('Summary') + lines(d['Summary']) + h3('Decisions') + lines(d['Decisions']) +\n    h3('Action items') + lines(d['Action items']) + h3('Open questions') + lines(d['Open questions']) + '</div>' +\n    '<div style=\"border-top:1px solid ' + LINE + ';padding:12px 26px;font-size:12px;color:' + MUTED + '\">Full action list: <a href=\"' + SHEET_URL + '\" style=\"color:' + RED + '\">team tracker</a>.</div></div>';\n  out.push({ json: { to: String(d['Team emails']).trim(), subject: 'Meeting summary: ' + d['Meeting title'] + ' (' + d['Meeting date'] + ')',\n    html, row_number: d.row_number, sent_at: sentAt } });\n}\nreturn out;"
+      },
+      "id": "7df993b5-3fd7-5db9-9464-9161e095780a",
+      "name": "Team email (only if approved)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "a5ea7708-559e-5d52-84a0-33ae00583d4d",
+      "name": "Send to team",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Runs only after the team emails have gone. Writes the time into Sent at so a row is never sent twice.\nreturn $('Team email (only if approved)').all().map(i => ({ json: { row_number: i.json.row_number, 'Sent at': i.json.sent_at } }));"
+      },
+      "id": "34643c40-d14f-5c9a-8264-0167df545bd4",
+      "name": "Rows to mark as sent",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "Sent at": "={{ $json['Sent at'] }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ]
+        },
+        "options": {}
+      },
+      "id": "f3a5068a-6800-5287-8bb7-b634c2128a61",
+      "name": "Write Sent at",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1100,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Every 30 minutes": {
+      "main": [
+        [
+          {
+            "node": "Approvals rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approvals rows": {
+      "main": [
+        [
+          {
+            "node": "Team email (only if approved)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Team email (only if approved)": {
+      "main": [
+        [
+          {
+            "node": "Send to team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to team": {
+      "main": [
+        [
+          {
+            "node": "Rows to mark as sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rows to mark as sent": {
+      "main": [
+        [
+          {
+            "node": "Write Sent at",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

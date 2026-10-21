@@ -193,4 +193,32 @@ Points to check after import: the HTTP module's raw JSON body fields (`contentTy
 Google Forms, Google Sheets, Make.com (HTTP, JSON, Router, Set variable), Claude API (`claude-opus-5-5`).
 
 
+## Run it on n8n instead
+
+The same flow is also built for [n8n](https://n8n.io), in the `n8n/` folder.
+
+| File | What it does |
+|:-|:-|
+| `n8n/try-it-now.workflow.json` | Runs on the 15 made-up applications with no accounts or keys. Import it and click **Test workflow** to see the ID map, the masked CVs, the exact prompts, the totals, the quote check and the ranked shortlist. |
+| `n8n/full.workflow.json` | The working version: Google Sheets trigger, the ID map written to a restricted sheet, redaction pass one in code, the two Claude calls, the same checks, and rows in `Shortlist` and `Needs_Human`. |
+
+The try-it-now file has no AI in it. The nodes **Sample AI redaction reply (illustrative)** and **Sample AI scoring reply (illustrative)** hold replies written for this demo in the same JSON shape Claude must return; they are not AI output. One scoring reply (`HL-1016`, C1) paraphrases the CV on purpose, so you can see the quote check flag it. Redaction pass one, the total, the quote check, the gaps list and the sorting are the same code as in the full version.
+
+**To import:** in n8n, open **Workflows**, choose **Create workflow**, then the **...** menu at the top right and **Import from file**. Pick one of the files above.
+
+**For the full version:**
+
+1. Connect Google Sheets in **New application row** and pick the sheet behind your application form.
+2. In **ID_Map row**, pick the separate, restricted spreadsheet that only the recruiter can open.
+3. In **Shortlist row**, **Needs_Human row (redaction)** and **Needs_Human row (scoring)**, pick the working spreadsheet and its tabs. Add the `Ranked` tab with the `SORT` formula from **Set it up** above.
+4. **The Claude key.** In n8n, create a credential of type **Header Auth** with Name `x-api-key` and your Anthropic API key as the Value, then pick it in the HTTP Request nodes **Claude: redact CV** and **Claude: score CV**. The key stays in n8n's credential store; never type it into a node, a sheet or a file you share.
+5. Change the five criteria in **Build scoring prompt** to match your own job description.
+6. Test with a made-up application first, and read the redacted CV in **Read redaction reply** before you trust any score.
+
+The rules live in Code nodes: **Redact CV (pass one)** masks the name, email and phone from the form fields and any other email address, and drops date of birth, gender, nationality, address and photo link. **Shortlist checks** adds up the total and checks every quote word for word against the redacted CV. **Ranked shortlist** sorts by total and lists everyone; it never rejects anyone. If either Claude call refuses, is cut off, errors or sends JSON that will not parse, the candidate ID goes to `Needs_Human` with "Recruiter to read CV in full".
+
+![Ranked shortlist produced by the n8n workflow code from the sample data](docs/n8n-output.png)
+
+*Ranked shortlist produced by the n8n workflow code from the sample data. The scores and quotes come from the illustrative stand-in replies, not from a live Claude call; the totals, the quote check and the order are computed by the workflow code.*
+
 Built by Nimotallahi Abiodun Durojaiye · [Portfolio](https://magenta-cactus-05d764.netlify.app)

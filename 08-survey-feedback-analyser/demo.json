@@ -7,7 +7,14 @@
   "problem": "A teacher training academy collects 30 to 40 feedback forms a month, but nobody has time to read the open answers. Repeated problems carry on, and a serious comment could sit unseen for weeks.",
   "solution": "Once a month the flow collects last month's responses from Google Sheets and sends the open answers to Claude. Claude groups them into themes with counts, exact quotes and suggestions, and flags anything about safeguarding, harassment or a complaint, while Sheets formulas work out the ratings. The programme lead gets a one-page report email, with warnings if counts or quotes do not check out.",
   "human_check": "Every flagged response, from the AI or from a keyword formula in the sheet, goes to the safeguarding lead and the programme lead to read in full.",
-  "tools": ["Google Forms", "Google Sheets", "Gmail", "Make.com", "Claude API"],
+  "tools": [
+    "Google Forms",
+    "Google Sheets",
+    "Gmail",
+    "Make.com",
+    "Claude API",
+    "n8n"
+  ],
   "image": "docs/preview.png",
   "linkedin_post": "Most feedback forms get a glance at the star rating and nothing more.\n\nThe useful part is in the open answers, and nobody has time to read 40 of them every month.\n\nSo I built a demo for a fictional teacher training academy, using sample data only. On the 1st of each month it pulls last month's responses from Google Sheets. Claude groups the open answers into themes, counts them, picks exact quotes and lists the suggestions people actually made. A theme needs at least two responses; one-off points go under other comments. The ratings are averaged by spreadsheet formulas, not by the AI. The programme lead gets a one-page email.\n\nThe safeguard: any answer that mentions safeguarding, harassment or a complaint is checked twice, by the AI and by a keyword formula, and sent to a person to read in full. The flow also checks that every quote appears word for word in the original answers.\n\nBlueprint and sample files are in the comments.\n\n#Automation #AI #Education"
 }

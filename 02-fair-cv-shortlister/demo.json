@@ -7,7 +7,13 @@
   "problem": "A 40-person logistics firm hiring an Operations Coordinator receives 300 applications and has no time to read them all with care. Rushed first reads lean on names, photos, addresses and ages that have nothing to do with the job.",
   "solution": "Make strips the applicant's name, contact details and other personal fields before the AI sees anything, and a separate Claude call removes any identifiers left in the CV text. A second Claude call scores the anonymous CV against five stated criteria, 0 to 3 each, and must quote the CV for every score or write \"no evidence\". Make adds the totals, checks each quote against the CV, lists employment gaps for human judgement and writes a ranked shortlist to Google Sheets.",
   "human_check": "The scenario never rejects or contacts anyone: the recruiter reads the evidence, decides, and only then looks up names in a separate recruiter-only sheet.",
-  "tools": ["Google Forms", "Google Sheets", "Make.com", "Claude API"],
+  "tools": [
+    "Google Forms",
+    "Google Sheets",
+    "Make.com",
+    "Claude API",
+    "n8n"
+  ],
   "image": "docs/preview.png",
   "linkedin_post": "Three hundred CVs for one job, and a team of forty with no HR department.\n\nThat is when first reads get rushed, and rushed reads lean on names, photos and postcodes.\n\nSo I built a demo for a fictional logistics firm, on made-up sample data. Before the AI sees a CV, Make removes the name, contact details, date of birth, gender, nationality, address and photo, and a separate Claude call clears anything left in the text. A second call scores the anonymous CV against five stated criteria, and every score has to quote the CV or say \"no evidence\". Make adds the totals and checks that each quote is really there.\n\nThe safeguard: nothing is rejected automatically. Employment gaps are listed for the recruiter to judge, not marked down, and names are only looked up after review. Proxies like school names can still carry bias, so a person reads the evidence and decides.\n\nIt is a blueprint, not a live hiring system. Files and costs on GitHub, link in the comments.\n\n#HR #FairHiring #Automation"
 }

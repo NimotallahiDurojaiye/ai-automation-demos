@@ -7,7 +7,14 @@
   "problem": "An online school gets about 200 contact-form messages a week, and they all land in one inbox. Urgent messages, including complaints and child safety concerns, wait in the same queue as spam and routine questions.",
   "solution": "Each new form entry goes to Claude, which returns a category, urgency, language, a one-line summary and a draft reply as structured JSON. Make routes the message to the right team inbox, logs it in Google Sheets and saves the draft in Gmail Drafts. Complaints and anything about a child's safety are forced to high urgency and sent to a lead with no draft.",
   "human_check": "Nothing is sent to the enquirer automatically: a staff member edits and sends every draft, and complaints and safety concerns are handled by a person under the school's own procedure.",
-  "tools": ["Google Forms", "Google Sheets", "Gmail", "Make.com", "Claude API"],
+  "tools": [
+    "Google Forms",
+    "Google Sheets",
+    "Gmail",
+    "Make.com",
+    "Claude API",
+    "n8n"
+  ],
   "image": "docs/preview.png",
   "linkedin_post": "A safeguarding message should never wait behind fifty spam emails.\n\nThat is what happens in a lot of small schools and charities. Every contact-form message lands in one inbox, and one person sorts it all by hand.\n\nSo I built a demo for a fictional online school, using made-up sample data. Each new message goes to Claude, which picks a category, an urgency level, the language, a one-line summary and a draft reply. Make then sends an alert to the right team, logs the message in Google Sheets and saves the draft reply in Gmail Drafts.\n\nThe part I care about most: nothing is sent to the enquirer automatically. A person reads, edits and sends every reply. Complaints and anything about a child's safety skip the draft entirely and go straight to a lead, and that rule sits in the scenario itself, not in the AI's judgement.\n\nIt is a blueprint, not a live client system. The Make file, sample data and costs are on GitHub, link in the comments.\n\n#Automation #AIforGood #Nonprofits"
 }
